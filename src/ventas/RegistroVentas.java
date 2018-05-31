@@ -332,19 +332,30 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
        try{
            
              ch = ChartFactory.createBarChart(titulo,etiqueta_y, "Ganancias", dtsc,PlotOrientation.VERTICAL, true, true, false);
+             
              cp = new ChartPanel(ch);
             frame_grafica.removeAll();
             frame_grafica.add(cp);
             
             //add(cp);
-            
-            
+         int g= dtsc.getRowCount();
+           // if(tamaño<7)
             cp.setBounds(0,0,frame_grafica.getWidth(),frame_grafica.getHeight());
+            
+            definir_dimeciones();
+            
             
        }catch(Exception e){ System.out.println(""+e); }
        
    }
    
+   int definir_dimeciones(int numero){
+       
+       switch(numero){
+       
+   }
+       
+   }
    String Dia_semana(int  day){
        String dia="";
         switch(day){
@@ -829,10 +840,12 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
     private void CONSULTASMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CONSULTASMouseClicked
       if(CONSULTAS.getSelectedIndex()==1){
         grafica_ultima_semana(); 
-        this.setSize(500,250);
+        this.setSize(1000,500);
+        this.setLocation(150,  3);
       }
       else{
-          this.setLocation(500, 3);
+          this.setSize(1000,450);
+          this.setLocation(225,  3);
       }
        
     }//GEN-LAST:event_CONSULTASMouseClicked

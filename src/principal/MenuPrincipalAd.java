@@ -333,6 +333,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         if (estacerrado(rv)) {
             rv = new RegistroVentas();
             escritorio.add(rv).setLocation(250, 3);
+            rv.setSize(1000,450);
             rv.show();
             cerra1 = true;
         } else {
