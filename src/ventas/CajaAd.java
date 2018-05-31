@@ -42,7 +42,7 @@ public class CajaAd extends javax.swing.JInternalFrame {
         }
         return cerrado;
     }
-    
+   // 
     public CajaAd() {
         initComponents();
         tablaCaja.getTableHeader().setDefaultRenderer(new principal.EstiloTablaHeader());
