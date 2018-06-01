@@ -531,7 +531,7 @@ public class Productos extends javax.swing.JInternalFrame {
         codigoL1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios/buscarL.png"))); // NOI18N
         jPanel4.add(codigoL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 250, 52));
 
-        opcion_busqueda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CÓDIGO/NOMBRE", "BUSCAR MENOR A", "BUSCAR POR TIPO", " " }));
+        opcion_busqueda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "CÓDIGO/NOMBRE", "BUSCAR MENOR A", "BUSCAR POR TIPO" }));
         opcion_busqueda.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         opcion_busqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

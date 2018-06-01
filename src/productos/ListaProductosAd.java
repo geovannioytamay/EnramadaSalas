@@ -260,11 +260,14 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                     int c = 0;
                     int j = 0;
                     cant = JOptionPane.showInputDialog(this, "Cantidad:", "Productos", JOptionPane.INFORMATION_MESSAGE);
-                    while (!OpcionesAl.isNumber(cant) && cant != null) {
+                    if(cant == null || cant.equals(""))cant="1";
+                   
+                    while (!OpcionesAl.isNumber(cant)) {
                         cant = JOptionPane.showInputDialog(this, "Debe ingresar valores numéricos\ny que sean mayor a 0:",
                                 "Error", JOptionPane.ERROR_MESSAGE);
+                        
                     }
-                    if ((cant.equals("")) || (cant.equals("0"))) {
+                    if (cant.equals("0")) {
 //                        JOptionPane.showMessageDialog(this, "Debe ingresar algun valor mayor que 0");
                     } else {
                         for (int i = 0; i < ventas.CajaAd.tablaCaja.getRowCount(); i++) {

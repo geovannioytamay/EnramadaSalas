@@ -16,7 +16,10 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -81,7 +84,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                   total=OpcionesVen.optener_ventas(fecha_inicio);
                  
                   if(total>0){
-                      dtsc.addValue(total,Dia_semana(calendar.get(Calendar.DAY_OF_WEEK)),  " ($"+total+")");                  
+                      dtsc.addValue(total,Dia_semana(calendar.get(Calendar.DAY_OF_WEEK))+" "+ fecha_inicio,  " ($"+total+")");                  
                   }
                    calendar.add(Calendar.DAY_OF_YEAR,1);
    }while(fecha_inicio.compareTo(fecha_fin)!=0);
@@ -132,7 +135,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                   total=OpcionesVen.optener_ventas(fecha_inicio);
                   if(total>0 ){
                       total=Double.parseDouble(String.format("%3.2f", (total)).replace(".00",""));
-                      dtsc.addValue(total,Dia_semana(calendar.get(Calendar.DAY_OF_WEEK)),  " ($"+total+")");                  
+                      dtsc.addValue(total,""+fecha_inicio,  " ($"+total+")");                  
                   }
                    calendar.add(Calendar.DAY_OF_YEAR,1);
    }while(fecha_inicio.compareTo(fecha_fin)!=0);
@@ -168,7 +171,8 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         
          
          fecha_inicio=String.format("%1$td/%1$tm/%1$tY",calendar.getTime());
-         int numero_semana=calendar.get(Calendar.WEEK_OF_MONTH);
+         int numero_semana=calendar.get(Calendar.WEEK_OF_YEAR);
+         int longitud_semana=numero_semana-1;
          double total=0;
             do { 
             
@@ -182,18 +186,18 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                   
                   
                   total=total+OpcionesVen.optener_ventas(fecha_inicio);
-                  calendar.add(Calendar.DAY_OF_YEAR,1);
-                  if(numero_semana!=calendar.get(Calendar.WEEK_OF_MONTH) && total>0 ){
+                  calendar.add(Calendar.DAY_OF_YEAR,1);                  
+                  if(numero_semana!=calendar.get(Calendar.WEEK_OF_YEAR) && total>0 ){
                       total=Double.parseDouble(String.format("%3.2f", (total)).replace(".00",""));
-                      dtsc.addValue(total,""+calendar.get(Calendar.WEEK_OF_MONTH),  " ($"+total+")");
+                      dtsc.addValue(total,""+(numero_semana-longitud_semana),  " ($"+total+")");
                       total=0;                 
                   }
-                   numero_semana=calendar.get(Calendar.WEEK_OF_MONTH);
+                   numero_semana=calendar.get(Calendar.WEEK_OF_YEAR);
                   
    }while(fecha_inicio.compareTo(fecha_fin)!=0);
            if( total>0 ){
             total=Double.parseDouble(String.format("%3.2f", (total)).replace(".00",""));
-            dtsc.addValue(total,""+calendar.get(Calendar.WEEK_OF_MONTH),  " ($"+total+")");
+            dtsc.addValue(total,""+(numero_semana-longitud_semana),  " ($"+total+")");
            
            }
             
@@ -208,9 +212,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
     }
     
      void graficar_por_mes(){
-     DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
-     
-    
+     DefaultCategoryDataset dtsc = new DefaultCategoryDataset();       
      
         String formato = fechaInicio.getDateFormatString();
         Date date =  fechaInicio.getDate();
@@ -222,6 +224,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         
          String fecha_inicio=String.valueOf(sdf.format(date));
         String fecha_fin=String.valueOf(sdf2.format(date2));
+        int anio=0;
         
         try{   
          Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(fecha_inicio);
@@ -245,10 +248,11 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                   
                   
                   total=total+OpcionesVen.optener_ventas(fecha_inicio);
+                  anio=calendar.get(Calendar.YEAR);
                   calendar.add(Calendar.DAY_OF_YEAR,1);
                   if(numero_mes!=calendar.get(Calendar.MONTH) && total>0 ){
                      total=Double.parseDouble(String.format("%3.2f", (total)).replace(".00",""));
-                    dtsc.addValue(total,Mes_anio(numero_mes), " ($"+total+")");
+                    dtsc.addValue(total,Mes_anio(numero_mes)+" "+anio, " ($"+total+")");
                     total=0;                 
                   }
                    numero_mes=calendar.get(Calendar.MONTH);
@@ -256,7 +260,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
    }while(fecha_inicio.compareTo(fecha_fin)!=0);
            if( total>0 ){
             total=Double.parseDouble(String.format("%3.2f", (total)).replace(".00",""));
-            dtsc.addValue(total,Mes_anio(calendar.get(Calendar.MONTH)),  " ($"+total+")");
+            dtsc.addValue(total,Mes_anio(calendar.get(Calendar.MONTH))+" "+anio,  " ($"+total+")");
             
            }
             
@@ -335,14 +339,16 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
              
              cp = new ChartPanel(ch);
             frame_grafica.removeAll();
-            frame_grafica.add(cp);
+            frame_grafica.add(cp);         
+    
+        
             
             //add(cp);
-         int g= dtsc.getRowCount();
-           // if(tamaño<7)
-            cp.setBounds(0,0,frame_grafica.getWidth(),frame_grafica.getHeight());
+         int g= dtsc.getColumnCount();
             
-            definir_dimeciones();
+            cp.setBounds(0,0,definir_dimeciones(g),300);
+            
+            
             
             
        }catch(Exception e){ System.out.println(""+e); }
@@ -350,11 +356,37 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
    }
    
    int definir_dimeciones(int numero){
+       int dimencion =0;
+       System.out.println("numero: "+numero);
+       if (numero<7){
+         frame_grafica.setSize(700,300);         
+         dimencion=frame_grafica.getWidth();
+          return dimencion;     
+       }
        
-       switch(numero){
+       if (numero<9){
+         frame_grafica.setSize(900,300);         
+         dimencion=frame_grafica.getWidth();
+          return dimencion;           
+       }
        
-   }
+       if (numero<13){
+         frame_grafica.setSize(1100,300);         
+         dimencion=frame_grafica.getWidth();
+         
+          return dimencion;        
+       }
        
+       if (numero>=13){
+         frame_grafica.setSize(1300,300);
+         this.setLocation(150,  3);
+         dimencion=frame_grafica.getWidth()+300;
+         return dimencion;         
+       }
+               
+               return dimencion;
+       
+          
    }
    String Dia_semana(int  day){
        String dia="";
@@ -453,6 +485,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         Opciones = new org.bolivia.combo.SComboBoxBlue();
         jButton1 = new javax.swing.JButton();
+        frame_scroll = new javax.swing.JScrollPane();
         frame_grafica = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -460,6 +493,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("REGISTRO VENTAS");
 
+        CONSULTAS.setBackground(new java.awt.Color(255, 255, 255));
         CONSULTAS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CONSULTASMouseClicked(evt);
@@ -687,17 +721,20 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, -1, -1));
 
         frame_grafica.setBackground(new java.awt.Color(255, 255, 255));
+        frame_grafica.setPreferredSize(new java.awt.Dimension(3000, 300));
 
         javax.swing.GroupLayout frame_graficaLayout = new javax.swing.GroupLayout(frame_grafica);
         frame_grafica.setLayout(frame_graficaLayout);
         frame_graficaLayout.setHorizontalGroup(
             frame_graficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 814, Short.MAX_VALUE)
+            .addGap(0, 3000, Short.MAX_VALUE)
         );
         frame_graficaLayout.setVerticalGroup(
             frame_graficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 287, Short.MAX_VALUE)
+            .addGap(0, 328, Short.MAX_VALUE)
         );
+
+        frame_scroll.setViewportView(frame_grafica);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -706,17 +743,20 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(frame_grafica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 103, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 824, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 93, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(frame_grafica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         CONSULTAS.addTab("GANANCIAS", jPanel2);
@@ -729,9 +769,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(CONSULTAS, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+            .addComponent(CONSULTAS)
         );
 
         pack();
@@ -884,6 +922,7 @@ switch(Opciones.getSelectedIndex()){
     private com.toedter.calendar.JDateChooser fechaFin;
     private com.toedter.calendar.JDateChooser fechaInicio;
     private javax.swing.JPanel frame_grafica;
+    private javax.swing.JScrollPane frame_scroll;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

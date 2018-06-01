@@ -311,7 +311,7 @@ public class MenuPrincipalNor extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Acceso denegado.", "Error", 0,
                 new ImageIcon(getClass().getResource("/imagenes/usuarios/impo.png")));
     }//GEN-LAST:event_alimentosActionPerformed
-    CajaNor ca;
+    CajaAd ca;
     RegistroVentas rv;
     private void ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasActionPerformed
         JOptionPane.showMessageDialog(this, "Acceso denegado.", "Error", 0,
@@ -320,7 +320,7 @@ public class MenuPrincipalNor extends javax.swing.JFrame {
 
     private void cajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaActionPerformed
         if (estacerrado(ca)) {
-            ca = new CajaNor();
+            ca = new CajaAd();
             escritorio.add(ca).setLocation(160, 3);
             ca.show();
         } else {

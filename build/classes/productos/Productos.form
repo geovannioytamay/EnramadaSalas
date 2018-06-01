@@ -666,11 +666,10 @@
             <Component class="org.bolivia.combo.SComboBoxBlue" name="opcion_busqueda">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
+                  <StringArray count="3">
                     <StringItem index="0" value="C&#xd3;DIGO/NOMBRE"/>
                     <StringItem index="1" value="BUSCAR MENOR A"/>
                     <StringItem index="2" value="BUSCAR POR TIPO"/>
-                    <StringItem index="3" value=" "/>
                   </StringArray>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
