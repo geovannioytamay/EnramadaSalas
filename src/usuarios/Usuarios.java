@@ -24,6 +24,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
     /**
      * Creates new form Usuarios
      */
+  
     public Usuarios() {
         initComponents();
         tablaUsuarios.getTableHeader().setDefaultRenderer(new principal.EstiloTablaHeader());

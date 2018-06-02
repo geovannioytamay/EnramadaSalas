@@ -10,9 +10,11 @@ import java.awt.Cursor;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import static principal.MenuPrincipalAd.escritorio;
 import usuarios.OpcionesUs;
 import static usuarios.Usuarios.codigo;
 import usuarios.UsuariosCod;
@@ -28,7 +30,7 @@ public class Productos extends javax.swing.JInternalFrame {
      */
     public Productos() {
         initComponents();
-         
+        OpcionesAl.llenar_combo();
         tablaAlimentos.getTableHeader().setDefaultRenderer(new principal.EstiloTablaHeader());
         tablaAlimentos.setDefaultRenderer(Object.class, new principal.EstiloTablaRenderer());
         this.tipoAl1.setCursor(new Cursor(12));       
@@ -90,6 +92,7 @@ public class Productos extends javax.swing.JInternalFrame {
                 }
             }
         });
+        
 
         tablaAlimentos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -182,7 +185,22 @@ public class Productos extends javax.swing.JInternalFrame {
         }
     }
     
-    
+    void abrit_ListaTipo(int opcion,  String titulo){
+        ListaTipo.opcion =opcion;
+       
+        
+        if (estacerrado(la)) {
+            la = new ListaTipo();
+            principal.MenuPrincipalAd.escritorio.add(la);
+            la.toFront();
+            la.setVisible(true);
+        }else{
+            if(la.isVisible())
+            JOptionPane.showMessageDialog(this, "La ventana LISTA DE PRODUCTOS\nya esta abierta !!!", "Aviso", 0,
+                    new ImageIcon(getClass().getResource("/imagenes/principal/adver.png")));
+            else la.setVisible(true);
+        }    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -207,6 +225,8 @@ public class Productos extends javax.swing.JInternalFrame {
         nombreL4 = new javax.swing.JLabel();
         tipoAl1 = new org.bolivia.combo.SComboBoxBlue();
         tipoL = new javax.swing.JLabel();
+        agregar_tipo = new javax.swing.JButton();
+        actualizar_tipo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaAlimentos = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -362,12 +382,49 @@ public class Productos extends javax.swing.JInternalFrame {
         nombreL4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/nombreL.png"))); // NOI18N
         jPanel2.add(nombreL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, -1, 52));
 
-        tipoAl1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TIPO DE PRODUCTO", "BEBIDAS", "BOTANAS", "CALDOS", "CAMARONES", "COCTELES", "DESAYUNOS", "FILETE", "LANGOSTA", "LANGOSTINO", "PESCADO", "PULPO" }));
+        tipoAl1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TIPO DE PRODUCTO" }));
         tipoAl1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tipoAl1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoAl1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(tipoAl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 40, 183, -1));
 
         tipoL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/tipoAlL.png"))); // NOI18N
         jPanel2.add(tipoL, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, -1, 52));
+
+        agregar_tipo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        agregar_tipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/mas1.png"))); // NOI18N
+        agregar_tipo.setBorder(null);
+        agregar_tipo.setBorderPainted(false);
+        agregar_tipo.setContentAreaFilled(false);
+        agregar_tipo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        agregar_tipo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        agregar_tipo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/mas2.png"))); // NOI18N
+        agregar_tipo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        agregar_tipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregar_tipoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(agregar_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 30, -1, -1));
+
+        actualizar_tipo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        actualizar_tipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/actualizar1.png"))); // NOI18N
+        actualizar_tipo.setBorder(null);
+        actualizar_tipo.setBorderPainted(false);
+        actualizar_tipo.setContentAreaFilled(false);
+        actualizar_tipo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        actualizar_tipo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        actualizar_tipo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/actualizar2.png"))); // NOI18N
+        actualizar_tipo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        actualizar_tipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizar_tipoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(actualizar_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(759, 30, 60, -1));
 
         tablaAlimentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -564,7 +621,7 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -576,7 +633,9 @@ public class Productos extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -686,14 +745,23 @@ public class Productos extends javax.swing.JInternalFrame {
         if(num=='.'  && existes_punto(costo_compra.getText())){
             evt.consume();
         }
-        
       
-       
-           
-        
-        
     }//GEN-LAST:event_costo_compraKeyTyped
-
+   
+  
+    
+     public boolean estacerrado(Object obj) {
+        JInternalFrame[] activos = escritorio.getAllFrames();
+        boolean cerrado = true;
+        int i = 0;
+        while (i < activos.length && cerrado) {
+            if (activos[i] == obj) {
+                cerrado = false;
+            }
+            i++;
+        }
+        return cerrado;
+    }
     private void nombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyReleased
         nombre.setText(nombre.getText().toUpperCase());        
     }//GEN-LAST:event_nombreKeyReleased
@@ -803,10 +871,27 @@ public class Productos extends javax.swing.JInternalFrame {
     private void codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_codigoActionPerformed
+productos.ListaTipo la;
+    private void agregar_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_tipoActionPerformed
+    abrit_ListaTipo(0,"NUEVO TIPO");
+        
+    }//GEN-LAST:event_agregar_tipoActionPerformed
+
+    private void tipoAl1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoAl1ActionPerformed
+    abrit_ListaTipo(1,"ACTUALIZAR");
+        
+        
+    }//GEN-LAST:event_tipoAl1ActionPerformed
+
+    private void actualizar_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizar_tipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_actualizar_tipoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizar;
+    private javax.swing.JButton actualizar_tipo;
+    private javax.swing.JButton agregar_tipo;
     private app.bolivia.swing.JCTextField buscar;
     private app.bolivia.swing.JCTextField cantidad;
     public static app.bolivia.swing.JCTextField codigo;
@@ -830,7 +915,7 @@ public class Productos extends javax.swing.JInternalFrame {
     private org.bolivia.combo.SComboBoxBlue opcion_busqueda;
     private javax.swing.JButton registrar;
     public static javax.swing.JTable tablaAlimentos;
-    private org.bolivia.combo.SComboBoxBlue tipoAl1;
+    public static org.bolivia.combo.SComboBoxBlue tipoAl1;
     private javax.swing.JLabel tipoL;
     // End of variables declaration//GEN-END:variables
 }

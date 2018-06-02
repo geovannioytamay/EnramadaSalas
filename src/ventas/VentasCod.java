@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class VentasCod {
     
-    public static String LISTAR = "SELECT * FROM venta ORDER BY fecha";   
+    public static String LISTAR = "SELECT * FROM venta ORDER BY id_venta DESC";   
 
     
     public static String REGISTRAR = "INSERT INTO venta(id_venta, total, fecha) "

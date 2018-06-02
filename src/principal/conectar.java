@@ -11,6 +11,7 @@ import javax.swing.*;
 public class conectar {
 
     Connection conect = null;
+    
 
     public Connection conexion() {
         try {

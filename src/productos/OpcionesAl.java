@@ -45,6 +45,29 @@ public class OpcionesAl {
         System.out.println(sql);
         return rsu;
     }
+    
+    public static void llenar_combo() {
+        
+         Productos.tipoAl1.removeAllItems();
+        
+        String SQL = "SELECT* FROM tipo_producto";
+
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+            while (rs.next()) {
+                Productos.tipoAl1.addItem(rs.getString("tipo"));
+                
+                
+            }
+
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OpcionesAl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
 
     public static int actualizar(ProductosCod uc) {
         int rsu = 0;
@@ -171,36 +194,7 @@ public class OpcionesAl {
         }
     }
 
-    public static void listar1(String busca) {
-        DefaultTableModel modelo = (DefaultTableModel) productos.ListaProductosANor.tablaAlimentos.getModel();
-
-        while (modelo.getRowCount() > 0) {
-            modelo.removeRow(0);
-        }
-        String sql = "";
-        if (busca.equals("")) {
-            sql = ProductosCod.LISTAR;
-        } else {
-            sql = "SELECT * FROM producto WHERE (id_producto like'" + busca + "%' or nombre like'" + busca + "%') "
-                    + "or tipo='" + busca + "' ORDER BY nombre";
-        }
-        String datos[] = new String[6];
-        try {
-            Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            while (rs.next()) {
-                datos[0] = rs.getString("id_producto");
-                datos[1] = rs.getString("nombre");
-                datos[2] = rs.getString("costo_compra");
-                datos[3] = rs.getString("costo_venta");
-                datos[4] = rs.getString("cantidad");
-                datos[5] = rs.getString("tipo");
-                modelo.addRow(datos);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(OpcionesAl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+   
     public static void listar2(String busca) {
         DefaultTableModel modelo = (DefaultTableModel) productos.ListaProductosAd.tablaAlimentos.getModel();
 
@@ -214,17 +208,16 @@ public class OpcionesAl {
             sql = "SELECT * FROM producto WHERE (id_producto like'" + busca + "%' or nombre like'" + busca + "%') "
                     + "or tipo='" + busca + "' ORDER BY nombre";
         }
-        String datos[] = new String[6];
+        String datos[] = new String[4];
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 datos[0] = rs.getString("id_producto");
                 datos[1] = rs.getString("tipo");
-                datos[2] = rs.getString("nombre");
-                datos[3] = rs.getString("costo_compra");
-                datos[4] = rs.getString("costo_venta");
-                datos[5] = rs.getString("cantidad");
+                datos[2] = rs.getString("nombre");               
+                datos[3] = rs.getString("costo_venta");
+                
                 modelo.addRow(datos);
             }
         } catch (SQLException ex) {

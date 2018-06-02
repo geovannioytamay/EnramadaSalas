@@ -28,6 +28,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
 
     public static boolean cerra = false;
     public static boolean cerra1 = false;
+    public static String tipo_usuario="AdMINISTRADOR";
 
     public boolean estacerrado(Object obj) {
         JInternalFrame[] activos = escritorio.getAllFrames();
@@ -307,18 +308,28 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
     usuarios.Usuarios us;
     private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosActionPerformed
+       if(tipo_usuario.equals("NORMAL")){
+            JOptionPane.showMessageDialog(this, "Acceso denegado.", "Error", 0,
+                new ImageIcon(getClass().getResource("/imagenes/usuarios/impo.png")));
+       }
+       else
         if (estacerrado(us)) {
             us = new Usuarios();
             escritorio.add(us).setLocation(250, 3);
             us.show();
-        } else {
-            JOptionPane.showMessageDialog(this, "La ventana USUARIOS\nya esta abierta !!!", "Aviso", 0,
+             } else {
+                    JOptionPane.showMessageDialog(this, "La ventana USUARIOS\nya esta abierta !!!", "Aviso", 0,
                     new ImageIcon(getClass().getResource("/imagenes/principal/adver.png")));
-        }
+            }
     }//GEN-LAST:event_usuariosActionPerformed
     productos.Productos al;
     private void alimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alimentosActionPerformed
-        if (estacerrado(al)) {
+       if(tipo_usuario.equals("NORMAL")){
+            JOptionPane.showMessageDialog(this, "Acceso denegado.", "Error", 0,
+                new ImageIcon(getClass().getResource("/imagenes/usuarios/impo.png")));
+       }
+       else
+           if (estacerrado(al)) {
             al = new Productos();
             escritorio.add(al).setLocation(250, 3);
             al.show();
@@ -330,7 +341,12 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
     CajaAd ca;
     RegistroVentas rv;
     private void ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasActionPerformed
-        if (estacerrado(rv)) {
+        if(tipo_usuario.equals("NORMAL")){
+            JOptionPane.showMessageDialog(this, "Acceso denegado.", "Error", 0,
+                new ImageIcon(getClass().getResource("/imagenes/usuarios/impo.png")));
+       }
+       else
+            if (estacerrado(rv)) {
             rv = new RegistroVentas();
             escritorio.add(rv).setLocation(250, 3);
             rv.setSize(1000,450);

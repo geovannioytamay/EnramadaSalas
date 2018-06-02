@@ -100,7 +100,7 @@ public class OpcionesVen {
             sql = VentasCod.LISTAR;
         } else {
             sql = "SELECT * FROM venta WHERE (id_venta like'" + busca + "%' or fecha='" + busca + "')"
-                    + " ORDER BY fecha";
+                    + " ORDER BY id_venta DESC";
         }
         String datos[] = new String[4];
         try {
@@ -146,34 +146,8 @@ public class OpcionesVen {
             Logger.getLogger(OpcionesVen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void numeros1() {
-        int j;
-        int cont = 1;
-        String num = "";
-        String c = "";
-        String SQL = "SELECT MAX(numero) FROM venta";
-        try {
-            Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery(SQL);
-            if (rs.next()) {
-                c = rs.getString(1);
-            }
-
-            if (c == null) {
-                ventas.CajaNor.numFac.setText("00000001");
-            } else {
-                j = Integer.parseInt(c);
-                GenerarNumero gen = new GenerarNumero();
-                gen.generar(j);
-                ventas.CajaNor.numFac.setText(gen.serie());
-
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(OpcionesVen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+  
+    /// consultas para graficar 
     public static double optener_ventas(String fecha) throws SQLException {
        
 

@@ -33,7 +33,7 @@ public class AccesoLogin extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/principal/logo.png")).getImage());
-        this.setTitle("ACCESO - SISTEMA ENRAMADA SALAS (SIENSA)");
+        this.setTitle("ACCESO - SISTEMA PUNTO DE VENTA");
     }
 
     public AccesoLogin(SplashScreen inicio) {
@@ -312,64 +312,31 @@ void Entrar(){
     public void Ingresa(String id, String pas) {
         String dato = null;
         try {
-            String sql = "SELECT nombre FROM usuarios WHERE nombre = '" + id + "'";
+            String sql = "SELECT tipo FROM usuarios WHERE nombre = '" + id + "' and contraseña = '" + pas + "'";
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            if (rs.first()) {
-                String sql1 = "SELECT contraseña FROM usuarios WHERE contraseña = '" + pas + "'";
-                Statement st1 = cn.createStatement();
-                ResultSet rs1 = st1.executeQuery(sql1);
-                if (rs1.first()) {
-                    String sql2 = "SELECT tipo FROM usuarios WHERE nombre = '" + id + "'"
-                            + " and contraseña = '" + pas + "'";
-                    Statement st2 = cn.createStatement();
-                    ResultSet rs2 = st2.executeQuery(sql2);
-                    while (rs2.next()) {
-                        dato = rs2.getString(1);
-                    }
-
-                    if (dato.equals("ADMINISTRADOR")) {
-
-                        String sql3 = "SELECT nombre FROM usuarios WHERE nombre = '" + id + "'";
-                        Statement st3 = cn.createStatement();
-                        ResultSet rs3 = st3.executeQuery(sql3);
-                        while (rs3.next()) {
-                            dato = rs3.getString(1);
-                        }
+            
+            if (rs.next()) {   
+                    
+                        dato =  rs.getString("tipo");;
+                        //System.out.println("tipo: "+ dato);
+                    
                         dispose();
                         MenuPrincipalAd mp = new MenuPrincipalAd();
-                        JOptionPane.showMessageDialog(this, "BIENVENIDO A SIENSA " + dato, "Administrador", 0,
+                        JOptionPane.showMessageDialog(this, "BIENVENIDO AL SISTEMA " + id, dato, 0,
                                 new ImageIcon(getClass().getResource("/imagenes/principal/adm.png")));
-                        mp.userConect.setText(dato);
+                        mp.userConect.setText(id);
+                        mp.tipo_usuario=dato;
                         mp.setVisible(true);
 
-                    } else {
-
-                        String sql3 = "SELECT nombre FROM usuarios WHERE nombre = '" + id + "'";
-                        Statement st3 = cn.createStatement();
-                        ResultSet rs3 = st3.executeQuery(sql3);
-                        while (rs3.next()) {
-                            dato = rs3.getString(1);
-                        }
-                        dispose();
-                        MenuPrincipalNor mp = new MenuPrincipalNor();
-                        JOptionPane.showMessageDialog(this, "BIENVENIDO A SIENSA " + dato, "Normal", 0,
-                                new ImageIcon(getClass().getResource("/imagenes/principal/norm.png")));
-                        mp.userConect.setText(dato);
-                        mp.setVisible(true);
-
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Contraseña incorrecta", "Acceso", 0,
+                    
+                } 
+            
+            else {
+                    JOptionPane.showMessageDialog(this, "Usuario o Contraseña incorrecta", "Acceso", 0,
                             new ImageIcon(getClass().getResource("/imagenes/principal/passLogin.png")));
                     this.contraseña.setText("");
                     this.usuario.transferFocus();
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "No existe éste usuario.", "Acceso", 0,
-                        new ImageIcon(getClass().getResource("/imagenes/principal/userLogin.png")));
-                this.usuario.setText("");
-                this.jLabel1.transferFocus();
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccesoLogin.class.getName()).log(Level.SEVERE, null, ex);
