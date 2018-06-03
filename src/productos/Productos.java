@@ -185,20 +185,18 @@ public class Productos extends javax.swing.JInternalFrame {
         }
     }
     
-    void abrit_ListaTipo(int opcion,  String titulo){
-        ListaTipo.opcion =opcion;
-       
+    void abrir_ListaTipo(int opcion){
+        ListaTipo.opcion =opcion;       
         
         if (estacerrado(la)) {
             la = new ListaTipo();
             principal.MenuPrincipalAd.escritorio.add(la);
             la.toFront();
             la.setVisible(true);
-        }else{
-            if(la.isVisible())
-            JOptionPane.showMessageDialog(this, "La ventana LISTA DE PRODUCTOS\nya esta abierta !!!", "Aviso", 0,
+        }else{        
+            JOptionPane.showMessageDialog(this, "La ventana esta abierta !!!", "Aviso", 0,
                     new ImageIcon(getClass().getResource("/imagenes/principal/adver.png")));
-            else la.setVisible(true);
+           
         }    
     }
 
@@ -873,18 +871,18 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_codigoActionPerformed
 productos.ListaTipo la;
     private void agregar_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_tipoActionPerformed
-    abrit_ListaTipo(0,"NUEVO TIPO");
+    abrir_ListaTipo(0);
         
     }//GEN-LAST:event_agregar_tipoActionPerformed
 
     private void tipoAl1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoAl1ActionPerformed
-    abrit_ListaTipo(1,"ACTUALIZAR");
+  
         
         
     }//GEN-LAST:event_tipoAl1ActionPerformed
 
     private void actualizar_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizar_tipoActionPerformed
-        // TODO add your handling code here:
+        abrir_ListaTipo(1);
     }//GEN-LAST:event_actualizar_tipoActionPerformed
 
 

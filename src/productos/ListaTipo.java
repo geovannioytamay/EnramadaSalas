@@ -34,8 +34,8 @@ public class ListaTipo extends javax.swing.JInternalFrame {
     public ListaTipo() {
         initComponents();
         this.setLocation(700,55);
-        if(opcion==0)this.setTitle("0");
-        else this.setTitle("1");
+        if(opcion==0)this.setTitle("NUEVO TIPO");
+        else this.setTitle("ACTUALIZAR / ELIMINAR TIPO "+ productos.Productos.tipoAl1.getSelectedItem());
              
     }
     
@@ -45,29 +45,49 @@ public class ListaTipo extends javax.swing.JInternalFrame {
          if(nuevo_tipo.getText().equals(""))
                     JOptionPane.showMessageDialog(this, "Campo no puede estar vacio", "Almacen", 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
+         else if(existe_nuevo(nuevo_tipo.getText()))
+              JOptionPane.showMessageDialog(this, "El tipo ya existe intente de nuevo", "Error", 0,
+                            new ImageIcon(getClass().getResource("/imagenes/usuarios/seguro.png")));
          else
          try{
           Statement st = cn.createStatement();
           String sql="";
-          if(opcion==0) sql="INSERT INTO tipo_producto(tipo) VALUES ('"+nuevo_tipo.getText()+"')";
-          else sql="UPDATE producto SET tipo= '"+nuevo_tipo.getText()+"' where tipo='"+ productos.Productos.tipoAl1.getSelectedIndex()+"'";
           
+          
+          if(opcion==0) sql="INSERT INTO tipo_producto(tipo) VALUES ('"+nuevo_tipo.getText()+"')";
+          else sql="UPDATE tipo_producto SET tipo= '"+nuevo_tipo.getText()+"' where tipo='"+productos.Productos.tipoAl1.getSelectedItem().toString()+"'";
+          
+         // System.out.println(productos.Productos.tipoAl1.getSelectedItem().toString());
           PreparedStatement ps = cn.prepareStatement(sql);
            
            ps.executeUpdate();
+           productos.Productos.tipoAl1.removeItemAt(productos.Productos.tipoAl1.getSelectedIndex());
           productos.Productos.tipoAl1.addItem(nuevo_tipo.getText());
            productos.Productos.tipoAl1.setSelectedIndex( productos.Productos.tipoAl1.getItemCount()-1);
            
+           
          
-           this.setVisible(false);
+           this.dispose();
+           
           }catch(Exception e){
           System.out.print(""+e);
           }
     }
+     boolean existe_nuevo(String nuevo){
+          try {
+            String sql = "SELECT tipo FROM tipo_producto WHERE tipo = '" + nuevo + "'";
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            if (rs.next()) {
+              return true;  
+            }
+          }catch(Exception e){}
+         
+         
+         return false;
+     }
     
-    public void titulo(String titulo){
-     this.setTitle(titulo);
-  }
  
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,10 +99,12 @@ public class ListaTipo extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        enviar = new javax.swing.JButton();
+        mas = new javax.swing.JButton();
         nuevo_tipo = new app.bolivia.swing.JCTextField();
         nombreL = new javax.swing.JLabel();
+        borrar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setTitle("NUEVO TIPO");
@@ -90,18 +112,18 @@ public class ListaTipo extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        enviar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        enviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/mas1.png"))); // NOI18N
-        enviar.setBorder(null);
-        enviar.setBorderPainted(false);
-        enviar.setContentAreaFilled(false);
-        enviar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        enviar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        enviar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/mas2.png"))); // NOI18N
-        enviar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        enviar.addActionListener(new java.awt.event.ActionListener() {
+        mas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        mas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/mas1.png"))); // NOI18N
+        mas.setBorder(null);
+        mas.setBorderPainted(false);
+        mas.setContentAreaFilled(false);
+        mas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        mas.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/mas2.png"))); // NOI18N
+        mas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        mas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enviarActionPerformed(evt);
+                masActionPerformed(evt);
             }
         });
 
@@ -131,33 +153,53 @@ public class ListaTipo extends javax.swing.JInternalFrame {
 
         nombreL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/nombreL.png"))); // NOI18N
 
+        borrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        borrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/borrar1.png"))); // NOI18N
+        borrar.setBorder(null);
+        borrar.setBorderPainted(false);
+        borrar.setContentAreaFilled(false);
+        borrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        borrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        borrar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/borrar2.png"))); // NOI18N
+        borrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(nuevo_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(nombreL))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(enviar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mas, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(enviar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(nuevo_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nombreL, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(13, 13, 13)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(nuevo_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nombreL, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mas, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,17 +210,19 @@ public class ListaTipo extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
+    private void masActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masActionPerformed
     
          registrar();
 
-    }//GEN-LAST:event_enviarActionPerformed
+    }//GEN-LAST:event_masActionPerformed
 
     private void nuevo_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevo_tipoActionPerformed
         // TODO add your handling code here:
@@ -201,10 +245,15 @@ public class ListaTipo extends javax.swing.JInternalFrame {
        
     }//GEN-LAST:event_nuevo_tipoKeyTyped
 
+    private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_borrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton enviar;
+    public static javax.swing.JButton borrar;
     public static javax.swing.JPanel jPanel1;
+    public static javax.swing.JButton mas;
     public static javax.swing.JLabel nombreL;
     public static app.bolivia.swing.JCTextField nuevo_tipo;
     // End of variables declaration//GEN-END:variables
