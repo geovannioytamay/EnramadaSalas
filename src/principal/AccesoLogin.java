@@ -64,15 +64,17 @@ public class AccesoLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se pudo ejecutar la presentación");
         }
     }
-void Entrar(){
+public String Entrar(){
     String us = usuario.getText();
         String pas = contraseña.getText();
         if (us.equals("") || pas.equals("")) {
             JOptionPane.showMessageDialog(this, "Los campos son obligatorios", "Acceso", 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
+            return null;
         } else {
-            Ingresa(us, pas);
+            return Ingresa(us, pas);
         }
+       
 }
     
     /**
@@ -276,7 +278,16 @@ void Entrar(){
     }//GEN-LAST:event_salirActionPerformed
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        Entrar();
+       String dato=Entrar();
+        if(dato!=null){
+             dispose();
+                        MenuPrincipalAd mp = new MenuPrincipalAd();
+                        JOptionPane.showMessageDialog(this, "BIENVENIDO AL SISTEMA " + usuario.getText(), dato, 0,
+                                new ImageIcon(getClass().getResource("/imagenes/principal/adm.png")));
+                        mp.userConect.setText(usuario.getText());
+                        mp.tipo_usuario=dato;
+                        mp.setVisible(true);
+        }
     }//GEN-LAST:event_entrarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -300,7 +311,16 @@ void Entrar(){
 
     private void contraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraseñaKeyPressed
       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-           Entrar();
+           String dato=Entrar();
+                if(dato!=null){
+                    dispose();
+                        MenuPrincipalAd mp = new MenuPrincipalAd();
+                        JOptionPane.showMessageDialog(this, "BIENVENIDO AL SISTEMA " + usuario.getText(), dato, 0,
+                                new ImageIcon(getClass().getResource("/imagenes/principal/adm.png")));
+                        mp.userConect.setText(usuario.getText());
+                        mp.tipo_usuario=dato;
+                        mp.setVisible(true);
+        }
         }
     }//GEN-LAST:event_contraseñaKeyPressed
 
@@ -309,7 +329,7 @@ void Entrar(){
     }//GEN-LAST:event_usuarioActionPerformed
     conectar cc = new conectar();
     Connection cn = cc.conexion();
-    public void Ingresa(String id, String pas) {
+    public String Ingresa(String id, String pas) {
         String dato = null;
         try {
             String sql = "SELECT tipo FROM usuarios WHERE nombre = '" + id + "' and contraseña = '" + pas + "'";
@@ -317,30 +337,18 @@ void Entrar(){
             ResultSet rs = st.executeQuery(sql);
             
             if (rs.next()) {   
-                    
-                        dato =  rs.getString("tipo");;
-                        //System.out.println("tipo: "+ dato);
-                    
-                        dispose();
-                        MenuPrincipalAd mp = new MenuPrincipalAd();
-                        JOptionPane.showMessageDialog(this, "BIENVENIDO AL SISTEMA " + id, dato, 0,
-                                new ImageIcon(getClass().getResource("/imagenes/principal/adm.png")));
-                        mp.userConect.setText(id);
-                        mp.tipo_usuario=dato;
-                        mp.setVisible(true);
-
-                    
+                       return  rs.getString("tipo");                    
                 } 
             
             else {
                     JOptionPane.showMessageDialog(this, "Usuario o Contraseña incorrecta", "Acceso", 0,
-                            new ImageIcon(getClass().getResource("/imagenes/principal/passLogin.png")));
-                    this.contraseña.setText("");
-                    this.usuario.transferFocus();
+                            new ImageIcon(getClass().getResource("/imagenes/principal/passLogin.png")));                   
+                    return null;
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccesoLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     /**

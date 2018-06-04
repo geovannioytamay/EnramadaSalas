@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import principal.GenerarCodigos;
 import principal.conectar;
+import static productos.ListaTipo.nuevo_tipo;
 
 /**
  *
@@ -60,7 +61,8 @@ public class OpcionesAl {
                 
                 
             }
-
+           productos.Productos.tipoAl1.addItem("OTROS");
+           productos.Productos.tipoAl1.setSelectedIndex( productos.Productos.tipoAl1.getItemCount()-1);
             
         } catch (SQLException ex) {
             Logger.getLogger(OpcionesAl.class.getName()).log(Level.SEVERE, null, ex);
@@ -152,7 +154,7 @@ public class OpcionesAl {
     }
 
     public static void listar(String busca, int opcion) {//opcion= 0 id/nombre, opcion=1 menor a..,  opcion=3 tipo
-        DefaultTableModel modelo = (DefaultTableModel) productos.Productos.tablaAlimentos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) productos.Productos.tablaProductos.getModel();
 
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);

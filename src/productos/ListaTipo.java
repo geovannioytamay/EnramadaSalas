@@ -34,8 +34,17 @@ public class ListaTipo extends javax.swing.JInternalFrame {
     public ListaTipo() {
         initComponents();
         this.setLocation(700,55);
-        if(opcion==0)this.setTitle("NUEVO TIPO");
-        else this.setTitle("ACTUALIZAR / ELIMINAR TIPO "+ productos.Productos.tipoAl1.getSelectedItem());
+        if(opcion==0){
+            this.setTitle("NUEVO TIPO");
+            this.setSize(this.getWidth()-80, this.getHeight());
+            borrar.setVisible(false);
+           
+        }
+        else {
+            this.setTitle("ACTUALIZAR / ELIMINAR TIPO "+ productos.Productos.tipoAl1.getSelectedItem());
+            mas.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/actualizar1.png")));
+             mas.setRolloverIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/actualizar2.png")));
+        }
              
     }
     
@@ -55,13 +64,13 @@ public class ListaTipo extends javax.swing.JInternalFrame {
           
           
           if(opcion==0) sql="INSERT INTO tipo_producto(tipo) VALUES ('"+nuevo_tipo.getText()+"')";
-          else sql="UPDATE tipo_producto SET tipo= '"+nuevo_tipo.getText()+"' where tipo='"+productos.Productos.tipoAl1.getSelectedItem().toString()+"'";
-          
+          else{ sql="UPDATE tipo_producto SET tipo= '"+nuevo_tipo.getText()+"' where tipo='"+productos.Productos.tipoAl1.getSelectedItem().toString()+"'";
+                productos.Productos.tipoAl1.removeItemAt(productos.Productos.tipoAl1.getSelectedIndex());}
          // System.out.println(productos.Productos.tipoAl1.getSelectedItem().toString());
           PreparedStatement ps = cn.prepareStatement(sql);
            
            ps.executeUpdate();
-           productos.Productos.tipoAl1.removeItemAt(productos.Productos.tipoAl1.getSelectedIndex());
+          
           productos.Productos.tipoAl1.addItem(nuevo_tipo.getText());
            productos.Productos.tipoAl1.setSelectedIndex( productos.Productos.tipoAl1.getItemCount()-1);
            
@@ -88,7 +97,27 @@ public class ListaTipo extends javax.swing.JInternalFrame {
          return false;
      }
     
- 
+  void eliminar(String tipo){
+      
+            if (JOptionPane.showConfirmDialog(this, "Esta a punto de elimnar el tipo: "+tipo+".\n¿Desea continuar?", "Eliminar", JOptionPane.YES_NO_OPTION, 0,
+                    new ImageIcon(getClass().getResource("/imagenes/usuarios/seguro.png"))) == JOptionPane.YES_OPTION) {
+                try{
+                    String sql="DELETE FROM tipo_producto WHERE tipo = '"+tipo+"'";
+          
+                    PreparedStatement ps = cn.prepareStatement(sql);           
+                    ps.executeUpdate(); 
+                    productos.Productos.tipoAl1.removeItemAt(productos.Productos.tipoAl1.getSelectedIndex());
+                    productos.Productos.tipoAl1.setSelectedIndex(0);     
+         
+                    this.dispose();
+                
+                    
+                    JOptionPane.showMessageDialog(this, "Tipo eliminado.", "Eliminar Tipo", 0,
+                            new ImageIcon(getClass().getResource("/imagenes/Productos/borrado.png")));
+                     }catch(Exception e){System.out.println(""+e);}
+                  }
+       
+  }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -165,6 +194,11 @@ public class ListaTipo extends javax.swing.JInternalFrame {
         borrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 borrarActionPerformed(evt);
+            }
+        });
+        borrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                borrarKeyPressed(evt);
             }
         });
 
@@ -246,8 +280,12 @@ public class ListaTipo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_nuevo_tipoKeyTyped
 
     private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
-        // TODO add your handling code here:
+        eliminar(""+productos.Productos.tipoAl1.getSelectedItem());
     }//GEN-LAST:event_borrarActionPerformed
+
+    private void borrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_borrarKeyPressed
+      
+    }//GEN-LAST:event_borrarKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

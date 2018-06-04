@@ -31,8 +31,8 @@ public class Productos extends javax.swing.JInternalFrame {
     public Productos() {
         initComponents();
         OpcionesAl.llenar_combo();
-        tablaAlimentos.getTableHeader().setDefaultRenderer(new principal.EstiloTablaHeader());
-        tablaAlimentos.setDefaultRenderer(Object.class, new principal.EstiloTablaRenderer());
+        tablaProductos.getTableHeader().setDefaultRenderer(new principal.EstiloTablaHeader());
+        tablaProductos.setDefaultRenderer(Object.class, new principal.EstiloTablaRenderer());
         this.tipoAl1.setCursor(new Cursor(12));       
         this.setFrameIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/icono.png")));
         limpiaCampos();
@@ -94,11 +94,11 @@ public class Productos extends javax.swing.JInternalFrame {
         });
         
 
-        tablaAlimentos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        tablaProductos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent lse) {
                
-                if (tablaAlimentos.getSelectedRow() != -1) {
+                if (tablaProductos.getSelectedRow() != -1) {
                     cambiaDatos();
                     selecionRegistro = true;
                 }
@@ -107,23 +107,23 @@ public class Productos extends javax.swing.JInternalFrame {
     }
 
     void cambiaDatos() {
-        int fila = tablaAlimentos.getSelectedRow();
-        codigo.setText(tablaAlimentos.getValueAt(fila, 0).toString());        
-        nombre.setText(tablaAlimentos.getValueAt(fila, 1).toString());        
-        costo_compra.setText(tablaAlimentos.getValueAt(fila, 2).toString());
-        costo_venta.setText(tablaAlimentos.getValueAt(fila, 3).toString());
-        cantidad.setText(tablaAlimentos.getValueAt(fila, 4).toString());
-        tipoAl1.setSelectedItem(tablaAlimentos.getValueAt(fila, 5).toString());
+        int fila = tablaProductos.getSelectedRow();
+        codigo.setText(tablaProductos.getValueAt(fila, 0).toString());        
+        nombre.setText(tablaProductos.getValueAt(fila, 1).toString());        
+        costo_compra.setText(tablaProductos.getValueAt(fila, 2).toString());
+        costo_venta.setText(tablaProductos.getValueAt(fila, 3).toString());
+        cantidad.setText(tablaProductos.getValueAt(fila, 4).toString());
+        tipoAl1.setSelectedItem(tablaProductos.getValueAt(fila, 5).toString());
     }
     boolean selecionRegistro = false;
 
     void limpiaCampos() {
-        if (tablaAlimentos.getSelectedRow() > -1) {
-            tablaAlimentos.removeRowSelectionInterval(tablaAlimentos.getSelectedRow(), tablaAlimentos.getSelectedRow());
+        if (tablaProductos.getSelectedRow() > -1) {
+            tablaProductos.removeRowSelectionInterval(tablaProductos.getSelectedRow(), tablaProductos.getSelectedRow());
         }
         codigo.setText("");
         nombre.setText("");
-        tipoAl1.setSelectedItem("TIPO DE PRODUCTO");
+        tipoAl1.setSelectedItem("OTROS");
         costo_compra.setText("");
         costo_venta.setText("");
         cantidad.setText("");        
@@ -135,9 +135,9 @@ public class Productos extends javax.swing.JInternalFrame {
     }
 
     void selecionaFila(String id) {
-        for (int i = 0; i < tablaAlimentos.getRowCount(); i++) {
-            if (id.equals(tablaAlimentos.getValueAt(i, 0))) {
-                tablaAlimentos.setRowSelectionInterval(i, i);
+        for (int i = 0; i < tablaProductos.getRowCount(); i++) {
+            if (id.equals(tablaProductos.getValueAt(i, 0))) {
+                tablaProductos.setRowSelectionInterval(i, i);
                 break;
             }
         }
@@ -161,7 +161,7 @@ public class Productos extends javax.swing.JInternalFrame {
         if (selecionRegistro) {
             JOptionPane.showMessageDialog(this, "El CODIGO: " + this.codigo.getText() + "\nya existe en un registro.", "Almacen", 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/impo.png")));
-        } else if (codigo.getText().equals("") || nombre.getText().equals("") || tipoAl1.getSelectedItem().equals("TIPO DE PRODUCTO")
+        } else if (codigo.getText().equals("") || nombre.getText().equals("")
                 || costo_compra.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Todos los campos\nson obligatorios.", "Almacen", 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
@@ -178,7 +178,7 @@ public class Productos extends javax.swing.JInternalFrame {
                 String id = codigo.getText();
                 limpiaCampos();
                 selecionaFila(id);
-                JOptionPane.showMessageDialog(this, "Registro éxitoso.", "Alimentos", 0,
+                JOptionPane.showMessageDialog(this, "Registro éxitoso.", "Productos", 0,
                         new ImageIcon(getClass().getResource("/imagenes/Productos/registrado.png")));
                 limpiaCampos();
             }
@@ -226,7 +226,7 @@ public class Productos extends javax.swing.JInternalFrame {
         agregar_tipo = new javax.swing.JButton();
         actualizar_tipo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaAlimentos = new javax.swing.JTable();
+        tablaProductos = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         registrar = new javax.swing.JButton();
         actualizar = new javax.swing.JButton();
@@ -424,7 +424,7 @@ public class Productos extends javax.swing.JInternalFrame {
         });
         jPanel2.add(actualizar_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(759, 30, 60, -1));
 
-        tablaAlimentos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -440,8 +440,8 @@ public class Productos extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tablaAlimentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jScrollPane1.setViewportView(tablaAlimentos);
+        tablaProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jScrollPane1.setViewportView(tablaProductos);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "OPCIONES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
@@ -644,11 +644,11 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_registrarActionPerformed
 
     private void actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarActionPerformed
-        if (tablaAlimentos.getRowCount() > 0) {
-            if (tablaAlimentos.getSelectedRowCount() > 0) {
-                if (codigo.getText().equals("") || nombre.getText().equals("") || tipoAl1.getSelectedItem().equals("TIPO DE PRODUCTO")
+        if (tablaProductos.getRowCount() > 0) {
+            if (tablaProductos.getSelectedRowCount() > 0) {
+                if (codigo.getText().equals("") || nombre.getText().equals("")
                         || costo_compra.getText().equals("")|| costo_venta.getText().equals("")|| cantidad.getText().equals("")) {
-                    JOptionPane.showMessageDialog(this, "Es necesario completar\ntodos los campos.", "Alimentos", 0,
+                    JOptionPane.showMessageDialog(this, "Es necesario completar\ntodos los campos.", "Productos", 0,
                             new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
                 } else if (JOptionPane.showConfirmDialog(this, "Esta a punto de actualizar\nun registro.\n¿Desea continuar?", "Almacen", JOptionPane.YES_NO_OPTION, 0,
                         new ImageIcon(getClass().getResource("/imagenes/usuarios/seguro.png"))) == JOptionPane.YES_OPTION) {
@@ -664,60 +664,60 @@ public class Productos extends javax.swing.JInternalFrame {
                         String id = codigo.getText();
                         limpiaCampos();
                         selecionaFila(id);
-                        JOptionPane.showMessageDialog(this, "Registro actualizado.", "Alimentos", 0,
+                        JOptionPane.showMessageDialog(this, "Registro actualizado.", "Productos", 0,
                                 new ImageIcon(getClass().getResource("/imagenes/Productos/actualizado.png")));
                         
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Seleccione un registro.", "Alimentos", 0,
+                JOptionPane.showMessageDialog(this, "Seleccione un registro.", "Productos", 0,
                         new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
             }
 
         } else {
-            JOptionPane.showMessageDialog(this, "No hay registros\npara actualizar.", "Alimentos", 0,
+            JOptionPane.showMessageDialog(this, "No hay registros\npara actualizar.", "Productos", 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
         }
     }//GEN-LAST:event_actualizarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        if (tablaAlimentos.getRowCount() > 0) {
-            if (tablaAlimentos.getSelectedRowCount() > 0) {
-                if (JOptionPane.showConfirmDialog(this, "Esta a punto de eliminar\nun registro.\n¿Desea continuar?", "Alimentos", JOptionPane.YES_NO_OPTION, 0,
+        if (tablaProductos.getRowCount() > 0) {
+            if (tablaProductos.getSelectedRowCount() > 0) {
+                if (JOptionPane.showConfirmDialog(this, "Esta a punto de eliminar\nun registro.\n¿Desea continuar?", "Productos", JOptionPane.YES_NO_OPTION, 0,
                         new ImageIcon(getClass().getResource("/imagenes/usuarios/seguro.png"))) == JOptionPane.YES_OPTION) {
-                    int fila = tablaAlimentos.getSelectedRow();
-                    String id = tablaAlimentos.getValueAt(fila, 0).toString();
+                    int fila = tablaProductos.getSelectedRow();
+                    String id = tablaProductos.getValueAt(fila, 0).toString();
                     int elimina = OpcionesAl.eliminar(id);
                     if (elimina != 0) {
                         limpiaCampos();
-                        JOptionPane.showMessageDialog(this, "Registro eliminado.", "Alimentos", 0,
+                        JOptionPane.showMessageDialog(this, "Registro eliminado.", "Productos", 0,
                                 new ImageIcon(getClass().getResource("/imagenes/Productos/borrado1.png")));
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Seleccione un registro.", "Alimentos", 0,
+                JOptionPane.showMessageDialog(this, "Seleccione un registro.", "Productos", 0,
                         new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
             }
 
         } else {
-            JOptionPane.showMessageDialog(this, "No hay registros\npara eliminar.", "Alimentos", 0,
+            JOptionPane.showMessageDialog(this, "No hay registros\npara eliminar.", "Productos", 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
         }
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void eliminarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarTActionPerformed
-        if (tablaAlimentos.getRowCount() > 0) {
-            if (JOptionPane.showConfirmDialog(this, "Esta a punto de elimnar\ntodos los registros.\n¿Desea continuar?", "Alimentos", JOptionPane.YES_NO_OPTION, 0,
+        if (tablaProductos.getRowCount() > 0) {
+            if (JOptionPane.showConfirmDialog(this, "Esta a punto de elimnar\ntodos los registros.\n¿Desea continuar?", "Productos", JOptionPane.YES_NO_OPTION, 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/seguro.png"))) == JOptionPane.YES_OPTION) {
                 int eliminaT = OpcionesAl.eliminaTodos();
                 if (eliminaT != 0) {
                     limpiaCampos();
-                    JOptionPane.showMessageDialog(this, "Registros eliminados.", "Alimentos", 0,
+                    JOptionPane.showMessageDialog(this, "Registros eliminados.", "Productos", 0,
                             new ImageIcon(getClass().getResource("/imagenes/Productos/borrado.png")));
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No hay registros\npara eliminar.", "Alimentos", 0,
+            JOptionPane.showMessageDialog(this, "No hay registros\npara eliminar.", "Productos", 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
         }
     }//GEN-LAST:event_eliminarTActionPerformed
@@ -882,6 +882,7 @@ productos.ListaTipo la;
     }//GEN-LAST:event_tipoAl1ActionPerformed
 
     private void actualizar_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizar_tipoActionPerformed
+        if(!tipoAl1.getSelectedItem().equals("OTROS"))
         abrir_ListaTipo(1);
     }//GEN-LAST:event_actualizar_tipoActionPerformed
 
@@ -912,7 +913,7 @@ productos.ListaTipo la;
     private javax.swing.JLabel nombreL4;
     private org.bolivia.combo.SComboBoxBlue opcion_busqueda;
     private javax.swing.JButton registrar;
-    public static javax.swing.JTable tablaAlimentos;
+    public static javax.swing.JTable tablaProductos;
     public static org.bolivia.combo.SComboBoxBlue tipoAl1;
     private javax.swing.JLabel tipoL;
     // End of variables declaration//GEN-END:variables
