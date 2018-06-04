@@ -184,7 +184,7 @@ public class Productos extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+ productos.ListaTipo la;   
     void abrir_ListaTipo(int opcion){
         ListaTipo.opcion =opcion;       
         
@@ -704,17 +704,23 @@ public class Productos extends javax.swing.JInternalFrame {
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
         }
     }//GEN-LAST:event_eliminarActionPerformed
-
+ productos.confirma_admin confirmar;
     private void eliminarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarTActionPerformed
         if (tablaProductos.getRowCount() > 0) {
             if (JOptionPane.showConfirmDialog(this, "Esta a punto de elimnar\ntodos los registros.\n¿Desea continuar?", "Productos", JOptionPane.YES_NO_OPTION, 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/seguro.png"))) == JOptionPane.YES_OPTION) {
-                int eliminaT = OpcionesAl.eliminaTodos();
-                if (eliminaT != 0) {
-                    limpiaCampos();
-                    JOptionPane.showMessageDialog(this, "Registros eliminados.", "Productos", 0,
-                            new ImageIcon(getClass().getResource("/imagenes/Productos/borrado.png")));
-                }
+                productos.confirma_admin.opcion=1;            
+                
+                 if (estacerrado(confirmar)) {
+                    confirmar = new confirma_admin();
+                    principal.MenuPrincipalAd.escritorio.add(confirmar);
+                    confirmar.toFront();
+                    confirmar.setVisible(true);
+                }else{        
+                    confirmar.toFront();
+                    confirmar.setVisible(true);        
+              }    
+                 
             }
         } else {
             JOptionPane.showMessageDialog(this, "No hay registros\npara eliminar.", "Productos", 0,
@@ -869,7 +875,7 @@ public class Productos extends javax.swing.JInternalFrame {
     private void codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_codigoActionPerformed
-productos.ListaTipo la;
+
     private void agregar_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_tipoActionPerformed
     abrir_ListaTipo(0);
         

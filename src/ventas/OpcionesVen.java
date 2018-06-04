@@ -82,6 +82,7 @@ public class OpcionesVen {
         try {
             ps = cn.prepareStatement(sql);
             rsu = ps.executeUpdate();
+             OpcionesVen.listar("");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

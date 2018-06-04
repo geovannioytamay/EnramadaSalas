@@ -82,6 +82,7 @@ public class OpcionesUs {
         try {
             ps = cn.prepareStatement(sql);
             rsu = ps.executeUpdate();
+            OpcionesUs.listarUsuario("");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

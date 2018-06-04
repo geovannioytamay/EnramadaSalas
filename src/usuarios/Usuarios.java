@@ -10,10 +10,13 @@ import java.awt.Cursor;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import static principal.MenuPrincipalAd.escritorio;
+import productos.confirma_admin;
 
 /**
  *
@@ -143,6 +146,19 @@ void registrar(){
             }
         }
 }
+
+public boolean estacerrado(Object obj) {
+        JInternalFrame[] activos = escritorio.getAllFrames();
+        boolean cerrado = true;
+        int i = 0;
+        while (i < activos.length && cerrado) {
+            if (activos[i] == obj) {
+                cerrado = false;
+            }
+            i++;
+        }
+        return cerrado;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -526,16 +542,21 @@ void registrar(){
         }
     }//GEN-LAST:event_eliminarActionPerformed
 
+    productos.confirma_admin confirmar;
     private void eliminarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarTActionPerformed
         if (tablaUsuarios.getRowCount() > 0) {
             if (JOptionPane.showConfirmDialog(this, "Esta a punto de elimnar\ntodos los registros.\n¿Desea continuar?", "Usuarios", JOptionPane.YES_NO_OPTION, 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/seguro.png"))) == JOptionPane.YES_OPTION) {
-                int eliminaT = OpcionesUs.eliminaTodos();
-                if (eliminaT != 0) {
-                    limpiaCampos();
-                    JOptionPane.showMessageDialog(this, "Registros eliminados.", "Usuarios", 0,
-                            new ImageIcon(getClass().getResource("/imagenes/usuarios/borrado.png")));
-                }
+                productos.confirma_admin.opcion=0;
+                if (estacerrado(confirmar)) {
+                    confirmar = new confirma_admin();
+                    principal.MenuPrincipalAd.escritorio.add(confirmar);
+                    confirmar.toFront();
+                    confirmar.setVisible(true);
+                }else{        
+                    confirmar.toFront();
+                    confirmar.setVisible(true);        
+              }   
             }
         } else {
             JOptionPane.showMessageDialog(this, "No hay registros\npara eliminar.", "Usuarios", 0,

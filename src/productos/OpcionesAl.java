@@ -111,10 +111,11 @@ public class OpcionesAl {
         try {
             ps = cn.prepareStatement(sql);
             rsu = ps.executeUpdate();
+            listar("",0);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        System.out.println(sql);
+       // System.out.println(sql);
         return rsu;
     }
 

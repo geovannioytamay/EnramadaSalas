@@ -64,9 +64,23 @@ public class AccesoLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se pudo ejecutar la presentación");
         }
     }
-public String Entrar(){
-    String us = usuario.getText();
+    void logiar(){
+        String us = usuario.getText();
         String pas = contraseña.getText();
+        String dato=Entrar(us,pas);
+       
+        if(dato!=null){
+             dispose();
+                        MenuPrincipalAd mp = new MenuPrincipalAd();
+                        JOptionPane.showMessageDialog(this, "BIENVENIDO AL SISTEMA " + usuario.getText(), dato, 0,
+                                new ImageIcon(getClass().getResource("/imagenes/principal/adm.png")));
+                        mp.userConect.setText(usuario.getText());
+                        mp.tipo_usuario=dato;
+                        mp.setVisible(true);
+        }
+    }
+public String Entrar(String us, String pas){
+    
         if (us.equals("") || pas.equals("")) {
             JOptionPane.showMessageDialog(this, "Los campos son obligatorios", "Acceso", 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
@@ -278,16 +292,7 @@ public String Entrar(){
     }//GEN-LAST:event_salirActionPerformed
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-       String dato=Entrar();
-        if(dato!=null){
-             dispose();
-                        MenuPrincipalAd mp = new MenuPrincipalAd();
-                        JOptionPane.showMessageDialog(this, "BIENVENIDO AL SISTEMA " + usuario.getText(), dato, 0,
-                                new ImageIcon(getClass().getResource("/imagenes/principal/adm.png")));
-                        mp.userConect.setText(usuario.getText());
-                        mp.tipo_usuario=dato;
-                        mp.setVisible(true);
-        }
+      logiar();
     }//GEN-LAST:event_entrarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -311,16 +316,7 @@ public String Entrar(){
 
     private void contraseñaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraseñaKeyPressed
       if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-           String dato=Entrar();
-                if(dato!=null){
-                    dispose();
-                        MenuPrincipalAd mp = new MenuPrincipalAd();
-                        JOptionPane.showMessageDialog(this, "BIENVENIDO AL SISTEMA " + usuario.getText(), dato, 0,
-                                new ImageIcon(getClass().getResource("/imagenes/principal/adm.png")));
-                        mp.userConect.setText(usuario.getText());
-                        mp.tipo_usuario=dato;
-                        mp.setVisible(true);
-        }
+          logiar();
         }
     }//GEN-LAST:event_contraseñaKeyPressed
 

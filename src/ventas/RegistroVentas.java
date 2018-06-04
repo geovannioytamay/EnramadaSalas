@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,7 +27,9 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import static principal.MenuPrincipalAd.escritorio;
 import productos.OpcionesAl;
+import productos.confirma_admin;
 
 /**
  *
@@ -453,6 +456,19 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
        
        
    }
+   
+   public boolean estacerrado(Object obj) {
+        JInternalFrame[] activos = escritorio.getAllFrames();
+        boolean cerrado = true;
+        int i = 0;
+        while (i < activos.length && cerrado) {
+            if (activos[i] == obj) {
+                cerrado = false;
+            }
+            i++;
+        }
+        return cerrado;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -806,20 +822,22 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
         }
     }//GEN-LAST:event_eliminarActionPerformed
-
+  productos.confirma_admin confirmar;
     private void eliminarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarTActionPerformed
         if (tablaVentas.getRowCount() > 0) {
             if (JOptionPane.showConfirmDialog(this, "Esta a punto de elimnar\ntodos los registros.\n¿Desea continuar?", "Registro Ventas", JOptionPane.YES_NO_OPTION, 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/seguro.png"))) == JOptionPane.YES_OPTION) {
-                int eliminaT = OpcionesVen.eliminaTodos();
-                if (eliminaT != 0) {
-                    limpiaCampos();
-                    JOptionPane.showMessageDialog(this, "Registros eliminados.", "Registro Ventas", 0,
-                            new ImageIcon(getClass().getResource("/imagenes/caja/borrado.png")));
-                    if (principal.MenuPrincipalAd.cerra) {
-                        OpcionesVen.numeros();
-                    }
-                }
+                 productos.confirma_admin.opcion=2;
+                 if (estacerrado(confirmar)) {
+                    confirmar = new confirma_admin();
+                    principal.MenuPrincipalAd.escritorio.add(confirmar);
+                    confirmar.toFront();
+                    confirmar.setVisible(true);
+                }else{        
+                    confirmar.toFront();
+                    confirmar.setVisible(true);        
+              }   
+                
             }
         } else {
             JOptionPane.showMessageDialog(this, "No hay registros\npara eliminar.", "Registro Ventas", 0,
