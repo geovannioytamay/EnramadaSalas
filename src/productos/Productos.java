@@ -98,7 +98,7 @@ public class Productos extends javax.swing.JInternalFrame {
             @Override
             public void valueChanged(ListSelectionEvent lse) {
                
-                if (tablaProductos.getSelectedRow() != -1) {
+                if (tablaProductos.getSelectedRow() != -1 &&  seleccion) {
                     cambiaDatos();
                     selecionRegistro = true;
                 }
@@ -133,15 +133,16 @@ public class Productos extends javax.swing.JInternalFrame {
         OpcionesAl.listar("",0);
         OpcionesAl.extraerID();
     }
-
+boolean seleccion=true;// si es verdadero pone en los campos los valore de la tabla del dato seleccionado
     void selecionaFila(String id) {
+   seleccion=false;// si es verdadero pone en los campos los valore de la tabla del dato seleccionado
         for (int i = 0; i < tablaProductos.getRowCount(); i++) {
             if (id.equals(tablaProductos.getValueAt(i, 0))) {
                 tablaProductos.setRowSelectionInterval(i, i);
                 break;
             }
-        }
-
+        } 
+   seleccion=true;
     }
     
     boolean existes_punto(String numero){
@@ -180,7 +181,7 @@ public class Productos extends javax.swing.JInternalFrame {
                 selecionaFila(id);
                 JOptionPane.showMessageDialog(this, "Registro éxitoso.", "Productos", 0,
                         new ImageIcon(getClass().getResource("/imagenes/Productos/registrado.png")));
-                limpiaCampos();
+               
             }
         }
     }

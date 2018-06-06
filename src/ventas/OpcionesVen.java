@@ -178,5 +178,21 @@ public class OpcionesVen {
         
         return total;
     }
+    
+     public static String suma_total(String fecha) {
+         String sql = "SELECT SUM(total) FROM venta WHERE fecha='"+fecha+"'";
+         String total="";
+         try{
+         
+         Statement st = cn.createStatement();
+         ResultSet rs = st.executeQuery(sql);
+         if(rs.next())
+         total=""+rs.getString("SUM(total)");   
+         }catch(Exception e){}
+          System.out.println(""+total);
+         if(total.equals("null"))return "$0";  
+        
+        return "$"+total;
+    }
 
 }

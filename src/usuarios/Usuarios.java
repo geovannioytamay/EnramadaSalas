@@ -72,11 +72,11 @@ public class Usuarios extends javax.swing.JInternalFrame {
                 }
             }
         });
-
+        
         tablaUsuarios.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent lse) {
-                if (tablaUsuarios.getSelectedRow() != -1) {
+                if (tablaUsuarios.getSelectedRow() != -1 && seleccion) {
                     cambiaDatos();
                     selecionRegistro = true;
                 }
@@ -107,15 +107,16 @@ public class Usuarios extends javax.swing.JInternalFrame {
         OpcionesUs.listarUsuario("");
         OpcionesUs.extraerID();
     }
-
+boolean seleccion=true;// si es verdadero pone en los campos los valore de la tabla del dato seleccionado
     void selecionaFila(String id) {
+        seleccion=false;
         for (int i = 0; i < tablaUsuarios.getRowCount(); i++) {
             if (id.equals(tablaUsuarios.getValueAt(i, 0))) {
                 tablaUsuarios.setRowSelectionInterval(i, i);
                 break;
             }
         }
-
+seleccion=true;
     }
     boolean selecionRegistro = false;
 void registrar(){
@@ -138,7 +139,8 @@ void registrar(){
                 int opcion = OpcionesUs.registrarUsuario(us);
                 if (opcion != 0) {
                     String id = codigo.getText();
-                    limpiaCampos();                    
+                    limpiaCampos();
+                    System.out.println(id);
                     selecionaFila(id);
                     JOptionPane.showMessageDialog(this, "Registro éxitoso.", "Usuarios", 0,
                             new ImageIcon(getClass().getResource("/imagenes/usuarios/registrado.png")));

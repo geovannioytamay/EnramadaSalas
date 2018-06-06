@@ -47,17 +47,27 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         this.setFrameIcon(new ImageIcon(getClass().getResource("/imagenes/caja/icono1.png")));
         tablaVentas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         limpiaCampos();
-        jLabel2.setText("");
+        jLabel2.setText("");       
+       
         this.setLocation(500, 3);
     }
 
     void limpiaCampos() {
         if (tablaVentas.getSelectedRow() > -1) {
             tablaVentas.removeRowSelectionInterval(tablaVentas.getSelectedRow(), tablaVentas.getSelectedRow());
-        }
-        fecha.setDate(null);
+        }        
         buscar.setText("");
-        OpcionesVen.listar("");
+        
+        Date sistemaFech = new Date();//fecha de hoy               
+        fecha.setDate(sistemaFech);
+        
+        String formato = fecha.getDateFormatString();
+        Date date = fecha.getDate();
+        SimpleDateFormat sdf = new SimpleDateFormat(formato);
+        OpcionesVen.listar(String.valueOf(sdf.format(date)));
+        total.setText(OpcionesVen.suma_total(String.valueOf(sdf.format(date))));
+        
+       
     }
 
    void grafica_ultima_semana(){//otiene 7 dias anstes desde hoy
@@ -484,7 +494,6 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         tablaVentas = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         buscar = new app.bolivia.swing.JCTextField();
-        codigoL1 = new javax.swing.JLabel();
         fecha = new com.toedter.calendar.JDateChooser();
         eliminar = new javax.swing.JButton();
         eliminarT = new javax.swing.JButton();
@@ -493,6 +502,8 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         ventasH = new javax.swing.JButton();
         codigoL2 = new javax.swing.JLabel();
+        total = new app.bolivia.swing.JCTextField();
+        codigoL3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         fechaInicio = new com.toedter.calendar.JDateChooser();
@@ -567,10 +578,6 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
             }
         });
         jPanel4.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 180, -1));
-
-        codigoL1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        codigoL1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios/buscarL.png"))); // NOI18N
-        jPanel4.add(codigoL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 300, 52));
 
         fecha.setDateFormatString("dd/MM/yyyy");
         fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -669,6 +676,32 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         codigoL2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios/buscarL.png"))); // NOI18N
         jPanel4.add(codigoL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 300, 52));
 
+        total.setBackground(new java.awt.Color(34, 102, 145));
+        total.setBorder(null);
+        total.setForeground(new java.awt.Color(255, 255, 255));
+        total.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        total.setOpaque(false);
+        total.setPhColor(new java.awt.Color(255, 255, 255));
+        total.setPlaceholder("No. VENTA");
+        total.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                totalMouseClicked(evt);
+            }
+        });
+        total.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                totalKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                totalKeyTyped(evt);
+            }
+        });
+        jPanel4.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 180, -1));
+
+        codigoL3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        codigoL3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios/buscarL.png"))); // NOI18N
+        jPanel4.add(codigoL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 300, 52));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -759,9 +792,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 824, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 93, Short.MAX_VALUE))))
@@ -863,16 +894,13 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
             String formato = fecha.getDateFormatString();
             Date date = fecha.getDate();
             SimpleDateFormat sdf = new SimpleDateFormat(formato);
-            OpcionesVen.listar(String.valueOf(sdf.format(date)));
+            OpcionesVen.listar(String.valueOf(sdf.format(date)));            
+           total.setText(OpcionesVen.suma_total(String.valueOf(sdf.format(date))));
         }
     }//GEN-LAST:event_buscFActionPerformed
 
     private void ventasHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasHActionPerformed
-        Date sistemaFech = new Date();
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        String fecH = formato.format(sistemaFech);
-        OpcionesVen.listar(fecH);
-        fecha.setDate(null);
+         limpiaCampos();
     }//GEN-LAST:event_ventasHActionPerformed
 
     private void buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseClicked
@@ -926,14 +954,26 @@ switch(Opciones.getSelectedIndex()){
                }        // TODO add your handling code here:
     }//GEN-LAST:event_OpcionesItemStateChanged
 
+    private void totalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totalMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalMouseClicked
+
+    private void totalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_totalKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalKeyReleased
+
+    private void totalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_totalKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane CONSULTAS;
     private org.bolivia.combo.SComboBoxBlue Opciones;
     private javax.swing.JButton buscF;
     private app.bolivia.swing.JCTextField buscar;
-    private javax.swing.JLabel codigoL1;
     private javax.swing.JLabel codigoL2;
+    private javax.swing.JLabel codigoL3;
     private javax.swing.JButton eliminar;
     private javax.swing.JButton eliminarT;
     private com.toedter.calendar.JDateChooser fecha;
@@ -952,6 +992,7 @@ switch(Opciones.getSelectedIndex()){
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpiar;
     public static javax.swing.JTable tablaVentas;
+    private app.bolivia.swing.JCTextField total;
     private javax.swing.JButton ventasH;
     // End of variables declaration//GEN-END:variables
 }
