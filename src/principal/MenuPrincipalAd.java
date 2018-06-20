@@ -8,6 +8,7 @@ package principal;
 import productos.Productos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import usuarios.Usuarios;
 import ventas.CajaAd;
+import static ventas.CajaAd.tablaCaja;
 import ventas.RegistroVentas;
 
 /**
@@ -53,7 +55,14 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/principal/logo.png")).getImage());
-        this.setTitle("MENÚ PRINCIPAL ADMINISTRADOR - SISTEMA PUNTO DE VENTA");
+        this.setTitle("MENÚ PRINCIPAL "+tipo_usuario+" - SISTEMA PUNTO DE VENTA");
+        usuarios.setMnemonic(KeyEvent.VK_A);
+        almacen.setMnemonic(KeyEvent.VK_U);
+        ventas.setMnemonic(KeyEvent.VK_R);
+        caja.setMnemonic(KeyEvent.VK_C);
+        info.setMnemonic(KeyEvent.VK_C);
+       
+        
     }
 
     /**
@@ -76,7 +85,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         logoSexo = new javax.swing.JLabel();
         desc = new javax.swing.JLabel();
         usuarios = new javax.swing.JButton();
-        alimentos = new javax.swing.JButton();
+        almacen = new javax.swing.JButton();
         ventas = new javax.swing.JButton();
         escritorio = new principal.Escritorio();
 
@@ -97,13 +106,13 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
 
         info.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         info.setForeground(new java.awt.Color(255, 255, 255));
-        info.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/informacion1.png"))); // NOI18N
-        info.setText("INFORMACIÓN");
+        info.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/config1.png"))); // NOI18N
         info.setBorder(null);
         info.setContentAreaFilled(false);
         info.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         info.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        info.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/informacion2.png"))); // NOI18N
+        info.setLabel("CONFIGURACIÓN");
+        info.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/config2.png"))); // NOI18N
         info.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         info.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,19 +182,19 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
             }
         });
 
-        alimentos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        alimentos.setForeground(new java.awt.Color(255, 255, 255));
-        alimentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/alimentos1.png"))); // NOI18N
-        alimentos.setText("ALMACEN");
-        alimentos.setBorder(null);
-        alimentos.setContentAreaFilled(false);
-        alimentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        alimentos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        alimentos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/alimentos2.png"))); // NOI18N
-        alimentos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        alimentos.addActionListener(new java.awt.event.ActionListener() {
+        almacen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        almacen.setForeground(new java.awt.Color(255, 255, 255));
+        almacen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/alimentos1.png"))); // NOI18N
+        almacen.setText("ALMACEN");
+        almacen.setBorder(null);
+        almacen.setContentAreaFilled(false);
+        almacen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        almacen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        almacen.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/alimentos2.png"))); // NOI18N
+        almacen.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        almacen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                alimentosActionPerformed(evt);
+                almacenActionPerformed(evt);
             }
         });
 
@@ -225,7 +234,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                .addComponent(alimentos, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(almacen, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(ventas, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
@@ -237,11 +246,11 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(usuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(alimentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(almacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(ventas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(hora)
@@ -256,9 +265,9 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addComponent(logoSexo1)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(logoSexo))))
-                        .addComponent(info))
-                    .addComponent(caja, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(logoSexo)))))
+                    .addComponent(caja, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(info, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -318,12 +327,11 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
             escritorio.add(us).setLocation(250, 3);
             us.show();
              } else {
-                    JOptionPane.showMessageDialog(this, "La ventana USUARIOS\nya esta abierta !!!", "Aviso", 0,
-                    new ImageIcon(getClass().getResource("/imagenes/principal/adver.png")));
+                    us.toFront();
             }
     }//GEN-LAST:event_usuariosActionPerformed
     productos.Productos al;
-    private void alimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alimentosActionPerformed
+    private void almacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_almacenActionPerformed
        if(tipo_usuario.equals("NORMAL")){
             JOptionPane.showMessageDialog(this, "Acceso denegado.", "Error", 0,
                 new ImageIcon(getClass().getResource("/imagenes/usuarios/impo.png")));
@@ -334,10 +342,9 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
             escritorio.add(al).setLocation(250, 3);
             al.show();
         } else {
-            JOptionPane.showMessageDialog(this, "La ventana ALIMENTOS\nya esta abierta !!!", "Aviso", 0,
-                    new ImageIcon(getClass().getResource("/imagenes/principal/adver.png")));
+            al.toFront();
         }
-    }//GEN-LAST:event_alimentosActionPerformed
+    }//GEN-LAST:event_almacenActionPerformed
     CajaAd ca;
     RegistroVentas rv;
     private void ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasActionPerformed
@@ -349,24 +356,22 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
             if (estacerrado(rv)) {
             rv = new RegistroVentas();
             escritorio.add(rv).setLocation(250, 3);
-            rv.setSize(1000,450);
+            rv.setSize(900,490);
             rv.show();
             cerra1 = true;
         } else {
-            JOptionPane.showMessageDialog(this, "La ventana REGISTRO VENTAS\nya esta abierta !!!", "Aviso", 0,
-                    new ImageIcon(getClass().getResource("/imagenes/principal/adver.png")));
+          rv.toFront();
         }
     }//GEN-LAST:event_ventasActionPerformed
 
     private void cajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaActionPerformed
         if (estacerrado(ca)) {
             ca = new CajaAd();
-            escritorio.add(ca).setLocation(160, 3);
+            escritorio.add(ca).setLocation(3, 3);
             ca.show();
             cerra = true;
         } else {
-            JOptionPane.showMessageDialog(this, "La ventana CAJA DE COBRO\nya esta abierta !!!", "Aviso", 0,
-                    new ImageIcon(getClass().getResource("/imagenes/principal/adver.png")));
+            ca.toFront();
         }
     }//GEN-LAST:event_cajaActionPerformed
 
@@ -386,24 +391,24 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
             this.setDefaultCloseOperation(0);
         }
     }//GEN-LAST:event_formWindowClosing
-
+ config con;
     private void infoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoActionPerformed
-        JOptionPane.showMessageDialog(this, "El Sistema Punto De Venta cuenta con una serie de opciones para el manejo del mismo.\n\n" +
-                                            "*USUARIOS: este apartado registra usuarios para que puedan acceder al sistema,\n"
-                                          + "el usuario administrador es el único con todos los privilegios sobre el sistema,\n"
-                                          + "y el usuario normal solo cuenta con algunos.\n\n" +
-                                            "*ALIMENTOS: este apartado registra los diferentes tipos de alimentos que se\n"
-                                          + "venderán con su respectiva información.\n\n" +
-                                            "*REGISTRO VENTAS: en este apartado se muestran todas las ventas realizadas\n"
-                                          + "durante determinada fecha y se pueden borrar los registros así como hacer\n"
-                                          + "búsquedas de los mismos.\n\n" +
-                                            "*CAJA DE COBRO: en este apartado es donde se llevan a cabo las ventas de los\n"
-                                          + "alimentos y se cobra al cliente.\n" +
-                                            "________________________________________________________________\n"+
-                                            "DESARROLADOR: Edwin Geovanni Oy Tamay.\n" +
-                                            "TELEFONO: 986 119 3106.\n\n\n\n\n"
-                                              + "                                           Version 1.0", "Información", 0,
-                    new ImageIcon(getClass().getResource("/imagenes/principal/desarrollador.png")));
+      
+        if(tipo_usuario.equals("NORMAL")){
+            JOptionPane.showMessageDialog(this, "Acceso denegado.", "Error", 0,
+                new ImageIcon(getClass().getResource("/imagenes/usuarios/impo.png")));
+       }
+       else
+           if (estacerrado(con)) {
+            con = new config();
+            escritorio.add(con).setLocation(250, 3);
+            con.show();
+        } else {
+            al.toFront();
+        }
+        
+      
+                  
     }//GEN-LAST:event_infoActionPerformed
     class horas implements ActionListener {
 
@@ -453,7 +458,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton alimentos;
+    private javax.swing.JButton almacen;
     private javax.swing.JButton caja;
     private javax.swing.JLabel desc;
     public static principal.Escritorio escritorio;

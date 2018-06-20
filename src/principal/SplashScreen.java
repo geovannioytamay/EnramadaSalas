@@ -125,6 +125,6 @@ public class SplashScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private org.edisoncor.gui.progressBar.ProgressBarRound progreso;
-    private javax.swing.JLabel texto;
+    public static javax.swing.JLabel texto;
     // End of variables declaration//GEN-END:variables
 }

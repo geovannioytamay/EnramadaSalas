@@ -37,6 +37,9 @@ public class Usuarios extends javax.swing.JInternalFrame {
         this.tipoUs.setCursor(new Cursor(12));       
         tablaUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         limpiaCampos();
+        
+        registrar.setMnemonic(KeyEvent.VK_G);
+        actualizar.setMnemonic(KeyEvent.VK_M);
 
         sexo.addItemListener(new ItemListener() {
 

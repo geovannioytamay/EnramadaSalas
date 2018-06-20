@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import principal.GenerarNumero;
 import principal.conectar;
-
+//
 /**
  *
  * @author Rojeru San CL
@@ -149,12 +149,19 @@ public class OpcionesVen {
     }
   
     /// consultas para graficar 
-    public static double optener_ventas(String fecha) throws SQLException {
-       
+    public static double optener_ventas(String fecha,int opcion) throws SQLException {
+       String sql="";
+       String sql2="";
 
-       
-         String sql = "SELECT id_venta FROM venta WHERE fecha='"+fecha+"'";
-         String sql2= "SELECT cantidad,compra,venta FROM venta_producto WHERE id_venta= ANY ("+sql+")";
+         if(opcion==0){
+               sql = "SELECT id_venta FROM venta WHERE fecha='"+fecha+"'";
+               sql2= "SELECT cantidad,compra,venta FROM venta_producto WHERE id_venta= ANY ("+sql+")";
+         }
+         else if(opcion==1){
+               sql = "SELECT id_venta FROM venta WHERE fecha like '%"+fecha+"'";
+               sql2= "SELECT cantidad,compra,venta FROM venta_producto WHERE id_venta= ANY ("+sql+")";
+         }
+        
         
        
          int cantidad=0;
@@ -189,7 +196,7 @@ public class OpcionesVen {
          if(rs.next())
          total=""+rs.getString("SUM(total)");   
          }catch(Exception e){}
-          System.out.println(""+total);
+         // System.out.println(""+total);
          if(total.equals("null"))return "$0";  
         
         return "$"+total;

@@ -62,6 +62,8 @@ public class AccesoLogin extends javax.swing.JFrame {
             Thread.sleep(2000);
         } catch (InterruptedException ex) {
             JOptionPane.showMessageDialog(this, "No se pudo ejecutar la presentación");
+             System.out.println("que transcurran 2 segundos ok");
+            
         }
     }
     void logiar(){

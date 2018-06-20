@@ -100,7 +100,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="usuarios" min="-2" pref="125" max="-2" attributes="0"/>
                       <EmptySpace pref="96" max="32767" attributes="0"/>
-                      <Component id="alimentos" min="-2" pref="125" max="-2" attributes="0"/>
+                      <Component id="almacen" min="-2" pref="125" max="-2" attributes="0"/>
                       <EmptySpace pref="88" max="32767" attributes="0"/>
                       <Component id="ventas" min="-2" pref="131" max="-2" attributes="0"/>
                       <EmptySpace pref="86" max="32767" attributes="0"/>
@@ -114,11 +114,11 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="usuarios" max="32767" attributes="0"/>
-                                  <Component id="alimentos" max="32767" attributes="0"/>
+                                  <Component id="almacen" max="32767" attributes="0"/>
                                   <Component id="ventas" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
@@ -139,9 +139,9 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <Component id="info" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="caja" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
+                          <Component id="caja" alignment="1" max="32767" attributes="0"/>
+                          <Component id="info" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -158,9 +158,8 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagenes/principal/informacion1.png"/>
+                  <Image iconType="3" name="/imagenes/principal/config1.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="INFORMACI&#xd3;N"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
@@ -169,8 +168,9 @@
                   <Color id="Cursor de Mano"/>
                 </Property>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
+                <Property name="label" type="java.lang.String" value="CONFIGURACI&#xd3;N"/>
                 <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagenes/principal/informacion2.png"/>
+                  <Image iconType="3" name="/imagenes/principal/config2.png"/>
                 </Property>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -307,7 +307,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usuariosActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="alimentos">
+            <Component class="javax.swing.JButton" name="almacen">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="12" style="1"/>
@@ -333,7 +333,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="alimentosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="almacenActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ventas">

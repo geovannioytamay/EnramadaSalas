@@ -12,7 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-import usuarios.*;
 import ventas.CajaAd;
 
 /**
@@ -21,72 +20,36 @@ import ventas.CajaAd;
  */
 public class ListaProductosAd extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Usuarios
-     */
+    int cliks_tabla=0, linea_seleccionado=-1;
     public ListaProductosAd() {
         initComponents();
-        tablaAlimentos.getTableHeader().setDefaultRenderer(new principal.EstiloTablaHeader());
-        tablaAlimentos.setDefaultRenderer(Object.class, new principal.EstiloTablaRenderer());
+         OpcionesAl.llenar_combo_caja();
+        tablaProductos.getTableHeader().setDefaultRenderer(new principal.EstiloTablaHeader());
+        tablaProductos.setDefaultRenderer(Object.class, new principal.EstiloTablaRenderer());
         this.tipoAl.setCursor(new Cursor(12));
-        tablaAlimentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tablaProductos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.setFrameIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/icono.png")));
         OpcionesAl.listar2("");
+        ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);//quitar la barra de titulo
 
         tipoAl.addItemListener(new ItemListener() {
 
             @Override
             public void itemStateChanged(ItemEvent ie) {
-                if (tipoAl.getSelectedIndex() == 0) {
+               
+                if (tipoAl.getSelectedItem().toString().equals("TODOS")) {
                     tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/tipoAlL.png")));
                     OpcionesAl.listar2("");
+                   //  System.out.println(""+tipoAl.getSelectedItem().toString().equals("TODOS"));
                 }
-                if (tipoAl.getSelectedIndex() == 1) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/bebida.png")));
-                    OpcionesAl.listar2(tipoAl.getSelectedItem().toString());
+                else{
+                      OpcionesAl.listar2(tipoAl.getSelectedItem().toString());
                 }
-                if (tipoAl.getSelectedIndex() == 2) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/botana.png")));
-                    OpcionesAl.listar2(tipoAl.getSelectedItem().toString());
-                }
-                if (tipoAl.getSelectedIndex() == 3) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/caldo.png")));
-                    OpcionesAl.listar2(tipoAl.getSelectedItem().toString());
-                }
-                if (tipoAl.getSelectedIndex() == 4) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/camaron.png")));
-                    OpcionesAl.listar2(tipoAl.getSelectedItem().toString());
-                }
-                if (tipoAl.getSelectedIndex() == 5) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/coctel.png")));
-                    OpcionesAl.listar2(tipoAl.getSelectedItem().toString());
-                }
-                if (tipoAl.getSelectedIndex() == 6) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/desayuno.png")));
-                    OpcionesAl.listar2(tipoAl.getSelectedItem().toString());
-                }
-                if (tipoAl.getSelectedIndex() == 7) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/filete.png")));
-                    OpcionesAl.listar2(tipoAl.getSelectedItem().toString());
-                }
-                if (tipoAl.getSelectedIndex() == 8) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/langosta.png")));
-                    OpcionesAl.listar2(tipoAl.getSelectedItem().toString());
-                }
-                if (tipoAl.getSelectedIndex() == 9) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/langostino.png")));
-                    OpcionesAl.listar2(tipoAl.getSelectedItem().toString());
-                }
-                if (tipoAl.getSelectedIndex() == 10) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/pescado.png")));
-                    OpcionesAl.listar2(tipoAl.getSelectedItem().toString());
-                }
-                if (tipoAl.getSelectedIndex() == 11) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/pulpo.png")));
-                    OpcionesAl.listar2(tipoAl.getSelectedItem().toString());
-                }
+               
             }
         });
+        
+       
     }
 
     /**
@@ -100,7 +63,7 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaAlimentos = new javax.swing.JTable();
+        tablaProductos = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         buscar = new app.bolivia.swing.JCTextField();
         codigoL1 = new javax.swing.JLabel();
@@ -108,13 +71,15 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
         tipoL = new javax.swing.JLabel();
         enviar = new javax.swing.JButton();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
         setTitle("LISTA DE ALIMENTOS");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        tablaAlimentos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -130,8 +95,18 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tablaAlimentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jScrollPane1.setViewportView(tablaAlimentos);
+        tablaProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tablaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaProductosMouseClicked(evt);
+            }
+        });
+        tablaProductos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tablaProductosKeyPressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaProductos);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "OPCIONES", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
@@ -149,18 +124,22 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                 buscarKeyReleased(evt);
             }
         });
-        jPanel4.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 180, -1));
+        jPanel4.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 180, -1));
 
         codigoL1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         codigoL1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios/buscarL.png"))); // NOI18N
-        jPanel4.add(codigoL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 250, 52));
+        jPanel4.add(codigoL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 250, 52));
 
-        tipoAl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TIPO ALIMENTO", "BEBIDAS", "BOTANAS", "CALDOS", "CAMARONES", "COCTELES", "DESAYUNOS", "FILETE", "LANGOSTA", "LANGOSTINO", "PESCADO", "PULPO" }));
         tipoAl.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel4.add(tipoAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 183, -1));
+        tipoAl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoAlActionPerformed(evt);
+            }
+        });
+        jPanel4.add(tipoAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 183, -1));
 
-        tipoL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/tipoAlL.png"))); // NOI18N
-        jPanel4.add(tipoL, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, 52));
+        tipoL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/tipoAlLmin.png"))); // NOI18N
+        jPanel4.add(tipoL, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 40, 30));
 
         enviar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         enviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/regis1.png"))); // NOI18N
@@ -177,7 +156,7 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                 enviarActionPerformed(evt);
             }
         });
-        jPanel4.add(enviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 90, 100));
+        jPanel4.add(enviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 90, 100));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -185,10 +164,10 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,15 +175,17 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
+
+        jPanel4.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,54 +198,55 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
     private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
         buscar.setText(buscar.getText().toUpperCase());
         OpcionesAl.listar2(buscar.getText());
+        esUnico();// para saber si es el unico registro y enviar a caja
     }//GEN-LAST:event_buscarKeyReleased
-    public void calcular() {
-        String pre;
-        String can;
-        double total = 0;
-        double precio;
-        int cantidad;
-        double imp = 0.0;
-
-        for (int i = 0; i < ventas.CajaAd.tablaCaja.getRowCount(); i++) {
-            pre = ventas.CajaAd.tablaCaja.getValueAt(i, 3).toString();
-            can = ventas.CajaAd.tablaCaja.getValueAt(i, 4).toString();
-            precio = Double.parseDouble(pre);
-            cantidad = Integer.parseInt(can);
-            imp = precio * cantidad;
-            total = total + imp;
-            ventas.CajaAd.tablaCaja.setValueAt(Math.rint(imp * 100) / 100, i, 5);
-
+    void  esUnico(){
+        int  registros  = tablaProductos.getRowCount();
+        // System.out.println("unico"+registros);
+        if( registros ==1){
+             tablaProductos.setRowSelectionInterval(0,0);
+             enviar_caja();
+             buscar.setText("");
+             
+              
+           //  System.out.println("unico");
         }
-        ventas.CajaAd.total.setText("" + Math.rint(total * 100) / 100);
-
+           
+        
     }
-    private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
-        if (tablaAlimentos.getRowCount() > 0) {
+    void enviar_caja(){
+        cliks_tabla=0;
+        linea_seleccionado=-1;
+        if (tablaProductos.getRowCount() > 0) {
             try {
-                String cant = null;
+                String cant = "-1";
                 DefaultTableModel tabladet = (DefaultTableModel) ventas.CajaAd.tablaCaja.getModel();
 
                 String[] dato = new String[6];
 
-                int fila = tablaAlimentos.getSelectedRow();
+                int fila = tablaProductos.getSelectedRow();
+               
 
                 if (fila == -1) {
                     JOptionPane.showMessageDialog(this, "Seleccione un registro.", "Productos", 0,
                             new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
                 } else {
-                    String cod = tablaAlimentos.getValueAt(fila, 0).toString();
-                    String tipo = tablaAlimentos.getValueAt(fila, 1).toString();
-                    String nom = tablaAlimentos.getValueAt(fila, 2).toString();
-                    String precio = tablaAlimentos.getValueAt(fila, 3).toString();
+                    String cod = tablaProductos.getValueAt(fila, 0).toString();
+                    String tipo = tablaProductos.getValueAt(fila, 1).toString();
+                    String nom = tablaProductos.getValueAt(fila, 2).toString();
+                    String precio = tablaProductos.getValueAt(fila, 3).toString();
                     int c = 0;
                     int j = 0;
-                    cant = JOptionPane.showInputDialog(this, "Cantidad:", "Productos", JOptionPane.INFORMATION_MESSAGE);
-                    if(cant == null || cant.equals(""))cant="1";
-                   
+                    cant = JOptionPane.showInputDialog(this, "Cantidad:", ""+ nom+": "+precio, JOptionPane.INFORMATION_MESSAGE);
+                   // JOptionPane.showInputDialog(rootPane, closable, title, fila, frameIcon, dato, linea_seleccionado)
+                            
+                    if( cant.equals(""))cant="1";
+                    //System.out.println("`rint"+JOptionPane.OPTION_TYPE_PROPERTY;
                     while (!OpcionesAl.isNumber(cant)) {
                         cant = JOptionPane.showInputDialog(this, "Debe ingresar valores numéricos\ny que sean mayor a 0:",
                                 "Error", JOptionPane.ERROR_MESSAGE);
+                        
+                         if(cant.equals(""))cant="1";
                         
                     }
                     if (cant.equals("0")) {
@@ -278,7 +260,8 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                                 int cantT = Integer.parseInt(cant) + Integer.parseInt((String) cant1);
                                 ventas.CajaAd.tablaCaja.setValueAt(String.valueOf(cantT), i, 4);
                                 c++;
-                                calcular();
+                                
+                                ventas.CajaAd.total();
                                 CajaAd.recibi.setText("");
                                 CajaAd.cambio.setText("");
                             }
@@ -294,7 +277,7 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                             tabladet.addRow(dato);
 
                             ventas.CajaAd.tablaCaja.setModel(tabladet);
-                            calcular();
+                            ventas.CajaAd.total();
 
                             CajaAd.recibi.setText("");
                             CajaAd.cambio.setText("");
@@ -307,8 +290,36 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No hay registros.", "Productos", 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
         }
-
+        
+    }
+    private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
+        enviar_caja();
     }//GEN-LAST:event_enviarActionPerformed
+
+    private void tablaProductosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaProductosKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaProductosKeyPressed
+
+    private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
+  
+               cliks_tabla++;
+               System.out.println(""+tablaProductos.getSelectedRow());
+               if(tablaProductos.getSelectedRow()==linea_seleccionado){
+                   
+                    if (cliks_tabla==2  ) {
+                      enviar_caja();                      
+                    }
+               }
+                else{
+                linea_seleccionado=tablaProductos.getSelectedRow();
+                cliks_tabla=1;
+                }
+                  // TODO add your handling code here:
+    }//GEN-LAST:event_tablaProductosMouseClicked
+
+    private void tipoAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoAlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipoAlActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -318,8 +329,8 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable tablaAlimentos;
-    private org.bolivia.combo.SComboBoxBlue tipoAl;
+    public static javax.swing.JTable tablaProductos;
+    public static org.bolivia.combo.SComboBoxBlue tipoAl;
     private javax.swing.JLabel tipoL;
     // End of variables declaration//GEN-END:variables
 }

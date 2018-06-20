@@ -47,7 +47,7 @@ public class OpcionesAl {
         return rsu;
     }
     
-    public static void llenar_combo() {
+    public static void llenar_combo() {// productos
         
          Productos.tipoAl1.removeAllItems();
         
@@ -63,6 +63,30 @@ public class OpcionesAl {
             }
            productos.Productos.tipoAl1.addItem("OTROS");
            productos.Productos.tipoAl1.setSelectedIndex( productos.Productos.tipoAl1.getItemCount()-1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OpcionesAl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+    
+    public static void llenar_combo_caja() {// productos
+        
+        ListaProductosAd.tipoAl.removeAllItems();
+        
+        String SQL = "SELECT* FROM tipo_producto";
+
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+            while (rs.next()) {
+                ListaProductosAd.tipoAl.addItem(rs.getString("tipo"));
+                
+                
+            }
+           ListaProductosAd.tipoAl.addItem("TODOS");
+           ListaProductosAd.tipoAl.setSelectedIndex( ListaProductosAd.tipoAl.getItemCount()-1);
             
         } catch (SQLException ex) {
             Logger.getLogger(OpcionesAl.class.getName()).log(Level.SEVERE, null, ex);
@@ -86,7 +110,7 @@ public class OpcionesAl {
         } catch (SQLException ex) {
             System.out.println("002 error"+ex);
         }
-        System.out.println(sql);
+      //  System.out.println(sql);
         return rsu;
     }
 
@@ -199,14 +223,14 @@ public class OpcionesAl {
 
    
     public static void listar2(String busca) {
-        DefaultTableModel modelo = (DefaultTableModel) productos.ListaProductosAd.tablaAlimentos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) productos.ListaProductosAd.tablaProductos.getModel();
 
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
         String sql = "";
         if (busca.equals("")) {
-            sql = ProductosCod.LISTAR;
+            sql ="SELECT * FROM producto ORDER BY nombre";
         } else {
             sql = "SELECT * FROM producto WHERE (id_producto like'" + busca + "%' or nombre like'" + busca + "%') "
                     + "or tipo='" + busca + "' ORDER BY nombre";
@@ -220,12 +244,14 @@ public class OpcionesAl {
                 datos[1] = rs.getString("tipo");
                 datos[2] = rs.getString("nombre");               
                 datos[3] = rs.getString("costo_venta");
-                
+               // System.out.println(datos[0]);
                 modelo.addRow(datos);
             }
         } catch (SQLException ex) {
             Logger.getLogger(OpcionesAl.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(""+ex);
         }
+       // System.out.println("____________________________________________________");
     }
 
     public static boolean isNumber(String n) {

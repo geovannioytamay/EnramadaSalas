@@ -5,21 +5,19 @@
             <url>src/ventas/RegistroVentas.java</url>
             <bookmark id="1">
                 <name/>
-                <line>45</line>
+                <line>47</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/OyTamay/Desktop/programas%20venta/Punto%20de%20venta/Punto%20de%20venta/Proyecto%20PV/EnramadaSalas/src/productos/OpcionesAl.java</file>
-            <file>file:/C:/Users/OyTamay/Desktop/programas%20venta/Punto%20de%20venta/Punto%20de%20venta/Proyecto%20PV/EnramadaSalas/src/productos/ProductosCod.java</file>
-            <file>file:/C:/Users/OyTamay/Desktop/programas%20venta/Punto%20de%20venta/Punto%20de%20venta/Proyecto%20PV/EnramadaSalas/src/productos/ListaProductosAd.java</file>
+            <file>file:/C:/Users/OyTamay/Desktop/programas%20venta/Punto%20de%20venta/Punto%20de%20venta/Proyecto%20PV/EnramadaSalas/src/principal/importar.java</file>
+            <file>file:/C:/Users/OyTamay/Desktop/programas%20venta/Punto%20de%20venta/Punto%20de%20venta/Proyecto%20PV/EnramadaSalas/src/principal/config.java</file>
+            <file>file:/C:/Users/OyTamay/Desktop/programas%20venta/Punto%20de%20venta/Punto%20de%20venta/Proyecto%20PV/EnramadaSalas/src/principal/respaldo.java</file>
+            <file>file:/C:/Users/OyTamay/Desktop/programas%20venta/Punto%20de%20venta/Punto%20de%20venta/Proyecto%20PV/EnramadaSalas/src/principal/informacion.java</file>
+            <file>file:/C:/Users/OyTamay/Desktop/programas%20venta/Punto%20de%20venta/Punto%20de%20venta/Proyecto%20PV/EnramadaSalas/src/ventas/RegistroVentas.java</file>
             <file>file:/C:/Users/OyTamay/Desktop/programas%20venta/Punto%20de%20venta/Punto%20de%20venta/Proyecto%20PV/EnramadaSalas/src/ventas/OpcionesVen.java</file>
-            <file>file:/C:/Users/OyTamay/Desktop/programas%20venta/Punto%20de%20venta/Punto%20de%20venta/Proyecto%20PV/EnramadaSalas/src/ventas/CajaAd.java</file>
-            <file>file:/C:/Users/OyTamay/Desktop/programas%20venta/Punto%20de%20venta/Punto%20de%20venta/Proyecto%20PV/EnramadaSalas/src/productos/Productos.java</file>
-            <file>file:/C:/Users/OyTamay/Desktop/programas%20venta/Punto%20de%20venta/Punto%20de%20venta/Proyecto%20PV/EnramadaSalas/src/principal/AccesoLogin.java</file>
-            <file>file:/C:/Users/OyTamay/Desktop/programas%20venta/Punto%20de%20venta/Punto%20de%20venta/Proyecto%20PV/EnramadaSalas/src/productos/ListaTipo.java</file>
         </group>
     </open-files>
 </project-private>

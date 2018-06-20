@@ -8,6 +8,8 @@ package ventas;
 import java.awt.Cursor;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -46,9 +48,8 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         tablaVentas.setDefaultRenderer(Object.class, new principal.EstiloTablaRenderer());
         this.setFrameIcon(new ImageIcon(getClass().getResource("/imagenes/caja/icono1.png")));
         tablaVentas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        limpiaCampos();
-        jLabel2.setText("");       
-       
+        limpiaCampos();           
+        poner_fechas();// en el apartado de las graficas
         this.setLocation(500, 3);
     }
 
@@ -94,7 +95,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                  
                   //System.out.println(""+calendar.get(Calendar.DAY_OF_WEEK)); //     calcula el dia de la semana   
                   
-                  total=OpcionesVen.optener_ventas(fecha_inicio);
+                  total=OpcionesVen.optener_ventas(fecha_inicio,1);
                  
                   if(total>0){
                       dtsc.addValue(total,Dia_semana(calendar.get(Calendar.DAY_OF_WEEK))+" "+ fecha_inicio,  " ($"+total+")");                  
@@ -103,21 +104,23 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
    }while(fecha_inicio.compareTo(fecha_fin)!=0);
             
   }catch(Exception e){
-  System.out.printf(""+e);
+ // System.out.printf(""+e);
   
    }
         grafica(dtsc,"Ultimos 7 dìas", "Dìa");
     }
    
    void graficar_por_dia(){
-     
-     DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
-    
+        try{
+        DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
+        
+          
      
         String formato = fechaInicio.getDateFormatString();
         Date date =  fechaInicio.getDate();
         SimpleDateFormat sdf = new SimpleDateFormat(formato);
-        
+               
+       
         String formato2 = fechaFin.getDateFormatString();
         Date date2 =  fechaFin.getDate();
         SimpleDateFormat sdf2 = new SimpleDateFormat(formato2);
@@ -125,44 +128,43 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
          String fecha_inicio=String.valueOf(sdf.format(date));
         String fecha_fin=String.valueOf(sdf2.format(date2));
         
-        try{   
+        
          Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(fecha_inicio);
          Calendar calendar = Calendar.getInstance();
          calendar.setTime(inputDate);    
-         
+        
         
          
          //fecha_inicio=String.format("%1$td/%1$tm/%1$tY",calendar.getTime());
          double total=0;
             do { 
-            
-           
-                  
-                  fecha_inicio=String.format("%1$td/%1$tm/%1$tY",calendar.getTime());
+              fecha_inicio=String.format("%1$td/%1$tm/%1$tY",calendar.getTime());
+              
                   //System.out.println(fecha_inicio); // Devuelve el objeto Date con los nuevos días añadidos
                  
-                  //System.out.println("GRAFICAR"+calendar.get(Calendar.DAY_OF_WEEK)); //     calcula el dia de la semana   
+                  //System.out.println("GRAFICAR"+ fecha_inicio); //     calcula el dia de la semana   
                   
                   
                   
-                  total=OpcionesVen.optener_ventas(fecha_inicio);
+                  total=OpcionesVen.optener_ventas(fecha_inicio,1);
                   if(total>0 ){
                       total=Double.parseDouble(String.format("%3.2f", (total)).replace(".00",""));
                       dtsc.addValue(total,""+fecha_inicio,  " ($"+total+")");                  
                   }
                    calendar.add(Calendar.DAY_OF_YEAR,1);
    }while(fecha_inicio.compareTo(fecha_fin)!=0);
-            
+   grafica(dtsc,"Grafica por dìa","Dìa");
   }catch(Exception e){
-  System.out.printf(""+e);
+ JOptionPane.showMessageDialog(this, "Verifique que las fechas esten correctamente.", "Ventas", 0,
+                        new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
   
    }
-        grafica(dtsc,"Grafica por dìa","Dìa");
+       
    }
    
     void graficar_por_semana(){
-     
-     DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
+    try{  
+        DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
     
      
         String formato = fechaInicio.getDateFormatString();
@@ -176,7 +178,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
          String fecha_inicio=String.valueOf(sdf.format(date));
         String fecha_fin=String.valueOf(sdf2.format(date2));
         
-        try{   
+          
          Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(fecha_inicio);
          Calendar calendar = Calendar.getInstance();
          calendar.setTime(inputDate);    
@@ -198,7 +200,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                   
                   
                   
-                  total=total+OpcionesVen.optener_ventas(fecha_inicio);
+                  total=total+OpcionesVen.optener_ventas(fecha_inicio,1);
                   calendar.add(Calendar.DAY_OF_YEAR,1);                  
                   if(numero_semana!=calendar.get(Calendar.WEEK_OF_YEAR) && total>0 ){
                       total=Double.parseDouble(String.format("%3.2f", (total)).replace(".00",""));
@@ -213,19 +215,22 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
             dtsc.addValue(total,""+(numero_semana-longitud_semana),  " ($"+total+")");
            
            }
-            
+     grafica(dtsc,"Grafica por semana", "Semana");        
   }catch(Exception e){
-  System.out.printf(""+e);
+  JOptionPane.showMessageDialog(this, "Verifique que las fechas esten correctamente.", "Ventas", 0,
+                        new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
   
    }
-        grafica(dtsc,"Grafica por semana", "Semana");
+       
    
   
    
     }
     
      void graficar_por_mes(){
-     DefaultCategoryDataset dtsc = new DefaultCategoryDataset();       
+     
+       try{    
+        DefaultCategoryDataset dtsc = new DefaultCategoryDataset();       
      
         String formato = fechaInicio.getDateFormatString();
         Date date =  fechaInicio.getDate();
@@ -239,7 +244,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         String fecha_fin=String.valueOf(sdf2.format(date2));
         int anio=0;
         
-        try{   
+         
          Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(fecha_inicio);
          Calendar calendar = Calendar.getInstance();
          calendar.setTime(inputDate);    
@@ -260,7 +265,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                   
                   
                   
-                  total=total+OpcionesVen.optener_ventas(fecha_inicio);
+                  total=total+OpcionesVen.optener_ventas(fecha_inicio,1);
                   anio=calendar.get(Calendar.YEAR);
                   calendar.add(Calendar.DAY_OF_YEAR,1);
                   if(numero_mes!=calendar.get(Calendar.MONTH) && total>0 ){
@@ -276,31 +281,30 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
             dtsc.addValue(total,Mes_anio(calendar.get(Calendar.MONTH))+" "+anio,  " ($"+total+")");
             
            }
-            
+    grafica(dtsc,"Grafica por mes", "Mes");        
   }catch(Exception e){
-  System.out.printf(""+e);
+  JOptionPane.showMessageDialog(this, "Verifique que las fechas esten correctamente.", "Ventas", 0,
+                        new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
   
    }
-        grafica(dtsc,"Grafica por mes", "Mes");
+        
   }
      
    void graficar_por_anio(){
-     DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
-     
-    
-     
-        String formato = fechaInicio.getDateFormatString();
-        Date date =  fechaInicio.getDate();
-        SimpleDateFormat sdf = new SimpleDateFormat(formato);
+     try{ 
+       DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
+       String fecha_inicio="01/01/2015";
         
-        String formato2 = fechaFin.getDateFormatString();
-        Date date2 =  fechaFin.getDate();
-        SimpleDateFormat sdf2 = new SimpleDateFormat(formato2);
+        Date sistemaFech = new Date();
+        SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha_fin=form.format(sistemaFech);
         
-         String fecha_inicio=String.valueOf(sdf.format(date));
-        String fecha_fin=String.valueOf(sdf2.format(date2));
+        Date inputDate2 = new SimpleDateFormat("dd/MM/yyyy").parse(fecha_fin);
+         Calendar calendar2 = Calendar.getInstance();
+         calendar2.setTime(inputDate2); 
+      
         
-        try{   
+         
          Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(fecha_inicio);
          Calendar calendar = Calendar.getInstance();
          calendar.setTime(inputDate);    
@@ -314,33 +318,31 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
             
            
                   
-                  fecha_inicio=String.format("%1$td/%1$tm/%1$tY",calendar.getTime());
-                 // System.out.println(fecha_inicio); // Devuelve el objeto Date con los nuevos días añadidos
+                  fecha_inicio=String.format("%1$tY",calendar.getTime());
+                 System.out.println(fecha_inicio); // Devuelve el objeto Date con los nuevos días añadidos
                  
                  //System.out.println("Mes: "+calendar.get(Calendar.YEAR)); //     calcula el dia de la semana   
                   
                   
                   
-                  total=total+OpcionesVen.optener_ventas(fecha_inicio);
-                  calendar.add(Calendar.DAY_OF_YEAR,1);
-                  if(numero_anio!=calendar.get(Calendar.YEAR) && total>0 ){
-                      total=Double.parseDouble(String.format("%3.2f", (total)).replace(".00",""));
-                      dtsc.addValue(total, ""+numero_anio,  " ($"+total+")");                  
-                      total=0;                 
-                  }
+                total=total+OpcionesVen.optener_ventas(fecha_inicio,1);
+                calendar.add(Calendar.YEAR,1);
+                  
+                 total=Double.parseDouble(String.format("%3.2f", (total)).replace(".00",""));
+                 dtsc.addValue(total, ""+numero_anio,  " ($"+total+")");                  
+                 total=0;                 
+                  
                    numero_anio=calendar.get(Calendar.YEAR);
                   
-   }while(fecha_inicio.compareTo(fecha_fin)!=0);
-           if( total>0 ){
-            total=Double.parseDouble(String.format("%3.2f", (total)).replace(".00",""));
-            dtsc.addValue(total, ""+numero_anio,  " ($"+total+")");
-           }
-            
+   }while(calendar.get(Calendar.YEAR)!= calendar2.get(Calendar.YEAR)+1);
+          
+   grafica(dtsc,"Grafica por año", "Año");         
   }catch(Exception e){
-  System.out.printf(""+e);
+  JOptionPane.showMessageDialog(this, "Verifique que las fechas esten correctamente.", "Ventas", 0,
+                        new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
   
    }
-        grafica(dtsc,"Grafica por año", "Año");
+        
         
    }
     JFreeChart ch;
@@ -370,7 +372,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
    
    int definir_dimeciones(int numero){
        int dimencion =0;
-       System.out.println("numero: "+numero);
+       //System.out.println("numero: "+numero);
        if (numero<7){
          frame_grafica.setSize(700,300);         
          dimencion=frame_grafica.getWidth();
@@ -467,6 +469,62 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
        
    }
    
+ boolean fecha_valida(){
+     try{
+        String formato = fechaInicio.getDateFormatString();
+        Date date =  fechaInicio.getDate();
+        SimpleDateFormat sdf = new SimpleDateFormat(formato);
+               
+       
+        String formato2 = fechaFin.getDateFormatString();
+        Date date2 =  fechaFin.getDate();
+        SimpleDateFormat sdf2 = new SimpleDateFormat(formato2);
+        
+        String fecha_inicio=String.valueOf(sdf.format(date));
+        String fecha_fin=String.valueOf(sdf2.format(date2));
+        
+        
+         Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(fecha_inicio);
+         Calendar calendar = Calendar.getInstance();
+         calendar.setTime(inputDate);
+         
+         Date inputDate2 = new SimpleDateFormat("dd/MM/yyyy").parse(fecha_fin);
+         Calendar calendar2 = Calendar.getInstance();
+         calendar.setTime(inputDate2);
+         
+         if(calendar.get(Calendar.YEAR)<2017 || calendar2.get(Calendar.YEAR)<2018 ){
+             //System.out.println(calendar.get(Calendar.YEAR));
+             JOptionPane.showMessageDialog(this, "Año de inicio establecido es incorecto: AÑO mayor a 2017 y AÑO menor a 2025", "Error  de fecha", 0,
+                        new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
+             return false;
+         }
+         if(calendar.get(Calendar.YEAR)>2025 || calendar2.get(Calendar.YEAR)>2025){
+             //System.out.println(calendar.get(Calendar.YEAR));
+             JOptionPane.showMessageDialog(this, "Año de final establecido es incorecto: AÑO mayor a 2017 y AÑO menor a 2025", "Error  de fecha", 0,
+                        new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
+             return false;
+         }
+          if(inputDate2.before(inputDate)) {
+                 JOptionPane.showMessageDialog(this, "Fecha inicio es menor a fecha final", "Error de fecha", 0,
+                        new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
+              return false;   
+          } 
+         
+          //System.out.println(calendar2.get(Calendar.YEAR));
+          // System.out.println(calendar.get(Calendar.YEAR));
+        
+         
+        
+  }catch(Exception e){
+ JOptionPane.showMessageDialog(this, "Verifique que las fechas esten correctamente.","Error  de fecha", 0,
+                        new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
+ return false;
+  
+   }
+     
+     return true;
+ }  
+   
    public boolean estacerrado(Object obj) {
         JInternalFrame[] activos = escritorio.getAllFrames();
         boolean cerrado = true;
@@ -504,6 +562,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         codigoL2 = new javax.swing.JLabel();
         total = new app.bolivia.swing.JCTextField();
         codigoL3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         fechaInicio = new com.toedter.calendar.JDateChooser();
@@ -511,7 +570,6 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         fechaFin = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         Opciones = new org.bolivia.combo.SComboBoxBlue();
-        jButton1 = new javax.swing.JButton();
         frame_scroll = new javax.swing.JScrollPane();
         frame_grafica = new javax.swing.JPanel();
 
@@ -569,6 +627,11 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                 buscarMouseClicked(evt);
             }
         });
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
         buscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 buscarKeyReleased(evt);
@@ -577,11 +640,11 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                 buscarKeyTyped(evt);
             }
         });
-        jPanel4.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 180, -1));
+        jPanel4.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 180, -1));
 
         fecha.setDateFormatString("dd/MM/yyyy");
         fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel4.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 150, 30));
+        jPanel4.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 180, 30));
 
         eliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios/borrar1.png"))); // NOI18N
@@ -649,11 +712,12 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                 buscFActionPerformed(evt);
             }
         });
-        jPanel4.add(buscF, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, -1));
+        jPanel4.add(buscF, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel1.setText("Fecha");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
+        jLabel1.setText("TOTAL");
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, 50, -1));
 
         ventasH.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ventasH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caja/ventasH1.png"))); // NOI18N
@@ -674,15 +738,17 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
 
         codigoL2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         codigoL2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios/buscarL.png"))); // NOI18N
-        jPanel4.add(codigoL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 300, 52));
+        jPanel4.add(codigoL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 300, 52));
 
+        total.setEditable(false);
         total.setBackground(new java.awt.Color(34, 102, 145));
         total.setBorder(null);
         total.setForeground(new java.awt.Color(255, 255, 255));
-        total.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        total.setText("$69.00");
+        total.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         total.setOpaque(false);
         total.setPhColor(new java.awt.Color(255, 255, 255));
-        total.setPlaceholder("No. VENTA");
         total.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 totalMouseClicked(evt);
@@ -696,11 +762,15 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                 totalKeyTyped(evt);
             }
         });
-        jPanel4.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 180, -1));
+        jPanel4.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 220, -1));
 
         codigoL3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        codigoL3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios/buscarL.png"))); // NOI18N
+        codigoL3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caja/vacio.png"))); // NOI18N
         jPanel4.add(codigoL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 300, 52));
+
+        jLabel4.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel4.setText("Fecha");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -736,8 +806,8 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         jPanel5.add(fechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 150, 30));
 
         jLabel2.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel2.setText("Fecha inico");
-        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+        jLabel2.setText("Fecha inicio");
+        jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
         fechaFin.setDateFormatString("dd/MM/yyyy");
         fechaFin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -745,7 +815,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
 
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText("Fecha fin");
-        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, -1, -1));
+        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, -1, -1));
 
         Opciones.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ULTIMOS 7 DIAS", "POR DIA", "POR SEMANA", "POR MES", "POR AÑO" }));
         Opciones.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -761,14 +831,6 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         });
         jPanel5.add(Opciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 183, -1));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, -1, -1));
-
         frame_grafica.setBackground(new java.awt.Color(255, 255, 255));
         frame_grafica.setPreferredSize(new java.awt.Dimension(3000, 300));
 
@@ -780,7 +842,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         );
         frame_graficaLayout.setVerticalGroup(
             frame_graficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 328, Short.MAX_VALUE)
+            .addGap(0, 365, Short.MAX_VALUE)
         );
 
         frame_scroll.setViewportView(frame_grafica);
@@ -789,21 +851,20 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 824, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 93, Short.MAX_VALUE))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
+                    .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         CONSULTAS.addTab("GANANCIAS", jPanel2);
@@ -912,11 +973,6 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_OpcionesActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    graficar_por_anio();
-    
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void CONSULTASKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CONSULTASKeyPressed
         
     }//GEN-LAST:event_CONSULTASKeyPressed
@@ -924,7 +980,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
     private void CONSULTASMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CONSULTASMouseClicked
       if(CONSULTAS.getSelectedIndex()==1){
         grafica_ultima_semana(); 
-        this.setSize(1000,500);
+        this.setSize(1000,550);
         this.setLocation(150,  3);
       }
       else{
@@ -933,9 +989,35 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
       }
        
     }//GEN-LAST:event_CONSULTASMouseClicked
-
+void poner_fechas(){
+    DefaultCategoryDataset dtsc = new DefaultCategoryDataset();
+     
+     Date sistemaFech = new Date();
+     SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");   
+       
+        String fecha_inicio=formato.format(sistemaFech);
+        fechaFin.setDate(sistemaFech);
+        try{   
+         Date inputDate = new SimpleDateFormat("dd/MM/yyyy").parse(fecha_inicio);
+         Calendar calendar = Calendar.getInstance();
+         calendar.setTime(inputDate);         
+         calendar.add(Calendar.DAY_OF_YEAR,-8);
+         
+         String fecha=String.format("%1$td/%1$tm/%1$tY",calendar.getTime());
+         
+         DateFormat fechae = new SimpleDateFormat("dd/MM/yyyy");
+         Date convertido = fechae.parse(fecha);			
+         
+         fechaInicio.setDate(convertido);
+              // System.out.println(fecha);
+            }catch(Exception e){}
+}
+    int cont=0;
     private void OpcionesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_OpcionesItemStateChanged
-switch(Opciones.getSelectedIndex()){
+cont++;
+if(cont%2==0 && (Opciones.getSelectedIndex()==0 || Opciones.getSelectedIndex()==4 || fecha_valida()) ){
+System.out.println("fecha valida"+cont);    
+        switch(Opciones.getSelectedIndex() ){
                    case 0:
                        grafica_ultima_semana();
                        break;
@@ -951,7 +1033,8 @@ switch(Opciones.getSelectedIndex()){
                     case 4:
                         graficar_por_anio();
                        break;
-               }        // TODO add your handling code here:
+               }        
+}
     }//GEN-LAST:event_OpcionesItemStateChanged
 
     private void totalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totalMouseClicked
@@ -965,6 +1048,10 @@ switch(Opciones.getSelectedIndex()){
     private void totalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_totalKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_totalKeyTyped
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -981,10 +1068,10 @@ switch(Opciones.getSelectedIndex()){
     private com.toedter.calendar.JDateChooser fechaInicio;
     private javax.swing.JPanel frame_grafica;
     private javax.swing.JScrollPane frame_scroll;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;

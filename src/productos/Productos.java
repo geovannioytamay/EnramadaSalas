@@ -36,62 +36,11 @@ public class Productos extends javax.swing.JInternalFrame {
         this.tipoAl1.setCursor(new Cursor(12));       
         this.setFrameIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/icono.png")));
         limpiaCampos();
+        registrar.setMnemonic(KeyEvent.VK_G);
+        actualizar.setMnemonic(KeyEvent.VK_M);
         
-        tipoAl1.addItemListener(new ItemListener() {
-
-            @Override
-            public void itemStateChanged(ItemEvent ie) {
-                if (tipoAl1.getSelectedIndex() == 0) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/tipoAlL.png")));
-                    nombreL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/nombreL.png")));
-                }
-                if (tipoAl1.getSelectedIndex() == 1) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/bebida.png")));
-                    nombreL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/bebida1.png")));
-                }
-                
-                if (tipoAl1.getSelectedIndex() == 2) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/botana.png")));
-                    nombreL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/botana1.png")));
-                }
-                if (tipoAl1.getSelectedIndex() == 3) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/caldo.png")));
-                    nombreL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/caldo1.png")));
-                }
-                if (tipoAl1.getSelectedIndex() == 4) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/camaron.png")));
-                    nombreL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/camaron1.png")));
-                }
-                if (tipoAl1.getSelectedIndex() == 5) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/coctel.png")));
-                    nombreL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/coctel1.png")));
-                }
-                if (tipoAl1.getSelectedIndex() == 6) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/desayuno.png")));
-                    nombreL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/desayuno1.png")));
-                }
-                if (tipoAl1.getSelectedIndex() == 7) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/filete.png")));
-                    nombreL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/filete1.png")));
-                }
-                if (tipoAl1.getSelectedIndex() == 8) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/langosta.png")));
-                    nombreL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/langosta1.png")));
-                }
-                if (tipoAl1.getSelectedIndex() == 9) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/langostino.png")));
-                    nombreL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/langostino1.png")));
-                }
-                if (tipoAl1.getSelectedIndex() == 10) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/pescado.png")));
-                    nombreL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/pescado1.png")));
-                }
-                if (tipoAl1.getSelectedIndex() == 11) {
-                    tipoL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/pulpo.png")));
-                    nombreL.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/pulpo1.png")));
-                }
-            }
-        });
+        
+        
         
 
         tablaProductos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
