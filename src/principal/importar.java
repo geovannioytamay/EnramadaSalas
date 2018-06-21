@@ -7,6 +7,7 @@ package principal;
 
 import java.awt.Color;
 import java.awt.FileDialog;
+import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -254,7 +255,7 @@ public class importar extends javax.swing.JInternalFrame {
     }
    void buscar_ruta(){
          FileDialog dialogoArchivo;
-        dialogoArchivo = new FileDialog(new principal.MenuPrincipalAd(), "Seleccione un archivo",FileDialog.LOAD);
+        dialogoArchivo = new FileDialog(new Frame(), "Seleccione su respaldo",FileDialog.LOAD);
         dialogoArchivo.setVisible(true);
         nombre_archivo=dialogoArchivo.getFile();
         ruta= dialogoArchivo.getDirectory() + nombre_archivo;   

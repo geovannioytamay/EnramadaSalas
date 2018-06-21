@@ -6,6 +6,7 @@
 package principal;
 
 import java.awt.FileDialog;
+import java.awt.Frame;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -20,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import static principal.MenuPrincipalAd.escritorio;
 import productos.OpcionesAl;
 
 
@@ -289,12 +291,12 @@ public class respaldo extends javax.swing.JInternalFrame {
      static String ruta="";
    void buscar_ruta(){
          FileDialog dialogoArchivo;
-        dialogoArchivo = new FileDialog(new principal.MenuPrincipalAd(), "Lista de Archivos desde Frame",FileDialog.SAVE);
+        dialogoArchivo = new FileDialog(new Frame(), "Guardar su respaldo",FileDialog.SAVE);        
         dialogoArchivo.setVisible(true);
-        
         ruta= dialogoArchivo.getDirectory() + dialogoArchivo.getFile();   
-        System.out.println(ruta);       
-        
+       // System.out.println(ruta); 
+    
+            
         
     }
     

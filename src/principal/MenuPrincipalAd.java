@@ -5,6 +5,7 @@
  */
 package principal;
 
+import java.awt.Dimension;
 import productos.Productos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,9 +52,9 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
      * Creates new form MenuPrincipal
      */
     public MenuPrincipalAd() {
-        this.setResizable(false);
+        this.setResizable(false);// desabilita la opcion miminizar y maximizar del grame
         initComponents();
-        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);       
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/principal/logo.png")).getImage());
         this.setTitle("MENÚ PRINCIPAL "+tipo_usuario+" - SISTEMA PUNTO DE VENTA");
         usuarios.setMnemonic(KeyEvent.VK_A);
@@ -61,6 +62,8 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         ventas.setMnemonic(KeyEvent.VK_R);
         caja.setMnemonic(KeyEvent.VK_C);
         info.setMnemonic(KeyEvent.VK_C);
+       // this.setUndecorated(true); 
+        //this.setResizable(true);
        
         
     }
@@ -78,18 +81,24 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         info = new javax.swing.JButton();
         caja = new javax.swing.JButton();
-        hora = new javax.swing.JLabel();
-        fecha = new javax.swing.JLabel();
-        userConect = new javax.swing.JLabel();
-        logoSexo1 = new javax.swing.JLabel();
-        logoSexo = new javax.swing.JLabel();
-        desc = new javax.swing.JLabel();
         usuarios = new javax.swing.JButton();
         almacen = new javax.swing.JButton();
         ventas = new javax.swing.JButton();
+        info1 = new javax.swing.JButton();
+        info2 = new javax.swing.JButton();
+        info3 = new javax.swing.JButton();
         escritorio = new principal.Escritorio();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        desc = new javax.swing.JLabel();
+        userConect = new javax.swing.JLabel();
+        hora = new javax.swing.JLabel();
+        fecha = new javax.swing.JLabel();
+        logoSexo = new javax.swing.JLabel();
+        logoSexo2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -133,36 +142,6 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         caja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cajaActionPerformed(evt);
-            }
-        });
-
-        hora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        hora.setForeground(new java.awt.Color(255, 255, 255));
-        hora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        hora.setText("HORA");
-
-        fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        fecha.setForeground(new java.awt.Color(255, 255, 255));
-        fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        fecha.setText("DIA - MES - AÑO");
-
-        userConect.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        userConect.setForeground(new java.awt.Color(255, 255, 255));
-        userConect.setText("USUARIO");
-
-        logoSexo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoSexo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/conectado.png"))); // NOI18N
-
-        logoSexo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoSexo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/descotectado1.png"))); // NOI18N
-
-        desc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        desc.setForeground(new java.awt.Color(255, 255, 255));
-        desc.setText("DESCONECTAR...");
-        desc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        desc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                descMouseClicked(evt);
             }
         });
 
@@ -214,26 +193,60 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
             }
         });
 
+        info1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        info1.setForeground(new java.awt.Color(255, 255, 255));
+        info1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/cerrar.png"))); // NOI18N
+        info1.setText("");
+        info1.setBorder(null);
+        info1.setContentAreaFilled(false);
+        info1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        info1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        info1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/config2.png"))); // NOI18N
+        info1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        info1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                info1ActionPerformed(evt);
+            }
+        });
+
+        info2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        info2.setForeground(new java.awt.Color(255, 255, 255));
+        info2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/maximizar.png"))); // NOI18N
+        info2.setBorder(null);
+        info2.setContentAreaFilled(false);
+        info2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        info2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        info2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/config2.png"))); // NOI18N
+        info2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        info2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                info2ActionPerformed(evt);
+            }
+        });
+
+        info3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        info3.setForeground(new java.awt.Color(255, 255, 255));
+        info3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/miminizar.png"))); // NOI18N
+        info3.setBorder(null);
+        info3.setContentAreaFilled(false);
+        info3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        info3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        info3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/config2.png"))); // NOI18N
+        info3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        info3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                info3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(logoSexo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(desc))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(logoSexo1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(userConect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(hora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
                 .addComponent(usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addComponent(almacen, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(ventas, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,35 +254,90 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
                 .addComponent(caja, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76)
                 .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(info3)
+                .addGap(18, 18, 18)
+                .addComponent(info2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(info1)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(usuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(almacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ventas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(hora)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(fecha)
-                            .addGap(2, 2, 2)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(userConect)
-                                    .addGap(21, 21, 21)
-                                    .addComponent(desc))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(logoSexo1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(logoSexo)))))
-                    .addComponent(caja, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(info, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(usuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(almacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ventas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(caja, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(info, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(info1)
+                    .addComponent(info2)
+                    .addComponent(info3))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        escritorio.add(jButton1);
+        jButton1.setBounds(350, 30, 73, 23);
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        escritorio.add(jButton2);
+        jButton2.setBounds(350, 70, 73, 23);
+
+        desc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        desc.setForeground(new java.awt.Color(255, 255, 255));
+        desc.setText("DESCONECTAR...");
+        desc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        desc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                descMouseClicked(evt);
+            }
+        });
+        escritorio.add(desc);
+        desc.setBounds(50, 120, 260, 15);
+
+        userConect.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        userConect.setForeground(new java.awt.Color(255, 255, 255));
+        userConect.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userConect.setText("USUARIO");
+        escritorio.add(userConect);
+        userConect.setBounds(460, 60, 280, 15);
+
+        hora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        hora.setForeground(new java.awt.Color(255, 255, 255));
+        hora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hora.setText("HORA");
+        escritorio.add(hora);
+        hora.setBounds(480, 10, 225, 17);
+
+        fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        fecha.setForeground(new java.awt.Color(255, 255, 255));
+        fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fecha.setText("DIA - MES - AÑO");
+        escritorio.add(fecha);
+        fecha.setBounds(480, 30, 225, 17);
+
+        logoSexo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logoSexo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/descotectado1.png"))); // NOI18N
+        escritorio.add(logoSexo);
+        logoSexo.setBounds(10, 110, 30, 30);
+
+        logoSexo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logoSexo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/caja.png"))); // NOI18N
+        escritorio.add(logoSexo2);
+        logoSexo2.setBounds(0, 0, 350, 190);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -286,7 +354,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE))
+                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -317,7 +385,8 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
     usuarios.Usuarios us;
     private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosActionPerformed
-       if(tipo_usuario.equals("NORMAL")){
+       
+        if(tipo_usuario.equals("NORMAL")){
             JOptionPane.showMessageDialog(this, "Acceso denegado.", "Error", 0,
                 new ImageIcon(getClass().getResource("/imagenes/usuarios/impo.png")));
        }
@@ -404,12 +473,33 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
             escritorio.add(con).setLocation(250, 3);
             con.show();
         } else {
-            al.toFront();
+            con.toFront();
         }
         
       
                   
     }//GEN-LAST:event_infoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.setExtendedState(MAXIMIZED_BOTH);
+         System.exit(0); 
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void info1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_info1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_info1ActionPerformed
+
+    private void info2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_info2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_info2ActionPerformed
+
+    private void info3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_info3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_info3ActionPerformed
     class horas implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
@@ -465,10 +555,15 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
     private javax.swing.JLabel fecha;
     private javax.swing.JLabel hora;
     private javax.swing.JButton info;
+    private javax.swing.JButton info1;
+    private javax.swing.JButton info2;
+    private javax.swing.JButton info3;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel logoSexo;
-    private javax.swing.JLabel logoSexo1;
+    private javax.swing.JLabel logoSexo2;
     public static javax.swing.JLabel userConect;
     private javax.swing.JButton usuarios;
     private javax.swing.JButton ventas;
