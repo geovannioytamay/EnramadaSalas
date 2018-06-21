@@ -30,6 +30,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
   
     public Usuarios() {
         initComponents();
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         tablaUsuarios.getTableHeader().setDefaultRenderer(new principal.EstiloTablaHeader());
         tablaUsuarios.setDefaultRenderer(Object.class, new principal.EstiloTablaRenderer());
         this.setFrameIcon(new ImageIcon(getClass().getResource("/imagenes/usuarios/icono.png")));
@@ -196,7 +197,12 @@ public boolean estacerrado(Object obj) {
         jPanel4 = new javax.swing.JPanel();
         buscar = new app.bolivia.swing.JCTextField();
         codigoL1 = new javax.swing.JLabel();
+        barraDeTitulo = new javax.swing.JPanel();
+        miminizar = new javax.swing.JButton();
+        miminizar1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(7, 37, 77), 4));
         setClosable(true);
         setIconifiable(true);
         setTitle("USUARIOS");
@@ -436,6 +442,61 @@ public boolean estacerrado(Object obj) {
         codigoL1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios/buscarL.png"))); // NOI18N
         jPanel4.add(codigoL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 250, 52));
 
+        barraDeTitulo.setBackground(new java.awt.Color(7, 37, 77));
+
+        miminizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        miminizar.setForeground(new java.awt.Color(255, 255, 255));
+        miminizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/close.png"))); // NOI18N
+        miminizar.setBorder(null);
+        miminizar.setContentAreaFilled(false);
+        miminizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        miminizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        miminizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/close2.png"))); // NOI18N
+        miminizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        miminizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miminizarActionPerformed(evt);
+            }
+        });
+
+        miminizar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        miminizar1.setForeground(new java.awt.Color(255, 255, 255));
+        miminizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/ico.png"))); // NOI18N
+        miminizar1.setBorder(null);
+        miminizar1.setContentAreaFilled(false);
+        miminizar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        miminizar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        miminizar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        miminizar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miminizar1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("USUARIOS");
+
+        javax.swing.GroupLayout barraDeTituloLayout = new javax.swing.GroupLayout(barraDeTitulo);
+        barraDeTitulo.setLayout(barraDeTituloLayout);
+        barraDeTituloLayout.setHorizontalGroup(
+            barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraDeTituloLayout.createSequentialGroup()
+                .addComponent(miminizar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(miminizar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        barraDeTituloLayout.setVerticalGroup(
+            barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(miminizar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(miminizar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -450,17 +511,20 @@ public boolean estacerrado(Object obj) {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(barraDeTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barraDeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -612,21 +676,33 @@ public boolean estacerrado(Object obj) {
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoUsActionPerformed
 
+    private void miminizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_miminizarActionPerformed
+
+    private void miminizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miminizar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizar;
+    private javax.swing.JPanel barraDeTitulo;
     private app.bolivia.swing.JCTextField buscar;
     public static app.bolivia.swing.JCTextField codigo;
     private javax.swing.JLabel codigoL;
     private javax.swing.JLabel codigoL1;
     private javax.swing.JButton eliminar;
     private javax.swing.JButton eliminarT;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpiar;
+    private javax.swing.JButton miminizar;
+    private javax.swing.JButton miminizar1;
     private app.bolivia.swing.JCTextField nombre;
     private javax.swing.JLabel nombreL;
     private jpass.JRPasswordField pass;

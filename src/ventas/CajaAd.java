@@ -51,6 +51,7 @@ public class CajaAd extends javax.swing.JInternalFrame {
 
     public CajaAd() {
         initComponents();
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         tablaCaja.getTableHeader().setDefaultRenderer(new principal.EstiloTablaHeader());
         tablaCaja.setDefaultRenderer(Object.class, new principal.EstiloTablaRenderer());
         this.setFrameIcon(new ImageIcon(getClass().getResource("/imagenes/caja/icono.png")));
@@ -136,12 +137,6 @@ public class CajaAd extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaCaja = new javax.swing.JTable();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         numFac = new app.bolivia.swing.JCTextField();
         codigoL4 = new javax.swing.JLabel();
@@ -150,7 +145,12 @@ public class CajaAd extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         fecha = new app.bolivia.swing.JCTextField();
         codigoL5 = new javax.swing.JLabel();
+        barraDeTitulo = new javax.swing.JPanel();
+        miminizar = new javax.swing.JButton();
+        miminizar1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(7, 37, 77), 7));
         setClosable(true);
         setIconifiable(true);
         setTitle("CAJA DE CORBO");
@@ -189,7 +189,7 @@ public class CajaAd extends javax.swing.JInternalFrame {
                 recibiKeyTyped(evt);
             }
         });
-        jPanel2.add(recibi, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 130, -1));
+        jPanel2.add(recibi, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 130, -1));
 
         codigoL6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caja/recibi.png"))); // NOI18N
         codigoL6.setToolTipText("RECIBI");
@@ -208,11 +208,11 @@ public class CajaAd extends javax.swing.JInternalFrame {
                 cambioKeyPressed(evt);
             }
         });
-        jPanel2.add(cambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 120, -1));
+        jPanel2.add(cambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 120, 30));
 
         codigoL7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caja/cambio.png"))); // NOI18N
         codigoL7.setToolTipText("CAMBIO");
-        jPanel2.add(codigoL7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, 52));
+        jPanel2.add(codigoL7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, -1, 52));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 30, -1, -1));
 
         borrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -228,7 +228,7 @@ public class CajaAd extends javax.swing.JInternalFrame {
                 borrarActionPerformed(evt);
             }
         });
-        jPanel2.add(borrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, -1, -1));
+        jPanel2.add(borrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, -1, -1));
 
         cancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caja/cancela2.png"))); // NOI18N
@@ -243,7 +243,7 @@ public class CajaAd extends javax.swing.JInternalFrame {
                 cancelarActionPerformed(evt);
             }
         });
-        jPanel2.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, -1, -1));
+        jPanel2.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 0, -1, -1));
 
         vender.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         vender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caja/venta2.png"))); // NOI18N
@@ -268,10 +268,10 @@ public class CajaAd extends javax.swing.JInternalFrame {
         total.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         total.setOpaque(false);
         total.setPhColor(new java.awt.Color(255, 255, 255));
-        jPanel2.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 120, 30));
+        jPanel2.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 68, 120, 30));
 
         codigoL3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caja/total2.png"))); // NOI18N
-        jPanel2.add(codigoL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, -1, 50));
+        jPanel2.add(codigoL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, -1, 50));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -296,58 +296,7 @@ public class CajaAd extends javax.swing.JInternalFrame {
         tablaCaja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane1.setViewportView(tablaCaja);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 680, 270));
-
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\OyTamay\\Desktop\\programas venta\\Punto de venta\\Punto de venta\\Proyecto PV\\EnramadaSalas\\src\\imagenes\\caja\\logo.png")); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("DISEÑANOR EDWIN GEOVANNI OY TAMAY");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("CONTACTOS:");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("TEL: 9861193106");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("CORRERO:  argentina.geovanni@gmail.com");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)))
-                .addGap(0, 293, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 760, 270));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -361,14 +310,14 @@ public class CajaAd extends javax.swing.JInternalFrame {
         numFac.setOpaque(false);
         numFac.setPhColor(new java.awt.Color(255, 255, 255));
         numFac.setPlaceholder("FACTURA");
-        jPanel6.add(numFac, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 130, 30));
+        jPanel6.add(numFac, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 130, 40));
 
         codigoL4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caja/numFac.png"))); // NOI18N
-        jPanel6.add(codigoL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, 50));
+        jPanel6.add(codigoL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 40));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("NÚMERO DE VENTA");
-        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, -1));
 
         ListaProductos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         ListaProductos.setVisible(true);
@@ -377,11 +326,11 @@ public class CajaAd extends javax.swing.JInternalFrame {
         ListaProductos.getContentPane().setLayout(ListaProductosLayout);
         ListaProductosLayout.setHorizontalGroup(
             ListaProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 546, Short.MAX_VALUE)
         );
         ListaProductosLayout.setVerticalGroup(
             ListaProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 445, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -391,6 +340,7 @@ public class CajaAd extends javax.swing.JInternalFrame {
         fecha.setBackground(new java.awt.Color(34, 102, 145));
         fecha.setBorder(null);
         fecha.setForeground(new java.awt.Color(255, 255, 255));
+        fecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         fecha.setOpaque(false);
         fecha.setPhColor(new java.awt.Color(255, 255, 255));
@@ -400,52 +350,111 @@ public class CajaAd extends javax.swing.JInternalFrame {
                 fechaActionPerformed(evt);
             }
         });
-        jPanel3.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 180, -1));
+        jPanel3.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 180, -1));
 
         codigoL5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caja/fecha.png"))); // NOI18N
-        jPanel3.add(codigoL5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 52));
+        jPanel3.add(codigoL5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 52));
+
+        barraDeTitulo.setBackground(new java.awt.Color(7, 37, 77));
+
+        miminizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        miminizar.setForeground(new java.awt.Color(255, 255, 255));
+        miminizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/close.png"))); // NOI18N
+        miminizar.setBorder(null);
+        miminizar.setContentAreaFilled(false);
+        miminizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        miminizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        miminizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/close2.png"))); // NOI18N
+        miminizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        miminizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miminizarActionPerformed(evt);
+            }
+        });
+
+        miminizar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        miminizar1.setForeground(new java.awt.Color(255, 255, 255));
+        miminizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/ico.png"))); // NOI18N
+        miminizar1.setBorder(null);
+        miminizar1.setContentAreaFilled(false);
+        miminizar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        miminizar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        miminizar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        miminizar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miminizar1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("CAJA DE COBRO");
+
+        javax.swing.GroupLayout barraDeTituloLayout = new javax.swing.GroupLayout(barraDeTitulo);
+        barraDeTitulo.setLayout(barraDeTituloLayout);
+        barraDeTituloLayout.setHorizontalGroup(
+            barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraDeTituloLayout.createSequentialGroup()
+                .addComponent(miminizar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(miminizar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(barraDeTituloLayout.createSequentialGroup()
+                    .addGap(42, 42, 42)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(58, Short.MAX_VALUE)))
+        );
+        barraDeTituloLayout.setVerticalGroup(
+            barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(miminizar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(miminizar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraDeTituloLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(barraDeTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ListaProductos)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ListaProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(243, 243, 243))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(barraDeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(ListaProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1397, 1397, 1397))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(ListaProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -462,9 +471,25 @@ public class CajaAd extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+      
+    }//GEN-LAST:event_formKeyPressed
+
+    private void miminizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miminizar1ActionPerformed
+
+    private void miminizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_miminizarActionPerformed
+
     private void fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fechaActionPerformed
+
+    private void venderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_venderActionPerformed
+        vender();
+    }//GEN-LAST:event_venderActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         limpiaCampos();
@@ -479,20 +504,16 @@ public class CajaAd extends javax.swing.JInternalFrame {
                 total();
             } else {
                 JOptionPane.showMessageDialog(tablaCaja, "Seleccione una fila.", "Caja de cobro", 0,
-                        new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
+                    new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
 
             }
         } else {
             JOptionPane.showMessageDialog(tablaCaja, "No hay registros\npara eliminar.", "Caja de cobro", 0,
-                    new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
+                new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
             Locale locale = new Locale("pt", "BR");
 
         }
     }//GEN-LAST:event_borrarActionPerformed
-
-    private void venderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_venderActionPerformed
-        vender();
-    }//GEN-LAST:event_venderActionPerformed
 
     private void cambioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cambioKeyPressed
         if (evt.getKeyCode() == evt.VK_ENTER) {
@@ -517,18 +538,14 @@ public class CajaAd extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_recibiKeyReleased
 
     private void recibiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_recibiKeyPressed
-       System.out.println(" tecl: "+evt.getKeyCode());
+        System.out.println(" tecl: "+evt.getKeyCode());
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (JOptionPane.showConfirmDialog(tablaCaja, "¿Hacer venta?", "Caja", JOptionPane.YES_NO_OPTION, 0,
-                    new ImageIcon(getClass().getResource("/imagenes/usuarios/seguro.png"))) == JOptionPane.YES_OPTION) {
-                vender();
-            }
+                new ImageIcon(getClass().getResource("/imagenes/usuarios/seguro.png"))) == JOptionPane.YES_OPTION) {
+            vender();
+        }
         }
     }//GEN-LAST:event_recibiKeyPressed
-
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-      
-    }//GEN-LAST:event_formKeyPressed
 
     private void recibiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recibiActionPerformed
         // TODO add your handling code here:
@@ -621,30 +638,28 @@ public class CajaAd extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JInternalFrame ListaProductos;
+    public static javax.swing.JInternalFrame ListaProductos;
+    private javax.swing.JPanel barraDeTitulo;
     private javax.swing.JButton borrar;
     public static app.bolivia.swing.JCTextField cambio;
     private javax.swing.JButton cancelar;
     private javax.swing.JLabel codigoL3;
     private javax.swing.JLabel codigoL4;
     private javax.swing.JLabel codigoL5;
-    public static javax.swing.JLabel codigoL6;
+    private javax.swing.JLabel codigoL6;
     private javax.swing.JLabel codigoL7;
-    public app.bolivia.swing.JCTextField fecha;
+    private app.bolivia.swing.JCTextField fecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton miminizar;
+    private javax.swing.JButton miminizar1;
     public static app.bolivia.swing.JCTextField numFac;
     public static app.bolivia.swing.JCTextField recibi;
     public static javax.swing.JTable tablaCaja;

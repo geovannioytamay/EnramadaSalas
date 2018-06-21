@@ -7,8 +7,10 @@ package productos;
 
 import com.sun.glass.events.KeyEvent;
 import java.awt.Cursor;
+import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -30,16 +32,18 @@ public class Productos extends javax.swing.JInternalFrame {
      */
     public Productos() {
         initComponents();
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         OpcionesAl.llenar_combo();
+        //insertar_barra();
         tablaProductos.getTableHeader().setDefaultRenderer(new principal.EstiloTablaHeader());
         tablaProductos.setDefaultRenderer(Object.class, new principal.EstiloTablaRenderer());
         this.tipoAl1.setCursor(new Cursor(12));       
-        this.setFrameIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/icono.png")));
+        //this.setFrameIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/icono.png")));
         limpiaCampos();
         registrar.setMnemonic(KeyEvent.VK_G);
         actualizar.setMnemonic(KeyEvent.VK_M);
         
-        
+       // System.out.println("barra: "+barra.getSize());
         
         
 
@@ -54,7 +58,13 @@ public class Productos extends javax.swing.JInternalFrame {
             }
         });
     }
-
+/*void insertar_barra(){// adptar una imagen l label
+     ImageIcon imgIcon = new ImageIcon(getClass().getResource("/imagenes/principal/barra_titulo.png"));
+     Image imgEscalada = imgIcon.getImage().getScaledInstance(1100,
+           40, Image.SCALE_SMOOTH);
+     Icon iconoEscalado = new ImageIcon(imgEscalada);
+     barra.setIcon(iconoEscalado);
+}*/
     void cambiaDatos() {
         int fila = tablaProductos.getSelectedRow();
         codigo.setText(tablaProductos.getValueAt(fila, 0).toString());        
@@ -187,7 +197,12 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
         buscar = new app.bolivia.swing.JCTextField();
         codigoL1 = new javax.swing.JLabel();
         opcion_busqueda = new org.bolivia.combo.SComboBoxBlue();
+        barraDeTitulo = new javax.swing.JPanel();
+        miminizar = new javax.swing.JButton();
+        miminizar1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(7, 37, 77), 4));
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
@@ -545,6 +560,61 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
         });
         jPanel4.add(opcion_busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 240, -1));
 
+        barraDeTitulo.setBackground(new java.awt.Color(7, 37, 77));
+
+        miminizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        miminizar.setForeground(new java.awt.Color(255, 255, 255));
+        miminizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/close.png"))); // NOI18N
+        miminizar.setBorder(null);
+        miminizar.setContentAreaFilled(false);
+        miminizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        miminizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        miminizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/close2.png"))); // NOI18N
+        miminizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        miminizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miminizarActionPerformed(evt);
+            }
+        });
+
+        miminizar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        miminizar1.setForeground(new java.awt.Color(255, 255, 255));
+        miminizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/ico.png"))); // NOI18N
+        miminizar1.setBorder(null);
+        miminizar1.setContentAreaFilled(false);
+        miminizar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        miminizar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        miminizar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        miminizar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miminizar1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("PRODUCTOS");
+
+        javax.swing.GroupLayout barraDeTituloLayout = new javax.swing.GroupLayout(barraDeTitulo);
+        barraDeTitulo.setLayout(barraDeTituloLayout);
+        barraDeTituloLayout.setHorizontalGroup(
+            barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraDeTituloLayout.createSequentialGroup()
+                .addComponent(miminizar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(miminizar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        barraDeTituloLayout.setVerticalGroup(
+            barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(miminizar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(miminizar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -559,17 +629,20 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(barraDeTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(barraDeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -577,7 +650,9 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -720,16 +795,6 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
         nombre.setText(nombre.getText().toUpperCase());        
     }//GEN-LAST:event_nombreKeyReleased
 
-    private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
-        buscar.setText(buscar.getText().toUpperCase());
-        int opcion =opcion_busqueda.getSelectedIndex();
-        OpcionesAl.listar(buscar.getText(), opcion);
-    }//GEN-LAST:event_buscarKeyReleased
-
-    private void buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseClicked
-        limpiaCampos();
-    }//GEN-LAST:event_buscarMouseClicked
-
     private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
         limpiaCampos();
     }//GEN-LAST:event_limpiarActionPerformed
@@ -814,14 +879,6 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
         }        // TODO add your handling code here:
     }//GEN-LAST:event_codigoKeyPressed
 
-    private void opcion_busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcion_busquedaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_opcion_busquedaActionPerformed
-
-    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarActionPerformed
-
     private void codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_codigoActionPerformed
@@ -842,11 +899,38 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
         abrir_ListaTipo(1);
     }//GEN-LAST:event_actualizar_tipoActionPerformed
 
+    private void opcion_busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcion_busquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opcion_busquedaActionPerformed
+
+    private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
+        buscar.setText(buscar.getText().toUpperCase());
+        int opcion =opcion_busqueda.getSelectedIndex();
+        OpcionesAl.listar(buscar.getText(), opcion);
+    }//GEN-LAST:event_buscarKeyReleased
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscarActionPerformed
+
+    private void buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseClicked
+        limpiaCampos();
+    }//GEN-LAST:event_buscarMouseClicked
+
+    private void miminizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_miminizarActionPerformed
+
+    private void miminizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miminizar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizar;
     private javax.swing.JButton actualizar_tipo;
     private javax.swing.JButton agregar_tipo;
+    private javax.swing.JPanel barraDeTitulo;
     private app.bolivia.swing.JCTextField buscar;
     private app.bolivia.swing.JCTextField cantidad;
     public static app.bolivia.swing.JCTextField codigo;
@@ -856,12 +940,17 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
     private app.bolivia.swing.JCTextField costo_venta;
     private javax.swing.JButton eliminar;
     private javax.swing.JButton eliminarT;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpiar;
+    private javax.swing.JButton miminizar;
+    private javax.swing.JButton miminizar1;
     private app.bolivia.swing.JCTextField nombre;
     private javax.swing.JLabel nombreL;
     private javax.swing.JLabel nombreL1;

@@ -56,7 +56,8 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);       
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/principal/logo.png")).getImage());
-        this.setTitle("MENÚ PRINCIPAL "+tipo_usuario+" - SISTEMA PUNTO DE VENTA");
+        //this.setTitle("MENÚ PRINCIPAL "+tipo_usuario+" - SISTEMA PUNTO DE VENTA");
+        tipo.setText(tipo_usuario);
         usuarios.setMnemonic(KeyEvent.VK_A);
         almacen.setMnemonic(KeyEvent.VK_U);
         ventas.setMnemonic(KeyEvent.VK_R);
@@ -84,16 +85,15 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         usuarios = new javax.swing.JButton();
         almacen = new javax.swing.JButton();
         ventas = new javax.swing.JButton();
-        info1 = new javax.swing.JButton();
-        info2 = new javax.swing.JButton();
-        info3 = new javax.swing.JButton();
+        miminizar = new javax.swing.JButton();
+        maximizar = new javax.swing.JButton();
+        cerrar = new javax.swing.JButton();
+        cerrar_sesion = new javax.swing.JButton();
         escritorio = new principal.Escritorio();
-        desc = new javax.swing.JLabel();
         userConect = new javax.swing.JLabel();
         hora = new javax.swing.JLabel();
+        tipo = new javax.swing.JLabel();
         fecha = new javax.swing.JLabel();
-        logoSexo = new javax.swing.JLabel();
-        logoSexo2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -114,6 +114,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         info.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         info.setForeground(new java.awt.Color(255, 255, 255));
         info.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/config1.png"))); // NOI18N
+        info.setAlignmentY(0.9F);
         info.setBorder(null);
         info.setContentAreaFilled(false);
         info.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -191,49 +192,63 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
             }
         });
 
-        info1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        info1.setForeground(new java.awt.Color(255, 255, 255));
-        info1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/cerrar.png"))); // NOI18N
-        info1.setText("");
-        info1.setBorder(null);
-        info1.setContentAreaFilled(false);
-        info1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        info1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        info1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/cerrar2.png"))); // NOI18N
-        info1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        info1.addActionListener(new java.awt.event.ActionListener() {
+        miminizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        miminizar.setForeground(new java.awt.Color(255, 255, 255));
+        miminizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/cerrar.png"))); // NOI18N
+        miminizar.setBorder(null);
+        miminizar.setContentAreaFilled(false);
+        miminizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        miminizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        miminizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/cerrar2.png"))); // NOI18N
+        miminizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        miminizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                info1ActionPerformed(evt);
+                miminizarActionPerformed(evt);
             }
         });
 
-        info2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        info2.setForeground(new java.awt.Color(255, 255, 255));
-        info2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/maximizar.png"))); // NOI18N
-        info2.setBorder(null);
-        info2.setContentAreaFilled(false);
-        info2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        info2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        info2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/maximizar2.png"))); // NOI18N
-        info2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        info2.addActionListener(new java.awt.event.ActionListener() {
+        maximizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        maximizar.setForeground(new java.awt.Color(255, 255, 255));
+        maximizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/maximizar.png"))); // NOI18N
+        maximizar.setBorder(null);
+        maximizar.setContentAreaFilled(false);
+        maximizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        maximizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        maximizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/maximizar2.png"))); // NOI18N
+        maximizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        maximizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                info2ActionPerformed(evt);
+                maximizarActionPerformed(evt);
             }
         });
 
-        info3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        info3.setForeground(new java.awt.Color(255, 255, 255));
-        info3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/miminizar.png"))); // NOI18N
-        info3.setBorder(null);
-        info3.setContentAreaFilled(false);
-        info3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        info3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        info3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/miminizar2.png"))); // NOI18N
-        info3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        info3.addActionListener(new java.awt.event.ActionListener() {
+        cerrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cerrar.setForeground(new java.awt.Color(255, 255, 255));
+        cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/miminizar.png"))); // NOI18N
+        cerrar.setBorder(null);
+        cerrar.setContentAreaFilled(false);
+        cerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cerrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cerrar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/miminizar2.png"))); // NOI18N
+        cerrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        cerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                info3ActionPerformed(evt);
+                cerrarActionPerformed(evt);
+            }
+        });
+
+        cerrar_sesion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cerrar_sesion.setForeground(new java.awt.Color(255, 255, 255));
+        cerrar_sesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/cerrar_sesion.png"))); // NOI18N
+        cerrar_sesion.setBorder(null);
+        cerrar_sesion.setContentAreaFilled(false);
+        cerrar_sesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cerrar_sesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cerrar_sesion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/cerrar_sesion2.png"))); // NOI18N
+        cerrar_sesion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        cerrar_sesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrar_sesionActionPerformed(evt);
             }
         });
 
@@ -252,74 +267,65 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
                 .addComponent(caja, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76)
                 .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(info3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(info2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(info1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(maximizar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(miminizar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cerrar_sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(usuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(almacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ventas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(caja, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(info, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 18, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(info3, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                    .addComponent(info2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(info1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cerrar, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                            .addComponent(maximizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(miminizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cerrar_sesion, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(usuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(almacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ventas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(caja, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(18, 18, 18))
         );
-
-        desc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        desc.setForeground(new java.awt.Color(255, 255, 255));
-        desc.setText("DESCONECTAR...");
-        desc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        desc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                descMouseClicked(evt);
-            }
-        });
-        escritorio.add(desc);
-        desc.setBounds(50, 120, 260, 15);
 
         userConect.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         userConect.setForeground(new java.awt.Color(255, 255, 255));
-        userConect.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userConect.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         userConect.setText("USUARIO");
         escritorio.add(userConect);
-        userConect.setBounds(460, 60, 280, 15);
+        userConect.setBounds(970, 20, 240, 15);
 
         hora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         hora.setForeground(new java.awt.Color(255, 255, 255));
-        hora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        hora.setText("HORA");
+        hora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        hora.setText("11:24:56 pm");
         escritorio.add(hora);
-        hora.setBounds(480, 10, 225, 17);
+        hora.setBounds(10, 20, 110, 17);
+
+        tipo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tipo.setForeground(new java.awt.Color(255, 255, 255));
+        tipo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tipo.setText("DIA - MES - AÑO");
+        escritorio.add(tipo);
+        tipo.setBounds(480, 10, 370, 17);
 
         fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         fecha.setForeground(new java.awt.Color(255, 255, 255));
-        fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fecha.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         fecha.setText("DIA - MES - AÑO");
         escritorio.add(fecha);
-        fecha.setBounds(480, 30, 225, 17);
-
-        logoSexo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoSexo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/descotectado1.png"))); // NOI18N
-        escritorio.add(logoSexo);
-        logoSexo.setBounds(10, 110, 30, 30);
-
-        logoSexo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoSexo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/caja.png"))); // NOI18N
-        escritorio.add(logoSexo2);
-        logoSexo2.setBounds(0, 0, 350, 190);
+        fecha.setBounds(125, 20, 140, 17);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -336,7 +342,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
+                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -426,21 +432,8 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cajaActionPerformed
 
-    private void descMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_descMouseClicked
-        if (JOptionPane.showConfirmDialog(this, "Esta a punto de\ncerrar la sesión\n¿Desea continuar?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, 0,
-                new ImageIcon(getClass().getResource("/imagenes/principal/preg2.png"))) == JOptionPane.YES_OPTION) {
-            this.dispose();
-            new AccesoLogin().setVisible(true);
-        }
-    }//GEN-LAST:event_descMouseClicked
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if (JOptionPane.showConfirmDialog(this, "Esta a punto de salir\nde la aplicación.\n¿Desea continuar?", "Cerrar", JOptionPane.YES_NO_OPTION, 0,
-                new ImageIcon(getClass().getResource("/imagenes/principal/adver1.png"))) == JOptionPane.YES_OPTION) {
-            System.exit(0);
-        }else{
-            this.setDefaultCloseOperation(0);
-        }
+        
     }//GEN-LAST:event_formWindowClosing
  config con;
     private void infoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoActionPerformed
@@ -462,18 +455,31 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
                   
     }//GEN-LAST:event_infoActionPerformed
 
-    private void info1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_info1ActionPerformed
-       System.exit(0); 
-    }//GEN-LAST:event_info1ActionPerformed
+    private void miminizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizarActionPerformed
+       if (JOptionPane.showConfirmDialog(this, "Esta a punto de salir\nde la aplicación.\n¿Desea continuar?", "Cerrar", JOptionPane.YES_NO_OPTION, 0,
+                new ImageIcon(getClass().getResource("/imagenes/principal/adver1.png"))) == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }else{
+            this.setDefaultCloseOperation(0);
+        } 
+    }//GEN-LAST:event_miminizarActionPerformed
 
-    private void info2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_info2ActionPerformed
+    private void maximizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maximizarActionPerformed
         this.setExtendedState(MAXIMIZED_BOTH);
          
-    }//GEN-LAST:event_info2ActionPerformed
+    }//GEN-LAST:event_maximizarActionPerformed
 
-    private void info3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_info3ActionPerformed
+    private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
         this.setExtendedState(ICONIFIED);
-    }//GEN-LAST:event_info3ActionPerformed
+    }//GEN-LAST:event_cerrarActionPerformed
+
+    private void cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar_sesionActionPerformed
+         if (JOptionPane.showConfirmDialog(this, "Esta a punto de\ncerrar la sesión\n¿Desea continuar?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, 0,
+                new ImageIcon(getClass().getResource("/imagenes/principal/preg2.png"))) == JOptionPane.YES_OPTION) {
+            this.dispose();
+            new AccesoLogin().setVisible(true);
+        }
+    }//GEN-LAST:event_cerrar_sesionActionPerformed
     class horas implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
@@ -524,18 +530,17 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton almacen;
     private javax.swing.JButton caja;
-    private javax.swing.JLabel desc;
+    private javax.swing.JButton cerrar;
+    private javax.swing.JButton cerrar_sesion;
     public static principal.Escritorio escritorio;
     private javax.swing.JLabel fecha;
     private javax.swing.JLabel hora;
     private javax.swing.JButton info;
-    private javax.swing.JButton info1;
-    private javax.swing.JButton info2;
-    private javax.swing.JButton info3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel logoSexo;
-    private javax.swing.JLabel logoSexo2;
+    private javax.swing.JButton maximizar;
+    private javax.swing.JButton miminizar;
+    private javax.swing.JLabel tipo;
     public static javax.swing.JLabel userConect;
     private javax.swing.JButton usuarios;
     private javax.swing.JButton ventas;
