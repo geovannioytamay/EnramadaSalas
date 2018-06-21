@@ -88,8 +88,6 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         info2 = new javax.swing.JButton();
         info3 = new javax.swing.JButton();
         escritorio = new principal.Escritorio();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         desc = new javax.swing.JLabel();
         userConect = new javax.swing.JLabel();
         hora = new javax.swing.JLabel();
@@ -201,7 +199,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         info1.setContentAreaFilled(false);
         info1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         info1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        info1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/config2.png"))); // NOI18N
+        info1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/cerrar2.png"))); // NOI18N
         info1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         info1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,7 +214,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         info2.setContentAreaFilled(false);
         info2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         info2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        info2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/config2.png"))); // NOI18N
+        info2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/maximizar2.png"))); // NOI18N
         info2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         info2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,7 +229,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         info3.setContentAreaFilled(false);
         info3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         info3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        info3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/config2.png"))); // NOI18N
+        info3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/miminizar2.png"))); // NOI18N
         info3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         info3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,47 +252,31 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
                 .addComponent(caja, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76)
                 .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(info3)
-                .addGap(18, 18, 18)
-                .addComponent(info2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(info1)
-                .addContainerGap())
+                .addGap(34, 34, 34)
+                .addComponent(info3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(info2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(info1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(usuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(almacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ventas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(caja, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(info, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(info1)
-                    .addComponent(info2)
-                    .addComponent(info3))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(usuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(almacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ventas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(caja, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(info, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 18, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(info3, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addComponent(info2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(info1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        escritorio.add(jButton1);
-        jButton1.setBounds(350, 30, 73, 23);
-
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        escritorio.add(jButton2);
-        jButton2.setBounds(350, 70, 73, 23);
 
         desc.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         desc.setForeground(new java.awt.Color(255, 255, 255));
@@ -480,25 +462,17 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
                   
     }//GEN-LAST:event_infoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       this.setExtendedState(ICONIFIED);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.setExtendedState(MAXIMIZED_BOTH);
-         System.exit(0); 
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void info1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_info1ActionPerformed
-        // TODO add your handling code here:
+       System.exit(0); 
     }//GEN-LAST:event_info1ActionPerformed
 
     private void info2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_info2ActionPerformed
-        // TODO add your handling code here:
+        this.setExtendedState(MAXIMIZED_BOTH);
+         
     }//GEN-LAST:event_info2ActionPerformed
 
     private void info3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_info3ActionPerformed
-        // TODO add your handling code here:
+        this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_info3ActionPerformed
     class horas implements ActionListener {
 
@@ -558,8 +532,6 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
     private javax.swing.JButton info1;
     private javax.swing.JButton info2;
     private javax.swing.JButton info3;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel logoSexo;
