@@ -99,7 +99,7 @@ public class ListaTipo extends javax.swing.JInternalFrame {
     
   void eliminar(String tipo){
       
-            if (JOptionPane.showConfirmDialog(this, "Esta a punto de elimnar el tipo: "+tipo+".\n¿Desea continuar?", "Eliminar", JOptionPane.YES_NO_OPTION, 0,
+            if (JOptionPane.showConfirmDialog(this, "Esta a punto de eliminar el tipo: "+tipo+".\n¿Desea continuar?", "Eliminar", JOptionPane.YES_NO_OPTION, 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/seguro.png"))) == JOptionPane.YES_OPTION) {
                 try{
                     String sql="DELETE FROM tipo_producto WHERE tipo = '"+tipo+"'";
@@ -112,7 +112,7 @@ public class ListaTipo extends javax.swing.JInternalFrame {
                     this.dispose();
                 
                     
-                    JOptionPane.showMessageDialog(this, "Tipo eliminado.", "Eliminar Tipo", 0,
+                    JOptionPane.showMessageDialog(this, "Tipo eliminado.", "Eliminar", 0,
                             new ImageIcon(getClass().getResource("/imagenes/Productos/borrado.png")));
                      }catch(Exception e){System.out.println(""+e);}
                   }

@@ -84,7 +84,7 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "CÓDIGO", "TIPO ALIMENTO", "NOMBRE ALIMENTO", "PRECIO $"
+                "CÓDIGO", "TIPO", "NOMBRE", "PRECIO"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -304,28 +304,28 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         userConect.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         userConect.setText("USUARIO");
         escritorio.add(userConect);
-        userConect.setBounds(970, 20, 240, 15);
+        userConect.setBounds(940, 20, 240, 15);
 
         hora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         hora.setForeground(new java.awt.Color(255, 255, 255));
         hora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         hora.setText("11:24:56 pm");
         escritorio.add(hora);
-        hora.setBounds(10, 20, 110, 17);
+        hora.setBounds(40, 20, 110, 17);
 
         tipo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tipo.setForeground(new java.awt.Color(255, 255, 255));
         tipo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tipo.setText("DIA - MES - AÑO");
+        tipo.setText("AMINISTRADOR");
         escritorio.add(tipo);
-        tipo.setBounds(480, 10, 370, 17);
+        tipo.setBounds(480, 20, 370, 17);
 
         fecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         fecha.setForeground(new java.awt.Color(255, 255, 255));
         fecha.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         fecha.setText("DIA - MES - AÑO");
         escritorio.add(fecha);
-        fecha.setBounds(125, 20, 140, 17);
+        fecha.setBounds(150, 20, 140, 17);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -413,7 +413,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
             if (estacerrado(rv)) {
             rv = new RegistroVentas();
             escritorio.add(rv).setLocation(250, 3);
-            rv.setSize(900,490);
+            rv.setSize(800,550);
             rv.show();
             cerra1 = true;
         } else {

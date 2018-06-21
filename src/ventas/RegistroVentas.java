@@ -44,6 +44,8 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
      */
     public RegistroVentas() {
         initComponents();
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        barraDeTitulo1.setVisible(false);
         tablaVentas.getTableHeader().setDefaultRenderer(new principal.EstiloTablaHeader());
         tablaVentas.setDefaultRenderer(Object.class, new principal.EstiloTablaRenderer());
         this.setFrameIcon(new ImageIcon(getClass().getResource("/imagenes/caja/icono1.png")));
@@ -350,18 +352,13 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
    void grafica( DefaultCategoryDataset dtsc, String titulo, String etiqueta_y){
        try{
            
-             ch = ChartFactory.createBarChart(titulo,etiqueta_y, "Ganancias", dtsc,PlotOrientation.VERTICAL, true, true, false);
-             
-             cp = new ChartPanel(ch);
+            ch = ChartFactory.createBarChart(titulo,etiqueta_y, "Ganancias", dtsc,PlotOrientation.VERTICAL, true, true, false);
+            cp = new ChartPanel(ch);
             frame_grafica.removeAll();
-            frame_grafica.add(cp);         
-    
-        
-            
+            frame_grafica.add(cp);
             //add(cp);
-         int g= dtsc.getColumnCount();
-            
-            cp.setBounds(0,0,definir_dimeciones(g),300);
+         int g= dtsc.getColumnCount();            
+          cp.setBounds(0,0,definir_dimeciones(g),300);
             
             
             
@@ -372,7 +369,9 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
    
    int definir_dimeciones(int numero){
        int dimencion =0;
-       //System.out.println("numero: "+numero);
+       System.out.println("numero: "+numero);
+       
+       
        if (numero<7){
          frame_grafica.setSize(700,300);         
          dimencion=frame_grafica.getWidth();
@@ -385,14 +384,20 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
           return dimencion;           
        }
        
-       if (numero<13){
+       if (numero<15){
          frame_grafica.setSize(1100,300);         
          dimencion=frame_grafica.getWidth();
          
           return dimencion;        
        }
        
-       if (numero>=13){
+        if (numero<17){
+         frame_grafica.setSize(1400,300);         
+         dimencion=frame_grafica.getWidth();         
+          return dimencion;        
+       }
+       
+       if (numero>=17){
          frame_grafica.setSize(1300,300);
          this.setLocation(150,  3);
          dimencion=frame_grafica.getWidth()+300;
@@ -546,6 +551,14 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        barraDeTitulo1 = new javax.swing.JPanel();
+        miminizar2 = new javax.swing.JButton();
+        miminizar3 = new javax.swing.JButton();
+        titulo1 = new javax.swing.JLabel();
+        barraDeTitulo = new javax.swing.JPanel();
+        miminizar = new javax.swing.JButton();
+        miminizar1 = new javax.swing.JButton();
+        titulo = new javax.swing.JLabel();
         CONSULTAS = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -574,9 +587,123 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         frame_grafica = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(7, 37, 77), 4));
         setClosable(true);
         setIconifiable(true);
         setTitle("REGISTRO VENTAS");
+
+        barraDeTitulo1.setBackground(new java.awt.Color(7, 37, 77));
+
+        miminizar2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        miminizar2.setForeground(new java.awt.Color(255, 255, 255));
+        miminizar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/close.png"))); // NOI18N
+        miminizar2.setBorder(null);
+        miminizar2.setContentAreaFilled(false);
+        miminizar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        miminizar2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        miminizar2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/close2.png"))); // NOI18N
+        miminizar2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        miminizar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miminizar2ActionPerformed(evt);
+            }
+        });
+
+        miminizar3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        miminizar3.setForeground(new java.awt.Color(255, 255, 255));
+        miminizar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/ico.png"))); // NOI18N
+        miminizar3.setBorder(null);
+        miminizar3.setContentAreaFilled(false);
+        miminizar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        miminizar3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        miminizar3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        miminizar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miminizar3ActionPerformed(evt);
+            }
+        });
+
+        titulo1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        titulo1.setForeground(new java.awt.Color(255, 255, 255));
+        titulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulo1.setText("REGISTROS DE VENTAS");
+        titulo1.setAlignmentY(0.0F);
+
+        javax.swing.GroupLayout barraDeTitulo1Layout = new javax.swing.GroupLayout(barraDeTitulo1);
+        barraDeTitulo1.setLayout(barraDeTitulo1Layout);
+        barraDeTitulo1Layout.setHorizontalGroup(
+            barraDeTitulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraDeTitulo1Layout.createSequentialGroup()
+                .addComponent(miminizar3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(miminizar2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(596, 596, 596))
+        );
+        barraDeTitulo1Layout.setVerticalGroup(
+            barraDeTitulo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(miminizar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(titulo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(miminizar2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+        );
+
+        barraDeTitulo.setBackground(new java.awt.Color(7, 37, 77));
+        barraDeTitulo.setAlignmentX(0.0F);
+        barraDeTitulo.setAlignmentY(0.0F);
+
+        miminizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        miminizar.setForeground(new java.awt.Color(255, 255, 255));
+        miminizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/close.png"))); // NOI18N
+        miminizar.setBorder(null);
+        miminizar.setContentAreaFilled(false);
+        miminizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        miminizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        miminizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/close2.png"))); // NOI18N
+        miminizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        miminizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miminizarActionPerformed(evt);
+            }
+        });
+
+        miminizar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        miminizar1.setForeground(new java.awt.Color(255, 255, 255));
+        miminizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/ico.png"))); // NOI18N
+        miminizar1.setBorder(null);
+        miminizar1.setContentAreaFilled(false);
+        miminizar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        miminizar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        miminizar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        miminizar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miminizar1ActionPerformed(evt);
+            }
+        });
+
+        titulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        titulo.setForeground(new java.awt.Color(255, 255, 255));
+        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulo.setText("REGISTROS DE VENTAS");
+
+        javax.swing.GroupLayout barraDeTituloLayout = new javax.swing.GroupLayout(barraDeTitulo);
+        barraDeTitulo.setLayout(barraDeTituloLayout);
+        barraDeTituloLayout.setHorizontalGroup(
+            barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barraDeTituloLayout.createSequentialGroup()
+                .addComponent(miminizar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(miminizar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(793, 793, 793))
+        );
+        barraDeTituloLayout.setVerticalGroup(
+            barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(miminizar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(miminizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         CONSULTAS.setBackground(new java.awt.Color(255, 255, 255));
         CONSULTAS.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -778,19 +905,19 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         CONSULTAS.addTab("CONSULTAS", jPanel1);
@@ -842,7 +969,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         );
         frame_graficaLayout.setVerticalGroup(
             frame_graficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGap(0, 340, Short.MAX_VALUE)
         );
 
         frame_scroll.setViewportView(frame_grafica);
@@ -851,20 +978,20 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
-                    .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 969, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         CONSULTAS.addTab("GANANCIAS", jPanel2);
@@ -873,11 +1000,20 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CONSULTAS)
+            .addComponent(barraDeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(barraDeTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(CONSULTAS, javax.swing.GroupLayout.PREFERRED_SIZE, 992, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 99, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CONSULTAS)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(barraDeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(barraDeTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CONSULTAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -981,11 +1117,21 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
       if(CONSULTAS.getSelectedIndex()==1){
         grafica_ultima_semana(); 
         this.setSize(1000,550);
+       
+        titulo.setSize(1200, 40);
+        miminizar.setAlignmentX(2000);
+        miminizar.setLocation(1000, 10000);
+        miminizar.repaint();
         this.setLocation(150,  3);
+        barraDeTitulo.setVisible(false);
+        barraDeTitulo1.setVisible(true);
       }
       else{
-          this.setSize(1000,450);
+           barraDeTitulo.setVisible(true);
+           barraDeTitulo1.setVisible(false);
+            this.setSize(800,550);
           this.setLocation(225,  3);
+           
       }
        
     }//GEN-LAST:event_CONSULTASMouseClicked
@@ -1053,10 +1199,28 @@ System.out.println("fecha valida"+cont);
         // TODO add your handling code here:
     }//GEN-LAST:event_buscarActionPerformed
 
+    private void miminizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_miminizarActionPerformed
+
+    private void miminizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miminizar1ActionPerformed
+
+    private void miminizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miminizar2ActionPerformed
+
+    private void miminizar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizar3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miminizar3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane CONSULTAS;
     private org.bolivia.combo.SComboBoxBlue Opciones;
+    private javax.swing.JPanel barraDeTitulo;
+    private javax.swing.JPanel barraDeTitulo1;
     private javax.swing.JButton buscF;
     private app.bolivia.swing.JCTextField buscar;
     private javax.swing.JLabel codigoL2;
@@ -1078,7 +1242,13 @@ System.out.println("fecha valida"+cont);
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpiar;
+    private javax.swing.JButton miminizar;
+    private javax.swing.JButton miminizar1;
+    private javax.swing.JButton miminizar2;
+    private javax.swing.JButton miminizar3;
     public static javax.swing.JTable tablaVentas;
+    private javax.swing.JLabel titulo;
+    private javax.swing.JLabel titulo1;
     private app.bolivia.swing.JCTextField total;
     private javax.swing.JButton ventasH;
     // End of variables declaration//GEN-END:variables
