@@ -31,7 +31,11 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
         this.setFrameIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/icono.png")));
         OpcionesAl.listar2("");
         ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);//quitar la barra de titulo
-
+        //tablaProductos.removeColumn(tablaProductos.getColumnModel().getColumn(4));
+        // ocultar ña columna de cantidad de la tabala
+        tablaProductos.getColumnModel().getColumn(4).setMaxWidth(0);
+        tablaProductos.getColumnModel().getColumn(4).setMinWidth(0);
+        tablaProductos.getColumnModel().getColumn(4).setPreferredWidth(0);
         tipoAl.addItemListener(new ItemListener() {
 
             @Override
@@ -63,7 +67,7 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaProductos = new javax.swing.JTable();
+        tablaProductos = new Lib.jtable_modificado2();
         jPanel4 = new javax.swing.JPanel();
         buscar = new app.bolivia.swing.JCTextField();
         codigoL1 = new javax.swing.JLabel();
@@ -84,11 +88,11 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "CÓDIGO", "TIPO", "NOMBRE", "PRECIO"
+                "CÓDIGO", "TIPO", "NOMBRE", "PRECIO", ""
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -215,7 +219,7 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
         
     }
     void enviar_caja(){
-        cliks_tabla=0;
+        if(disponible(tablaProductos.getSelectedRow()))return ;// si el producto es cero no envia  a caja
         linea_seleccionado=-1;
         if (tablaProductos.getRowCount() > 0) {
             try {
@@ -231,6 +235,8 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Seleccione un registro.", "Productos", 0,
                             new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
                 } else {
+                    
+                    
                     String cod = tablaProductos.getValueAt(fila, 0).toString();
                     String tipo = tablaProductos.getValueAt(fila, 1).toString();
                     String nom = tablaProductos.getValueAt(fila, 2).toString();
@@ -253,11 +259,22 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
 //                        JOptionPane.showMessageDialog(this, "Debe ingresar algun valor mayor que 0");
                     } else {
                         for (int i = 0; i < ventas.CajaAd.tablaCaja.getRowCount(); i++) {
-                            Object com = ventas.CajaAd.tablaCaja.getValueAt(i, 0);
+                            Object id = ventas.CajaAd.tablaCaja.getValueAt(i, 0);
                             Object cant1 = ventas.CajaAd.tablaCaja.getValueAt(i, 4);
-                            if (cod.equals(com)) {
+                            if (cod.equals(id)) {
                                 j = i;
+                                
                                 int cantT = Integer.parseInt(cant) + Integer.parseInt((String) cant1);
+                                int consulta_cant=ventas.OpcionesVen.resta_cantidad(""+id, ""+cantT);
+                                if(consulta_cant<0){
+                                    int disponible = cantT + consulta_cant- Integer.parseInt((String) cant1);
+                                    JOptionPane.showMessageDialog(this, "No hay suficientes productos para agregar."
+                                            + " solo puede agregar a lo màs "+disponible+" de este  producto", "Productos", 0,
+                                    new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
+                                     
+                                    return;
+                                }
+                               
                                 ventas.CajaAd.tablaCaja.setValueAt(String.valueOf(cantT), i, 4);
                                 c++;
                                 
@@ -267,13 +284,21 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                             }
                         }
                         if (c == 0) {
-
+                            int consulta_cant=ventas.OpcionesVen.resta_cantidad(""+cod, ""+cant);
+                            if(consulta_cant<0){
+                                int disponible = Integer.parseInt(cant) + consulta_cant;
+                                    JOptionPane.showMessageDialog(this, "No hay suficientes productos para agregar."
+                                            + " solo puede agregar a lo màs "+disponible+" de este  producto", "Productos", 0,
+                                    new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
+                                     
+                                    return;
+                            }
                             dato[0] = cod;
                             dato[1] = tipo;
                             dato[2] = nom;
                             dato[3] = precio;
                             dato[4] = cant;
-
+                                   
                             tabladet.addRow(dato);
 
                             ventas.CajaAd.tablaCaja.setModel(tabladet);
@@ -291,6 +316,16 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
         }
         
+    }
+    boolean disponible(int fila){
+        if(Integer.parseInt(tablaProductos.getValueAt(fila, 4).toString())==0){
+            
+            JOptionPane.showMessageDialog(this, "imposible enviar a caja. No hay màs productos.", "Productos", 0,
+                    new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
+            
+            return true;
+        }
+        return false;
     }
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         enviar_caja();

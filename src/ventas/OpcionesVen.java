@@ -41,7 +41,7 @@ public class OpcionesVen {
              
             //__guardar id de venta_producto
             ps2 = cn.prepareStatement(sql2);
-            Statement cs = cn.createStatement();
+          
             int cant= uc.getIds_producto().length;        
              
             for(int i=0;i<cant;i++){
@@ -53,13 +53,8 @@ public class OpcionesVen {
                ps2.executeUpdate();
                 
               // actulizar la cantidad de los productos catidad de productos menos cantidad vendida
-              ResultSet rs = cs.executeQuery("SELECT cantidad FROM producto where id_producto='"+uc.getIds_producto()[i][0]+"'");
-              int can=0;
-              System.out.println(uc.getIds_producto()[i][4]);
-              if(rs.next()){
-               can = Integer.parseInt(rs.getString("cantidad"))-Integer.parseInt(uc.getIds_producto()[i][4]); 
-               }
-                ps = cn.prepareStatement("UPDATE producto SET cantidad = '"+can+"' WHERE id_producto = '"+uc.getIds_producto()[i][0]+"'");
+                int cantidad = resta_cantidad(uc.getIds_producto()[i][0],uc.getIds_producto()[i][4]);
+                ps = cn.prepareStatement("UPDATE producto SET cantidad = '"+cantidad+"' WHERE id_producto = '"+uc.getIds_producto()[i][0]+"'");
                 ps.executeUpdate();
             }
             
@@ -67,10 +62,22 @@ public class OpcionesVen {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        System.out.println(sql);
+        //System.out.println(sql);
         return rsu;
     }
-
+ public static int resta_cantidad(String id, String venta) throws SQLException{
+       Statement cs = cn.createStatement();
+        ResultSet rs = cs.executeQuery("SELECT cantidad FROM producto where id_producto='"+id+"'");
+              int can=0;
+              //System.out.println(id);
+              if(rs.next()){
+               can = Integer.parseInt(rs.getString("cantidad"))-Integer.parseInt(venta); 
+               }
+              
+              return can;
+       
+     
+ }
     public static int eliminar(String id) {
         int rsu = 0;
         String sql = VentasCod.ELIMINAR;

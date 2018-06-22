@@ -235,7 +235,7 @@ public class OpcionesAl {
             sql = "SELECT * FROM producto WHERE (id_producto like'" + busca + "%' or nombre like'" + busca + "%') "
                     + "or tipo='" + busca + "' ORDER BY nombre";
         }
-        String datos[] = new String[4];
+        String datos[] = new String[5];
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -244,6 +244,7 @@ public class OpcionesAl {
                 datos[1] = rs.getString("tipo");
                 datos[2] = rs.getString("nombre");               
                 datos[3] = rs.getString("costo_venta");
+                datos[4] = rs.getString("cantidad");
                // System.out.println(datos[0]);
                 modelo.addRow(datos);
             }
