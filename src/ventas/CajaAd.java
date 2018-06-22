@@ -582,7 +582,7 @@ public class CajaAd extends javax.swing.JInternalFrame {
                 vc.setPrimaryKey(numFac.getText());
                 vc.setTotal(total.getText());
                 vc.setFecha(fecha.getText());
-                vc.setIds_poductos(optener_id());
+                vc.setIds_poductos(optener_id_costo_venta_cantidad());
                 int opcion = OpcionesVen.registrar(vc);
                 if (opcion != 0) {
                     String nl = System.getProperty("line.separator");
@@ -598,13 +598,14 @@ public class CajaAd extends javax.swing.JInternalFrame {
 
     }
 
-    String[][] optener_id() {
+    String[][] optener_id_costo_venta_cantidad() {
         int cant = tablaCaja.getRowCount();
-        String id_cantidad[][] = new String[cant][4];
+        String id_cantidad[][] = new String[cant][5];//[id][precio][costo][venta][cuantos productos a cender]
 
         for (int i = 0; i < cant; i++) {
-            id_cantidad[i][0] = (String) tablaCaja.getValueAt(i, 0);
-            id_cantidad[i][1] = (String) tablaCaja.getValueAt(i, 4);
+            id_cantidad[i][0] = (String) tablaCaja.getValueAt(i, 0);//id
+            id_cantidad[i][1] = (String) tablaCaja.getValueAt(i, 4);//precio
+            id_cantidad[i][4] = (String) ""+tablaCaja.getValueAt(i, 4);//cantidad
 
             String SQL = "SELECT costo_compra, costo_venta FROM producto WHERE id_producto='" + id_cantidad[i][0] + "'";
 

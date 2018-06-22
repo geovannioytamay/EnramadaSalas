@@ -33,7 +33,7 @@ public class OpcionesVen {
         String sql2 = VentasCod.VETA_PRODUTOS;
         try {
             ps = cn.prepareStatement(sql);         
-            
+            //guardar venta
             ps.setString(1, uc.getPrimaryKey());
             ps.setString(2, uc.getTotal());
             ps.setString(3, uc.getFecha());
@@ -41,6 +41,7 @@ public class OpcionesVen {
              
             //__guardar id de venta_producto
             ps2 = cn.prepareStatement(sql2);
+            Statement cs = cn.createStatement();
             int cant= uc.getIds_producto().length;        
              
             for(int i=0;i<cant;i++){
@@ -49,8 +50,17 @@ public class OpcionesVen {
                ps2.setString(3, uc.getIds_producto()[i][1]);
                ps2.setString(4, uc.getIds_producto()[i][2]);
                ps2.setString(5, uc.getIds_producto()[i][3]);
-               rsu = ps2.executeUpdate();
-               
+               ps2.executeUpdate();
+                
+              // actulizar la cantidad de los productos catidad de productos menos cantidad vendida
+              ResultSet rs = cs.executeQuery("SELECT cantidad FROM producto where id_producto='"+uc.getIds_producto()[i][0]+"'");
+              int can=0;
+              System.out.println(uc.getIds_producto()[i][4]);
+              if(rs.next()){
+               can = Integer.parseInt(rs.getString("cantidad"))-Integer.parseInt(uc.getIds_producto()[i][4]); 
+               }
+                ps = cn.prepareStatement("UPDATE producto SET cantidad = '"+can+"' WHERE id_producto = '"+uc.getIds_producto()[i][0]+"'");
+                ps.executeUpdate();
             }
             
            
