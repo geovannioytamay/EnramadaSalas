@@ -202,6 +202,7 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
         miminizar1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(7, 37, 77), 4));
         setClosable(true);
         setIconifiable(true);
@@ -211,7 +212,7 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "REGISTRO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         codigo.setBackground(new java.awt.Color(34, 102, 145));
@@ -231,10 +232,10 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
                 codigoKeyPressed(evt);
             }
         });
-        jPanel2.add(codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 180, -1));
+        jPanel2.add(codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 180, -1));
 
         codigoL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/codigoL.png"))); // NOI18N
-        jPanel2.add(codigoL, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, 52));
+        jPanel2.add(codigoL, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, 52));
 
         nombre.setBackground(new java.awt.Color(34, 102, 145));
         nombre.setBorder(null);
@@ -259,10 +260,10 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
                 nombreKeyTyped(evt);
             }
         });
-        jPanel2.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 180, -1));
+        jPanel2.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 180, -1));
 
         nombreL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/nombreL.png"))); // NOI18N
-        jPanel2.add(nombreL, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, 52));
+        jPanel2.add(nombreL, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, 52));
 
         costo_compra.setBackground(new java.awt.Color(34, 102, 145));
         costo_compra.setBorder(null);
@@ -284,10 +285,10 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
                 costo_compraKeyTyped(evt);
             }
         });
-        jPanel2.add(costo_compra, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 180, -1));
+        jPanel2.add(costo_compra, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 180, -1));
 
         nombreL1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/precioL.png"))); // NOI18N
-        jPanel2.add(nombreL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, -1, 52));
+        jPanel2.add(nombreL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, -1, 52));
 
         costo_venta.setBackground(new java.awt.Color(34, 102, 145));
         costo_venta.setBorder(null);
@@ -312,10 +313,10 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
                 costo_ventaKeyTyped(evt);
             }
         });
-        jPanel2.add(costo_venta, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 180, -1));
+        jPanel2.add(costo_venta, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 180, -1));
 
         nombreL3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/nombreL.png"))); // NOI18N
-        jPanel2.add(nombreL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, -1, 52));
+        jPanel2.add(nombreL3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, -1, 52));
 
         cantidad.setBackground(new java.awt.Color(34, 102, 145));
         cantidad.setBorder(null);
@@ -340,10 +341,10 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
                 cantidadKeyTyped(evt);
             }
         });
-        jPanel2.add(cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 180, -1));
+        jPanel2.add(cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 180, -1));
 
         nombreL4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/nombreL.png"))); // NOI18N
-        jPanel2.add(nombreL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, -1, 52));
+        jPanel2.add(nombreL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, -1, 52));
 
         tipoAl1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TIPO DE PRODUCTO" }));
         tipoAl1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -352,10 +353,10 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
                 tipoAl1ActionPerformed(evt);
             }
         });
-        jPanel2.add(tipoAl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 40, 183, -1));
+        jPanel2.add(tipoAl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 183, -1));
 
         tipoL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/tipoAlL.png"))); // NOI18N
-        jPanel2.add(tipoL, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, -1, 52));
+        jPanel2.add(tipoL, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, -1, 52));
 
         agregar_tipo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         agregar_tipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/mas1.png"))); // NOI18N
@@ -371,7 +372,7 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
                 agregar_tipoActionPerformed(evt);
             }
         });
-        jPanel2.add(agregar_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 30, -1, -1));
+        jPanel2.add(agregar_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, -1));
 
         actualizar_tipo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         actualizar_tipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/actualizar1.png"))); // NOI18N
@@ -387,7 +388,7 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
                 actualizar_tipoActionPerformed(evt);
             }
         });
-        jPanel2.add(actualizar_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(759, 30, 60, -1));
+        jPanel2.add(actualizar_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 10, 60, -1));
 
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -636,14 +637,14 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(barraDeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -656,9 +657,7 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -945,8 +944,6 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpiar;
     private javax.swing.JButton miminizar;

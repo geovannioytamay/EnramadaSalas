@@ -71,17 +71,18 @@ public class SplashScreen extends javax.swing.JFrame {
 
         texto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         texto.setForeground(new java.awt.Color(255, 255, 255));
+        texto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         texto.setText("Cargando componentes...");
         texto.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
         texto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 410, -1));
+        getContentPane().add(texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 640, -1));
 
         progreso.setForeground(new java.awt.Color(0, 102, 153));
-        getContentPane().add(progreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, 640, 20));
+        getContentPane().add(progreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 640, 20));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/splash1.png"))); // NOI18N
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 520));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
