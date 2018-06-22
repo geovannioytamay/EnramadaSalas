@@ -304,10 +304,11 @@ public class respaldo extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        imagen = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         registrar2 = new javax.swing.JButton();
-        progreso = new org.edisoncor.gui.progressBar.ProgressBarRound();
+        imagen = new javax.swing.JLabel();
         txt_porsen = new javax.swing.JLabel();
+        progreso = new org.edisoncor.gui.progressBar.ProgressBarRound();
         mensage = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -316,8 +317,9 @@ public class respaldo extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("INFORMACION");
 
-        imagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/imagen_export.png"))); // NOI18N
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         registrar2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         registrar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/btn_exmport.png"))); // NOI18N
@@ -333,13 +335,20 @@ public class respaldo extends javax.swing.JInternalFrame {
                 registrar2ActionPerformed(evt);
             }
         });
+        jPanel3.add(registrar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
 
-        progreso.setForeground(new java.awt.Color(0, 102, 153));
+        imagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/imagen_export.png"))); // NOI18N
+        jPanel3.add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
 
         txt_porsen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_porsen.setText("100%");
         txt_porsen.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
         txt_porsen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel3.add(txt_porsen, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, -1, -1));
+
+        progreso.setForeground(new java.awt.Color(0, 102, 153));
+        jPanel3.add(progreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 420, 20));
 
         mensage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         mensage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/mensgae_expor.png"))); // NOI18N
@@ -354,42 +363,19 @@ public class respaldo extends javax.swing.JInternalFrame {
                 mensageActionPerformed(evt);
             }
         });
+        jPanel3.add(mensage, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(progreso, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(234, 234, 234)
-                        .addComponent(txt_porsen, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(registrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mensage, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(registrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mensage, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(txt_porsen)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(progreso, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 67, Short.MAX_VALUE))
         );
 
         pack();
@@ -409,6 +395,7 @@ public class respaldo extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel imagen;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JButton mensage;
     private org.edisoncor.gui.progressBar.ProgressBarRound progreso;
     private javax.swing.JButton registrar2;

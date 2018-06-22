@@ -343,16 +343,16 @@ public class importar extends javax.swing.JInternalFrame {
                 mensageActionPerformed(evt);
             }
         });
-        jPanel3.add(mensage, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
+        jPanel3.add(mensage, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         txt_porsen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_porsen.setText("100%");
         txt_porsen.setCursor(new java.awt.Cursor(java.awt.Cursor.WAIT_CURSOR));
         txt_porsen.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel3.add(txt_porsen, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, -1, -1));
+        jPanel3.add(txt_porsen, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, -1, -1));
 
         progreso.setForeground(new java.awt.Color(0, 102, 153));
-        jPanel3.add(progreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 500, -1));
+        jPanel3.add(progreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 244, 430, 20));
 
         registrar2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         registrar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/btn_import.png"))); // NOI18N
@@ -368,7 +368,7 @@ public class importar extends javax.swing.JInternalFrame {
                 registrar2ActionPerformed(evt);
             }
         });
-        jPanel3.add(registrar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
+        jPanel3.add(registrar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         imagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/imagen_import.png"))); // NOI18N

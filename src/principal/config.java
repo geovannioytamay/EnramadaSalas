@@ -45,7 +45,7 @@ public class config extends javax.swing.JInternalFrame {
      */
     public config() {
         initComponents();
-        
+         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         contenido.setTitle("Informaciòn");
         informacion inf = new informacion();
         contenido.add(inf);       
@@ -70,8 +70,13 @@ public class config extends javax.swing.JInternalFrame {
         registrar1 = new javax.swing.JButton();
         registrar2 = new javax.swing.JButton();
         contenido = new javax.swing.JInternalFrame();
+        barraDeTitulo = new javax.swing.JPanel();
+        miminizar = new javax.swing.JButton();
+        miminizar1 = new javax.swing.JButton();
+        titulo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(7, 37, 77), 4));
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
@@ -80,7 +85,6 @@ public class config extends javax.swing.JInternalFrame {
         registrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         registrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/importar1.png"))); // NOI18N
         registrar.setText("Importar BD");
-        registrar.setActionCommand("Importar BD");
         registrar.setBorder(null);
         registrar.setBorderPainted(false);
         registrar.setContentAreaFilled(false);
@@ -132,11 +136,68 @@ public class config extends javax.swing.JInternalFrame {
         contenido.getContentPane().setLayout(contenidoLayout);
         contenidoLayout.setHorizontalGroup(
             contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         contenidoLayout.setVerticalGroup(
             contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        barraDeTitulo.setBackground(new java.awt.Color(7, 37, 77));
+        barraDeTitulo.setAlignmentX(0.0F);
+        barraDeTitulo.setAlignmentY(0.0F);
+
+        miminizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        miminizar.setForeground(new java.awt.Color(255, 255, 255));
+        miminizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/close.png"))); // NOI18N
+        miminizar.setBorder(null);
+        miminizar.setContentAreaFilled(false);
+        miminizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        miminizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        miminizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/close2.png"))); // NOI18N
+        miminizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        miminizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miminizarActionPerformed(evt);
+            }
+        });
+
+        miminizar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        miminizar1.setForeground(new java.awt.Color(255, 255, 255));
+        miminizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/ico.png"))); // NOI18N
+        miminizar1.setBorder(null);
+        miminizar1.setContentAreaFilled(false);
+        miminizar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        miminizar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        miminizar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        miminizar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miminizar1ActionPerformed(evt);
+            }
+        });
+
+        titulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        titulo.setForeground(new java.awt.Color(255, 255, 255));
+        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titulo.setText("CONFIGURACIONES");
+
+        javax.swing.GroupLayout barraDeTituloLayout = new javax.swing.GroupLayout(barraDeTitulo);
+        barraDeTitulo.setLayout(barraDeTituloLayout);
+        barraDeTituloLayout.setHorizontalGroup(
+            barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barraDeTituloLayout.createSequentialGroup()
+                .addComponent(miminizar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(miminizar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        barraDeTituloLayout.setVerticalGroup(
+            barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(miminizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(miminizar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -144,28 +205,32 @@ public class config extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(registrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(registrar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(registrar2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(contenido)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(barraDeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(registrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barraDeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(registrar)
-                .addGap(18, 18, 18)
-                .addComponent(registrar1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(contenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(registrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(registrar)
+                        .addGap(18, 18, 18)
+                        .addComponent(registrar1)
+                        .addContainerGap(133, Short.MAX_VALUE))
+                    .addComponent(contenido)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -214,12 +279,24 @@ public class config extends javax.swing.JInternalFrame {
         contenido.setVisible(true);
     }//GEN-LAST:event_registrar2ActionPerformed
 
+    private void miminizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_miminizarActionPerformed
+
+    private void miminizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miminizar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel barraDeTitulo;
     private javax.swing.JInternalFrame contenido;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton miminizar;
+    private javax.swing.JButton miminizar1;
     private javax.swing.JButton registrar;
     private javax.swing.JButton registrar1;
     private javax.swing.JButton registrar2;
+    private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }

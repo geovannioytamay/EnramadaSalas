@@ -495,8 +495,9 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
          
          Date inputDate2 = new SimpleDateFormat("dd/MM/yyyy").parse(fecha_fin);
          Calendar calendar2 = Calendar.getInstance();
-         calendar.setTime(inputDate2);
-         
+         calendar2.setTime(inputDate2);
+         //System.out.println("fecha1: "+calendar.get(Calendar.YEAR));
+         //System.out.println("fecha2: "+calendar2.get(Calendar.YEAR));
          if(calendar.get(Calendar.YEAR)<2017 || calendar2.get(Calendar.YEAR)<2018 ){
              //System.out.println(calendar.get(Calendar.YEAR));
              JOptionPane.showMessageDialog(this, "Año de inicio establecido es incorecto: AÑO mayor a 2017 y AÑO menor a 2025", "Error  de fecha", 0,
@@ -1162,7 +1163,7 @@ void poner_fechas(){
     private void OpcionesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_OpcionesItemStateChanged
 cont++;
 if(cont%2==0 && (Opciones.getSelectedIndex()==0 || Opciones.getSelectedIndex()==4 || fecha_valida()) ){
-System.out.println("fecha valida"+cont);    
+//System.out.println("fecha valida"+cont);    
         switch(Opciones.getSelectedIndex() ){
                    case 0:
                        grafica_ultima_semana();
