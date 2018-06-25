@@ -142,8 +142,9 @@ public class OpcionesAl {
        // System.out.println(sql);
         return rsu;
     }
-
+   static boolean generar_codigo=false;
     public static void extraerID() {
+        if(generar_codigo==false)return;
         int j;
         int cont = 1;
         String num = "";

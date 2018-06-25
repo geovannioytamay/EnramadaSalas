@@ -12,8 +12,8 @@ public class jtable_modificado extends JTable {
     public Component prepareRenderer(TableCellRenderer renderer, int rowIndex, int columnIndex){
         
       Component component = super.prepareRenderer(renderer, rowIndex, columnIndex);
-      component.setBackground(Color.WHITE);
-      component.setForeground(Color.BLACK);
+      //component.setBackground(Color.WHITE);
+      //component.setForeground(Color.BLACK);
       //System.out.println(""+getValueAt(rowIndex, 4));
      
      if(Integer.parseInt(""+getValueAt(rowIndex, 4))<=3){

@@ -753,13 +753,13 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
     }//GEN-LAST:event_eliminarTActionPerformed
 
     private void nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyTyped
-        char letras = evt.getKeyChar();
+   /*     char letras = evt.getKeyChar();
         if ((letras < 'a' || letras > 'z') && (letras < 'A' | letras > 'Z')) {
             if ((letras != 'ñ') && (letras != 'Ñ') && (letras != 'á') && (letras != 'Á') && (letras != 'é') && (letras != 'É') && (letras != 'í')
                     && (letras != 'Í') && (letras != 'ó') && (letras != 'Ó') && (letras != 'ú') && (letras != 'Ú') && (letras != ' ')) {
                 evt.consume();
             }
-        }
+        }*/
     }//GEN-LAST:event_nombreKeyTyped
 
     private void costo_compraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_costo_compraKeyTyped

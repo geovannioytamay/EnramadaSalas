@@ -61,6 +61,7 @@ public class CajaAd extends javax.swing.JInternalFrame {
         ListaProductos.add(lista);
         lista.toFront();
         lista.setVisible(true);
+        nombre.setText(principal.MenuPrincipalAd.userConect.getText());
 
         ((javax.swing.plaf.basic.BasicInternalFrameUI) ListaProductos.getUI()).setNorthPane(null);
                 
@@ -141,14 +142,14 @@ public class CajaAd extends javax.swing.JInternalFrame {
         numFac = new app.bolivia.swing.JCTextField();
         codigoL4 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        ListaProductos = new javax.swing.JInternalFrame();
-        jPanel3 = new javax.swing.JPanel();
         fecha = new app.bolivia.swing.JCTextField();
         codigoL5 = new javax.swing.JLabel();
+        ListaProductos = new javax.swing.JInternalFrame();
         barraDeTitulo = new javax.swing.JPanel();
         miminizar = new javax.swing.JButton();
         miminizar1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        nombre = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(7, 37, 77), 7));
         setClosable(true);
@@ -310,31 +311,14 @@ public class CajaAd extends javax.swing.JInternalFrame {
         numFac.setOpaque(false);
         numFac.setPhColor(new java.awt.Color(255, 255, 255));
         numFac.setPlaceholder("FACTURA");
-        jPanel6.add(numFac, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 130, 40));
+        jPanel6.add(numFac, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 130, 40));
 
         codigoL4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caja/numFac.png"))); // NOI18N
-        jPanel6.add(codigoL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 40));
+        jPanel6.add(codigoL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, 40));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("NÚMERO DE VENTA");
-        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, -1));
-
-        ListaProductos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        ListaProductos.setVisible(true);
-
-        javax.swing.GroupLayout ListaProductosLayout = new javax.swing.GroupLayout(ListaProductos.getContentPane());
-        ListaProductos.getContentPane().setLayout(ListaProductosLayout);
-        ListaProductosLayout.setHorizontalGroup(
-            ListaProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 546, Short.MAX_VALUE)
-        );
-        ListaProductosLayout.setVerticalGroup(
-            ListaProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 445, Short.MAX_VALUE)
-        );
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, -1, -1));
 
         fecha.setEditable(false);
         fecha.setBackground(new java.awt.Color(34, 102, 145));
@@ -350,10 +334,24 @@ public class CajaAd extends javax.swing.JInternalFrame {
                 fechaActionPerformed(evt);
             }
         });
-        jPanel3.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 180, -1));
+        jPanel6.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 180, -1));
 
         codigoL5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caja/fecha.png"))); // NOI18N
-        jPanel3.add(codigoL5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 52));
+        jPanel6.add(codigoL5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, 52));
+
+        ListaProductos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        ListaProductos.setVisible(true);
+
+        javax.swing.GroupLayout ListaProductosLayout = new javax.swing.GroupLayout(ListaProductos.getContentPane());
+        ListaProductos.getContentPane().setLayout(ListaProductosLayout);
+        ListaProductosLayout.setHorizontalGroup(
+            ListaProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 546, Short.MAX_VALUE)
+        );
+        ListaProductosLayout.setVerticalGroup(
+            ListaProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 499, Short.MAX_VALUE)
+        );
 
         barraDeTitulo.setBackground(new java.awt.Color(7, 37, 77));
 
@@ -417,6 +415,9 @@ public class CajaAd extends javax.swing.JInternalFrame {
                     .addContainerGap()))
         );
 
+        nombre.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        nombre.setText("EDWIN GEOVANNI OY TAMAY");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -424,48 +425,53 @@ public class CajaAd extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(barraDeTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ListaProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(ListaProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(barraDeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(7, 7, 7)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(nombre))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(ListaProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ListaProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -647,20 +653,20 @@ public class CajaAd extends javax.swing.JInternalFrame {
     private javax.swing.JLabel codigoL3;
     private javax.swing.JLabel codigoL4;
     private javax.swing.JLabel codigoL5;
-    private javax.swing.JLabel codigoL6;
+    public static javax.swing.JLabel codigoL6;
     private javax.swing.JLabel codigoL7;
-    private app.bolivia.swing.JCTextField fecha;
+    public app.bolivia.swing.JCTextField fecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton miminizar;
     private javax.swing.JButton miminizar1;
+    private javax.swing.JLabel nombre;
     public static app.bolivia.swing.JCTextField numFac;
     public static app.bolivia.swing.JCTextField recibi;
     public static javax.swing.JTable tablaCaja;
