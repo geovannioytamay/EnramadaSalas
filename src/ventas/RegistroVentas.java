@@ -5,17 +5,10 @@
  */
 package ventas;
 
-import java.awt.Cursor;
+
 import java.awt.Image;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -24,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -357,12 +351,20 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
    
    
    void graficar(){
-       int alto=200;
+       
+       JLabel graf=  new  JLabel();
+       graf.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/grafica.png")));
+       graf.setLocation(10, 10);
+       graf.setSize(100,1000);
+       frame_grafica1.add(graf);
+       
+       int alto=1000;
        int ancho=100;
        ImageIcon fot = new ImageIcon("src/imagenes/Productos/grafica.png");
        Icon icono = new ImageIcon(fot.getImage().getScaledInstance(alto, ancho, Image.SCALE_DEFAULT));
        grafica.setIcon(icono);
        grafica.setSize(alto,ancho);
+       grafica.repaint();
        this.repaint();
    }
          
@@ -604,9 +606,11 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         fechaFin = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         Opciones = new org.bolivia.combo.SComboBoxBlue();
+        grafica = new javax.swing.JButton();
+        frame_scroll1 = new javax.swing.JScrollPane();
+        frame_grafica1 = new javax.swing.JPanel();
         frame_scroll = new javax.swing.JScrollPane();
         frame_grafica = new javax.swing.JPanel();
-        grafica = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(7, 37, 77), 4));
@@ -980,6 +984,71 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         });
         jPanel5.add(Opciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 183, -1));
 
+        grafica.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        grafica.setForeground(new java.awt.Color(255, 255, 255));
+        grafica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/grafica.png"))); // NOI18N
+        grafica.setBorder(null);
+        grafica.setContentAreaFilled(false);
+        grafica.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        grafica.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        grafica.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        grafica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                graficaActionPerformed(evt);
+            }
+        });
+
+        frame_grafica1.setBackground(new java.awt.Color(255, 255, 255));
+        frame_grafica1.setPreferredSize(new java.awt.Dimension(3000, 300));
+
+        javax.swing.GroupLayout frame_grafica1Layout = new javax.swing.GroupLayout(frame_grafica1);
+        frame_grafica1.setLayout(frame_grafica1Layout);
+        frame_grafica1Layout.setHorizontalGroup(
+            frame_grafica1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3000, Short.MAX_VALUE)
+        );
+        frame_grafica1Layout.setVerticalGroup(
+            frame_grafica1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 340, Short.MAX_VALUE)
+        );
+
+        frame_scroll1.setViewportView(frame_grafica1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 969, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(grafica, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(frame_scroll1, javax.swing.GroupLayout.DEFAULT_SIZE, 969, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addComponent(grafica, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(115, 115, 115))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(108, Short.MAX_VALUE)
+                    .addComponent(frame_scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(26, 26, 26)))
+        );
+
+        CONSULTAS.addTab("GANANCIAS", jPanel2);
+
         frame_grafica.setBackground(new java.awt.Color(255, 255, 255));
         frame_grafica.setPreferredSize(new java.awt.Dimension(3000, 300));
 
@@ -991,66 +1060,22 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         );
         frame_graficaLayout.setVerticalGroup(
             frame_graficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         frame_scroll.setViewportView(frame_grafica);
-
-        grafica.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        grafica.setForeground(new java.awt.Color(255, 255, 255));
-        grafica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/grafica.png"))); // NOI18N
-        grafica.setBorder(null);
-        grafica.setContentAreaFilled(false);
-        grafica.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        grafica.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        grafica.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/principal/close2.png"))); // NOI18N
-        grafica.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        grafica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                graficaActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 969, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(grafica, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(36, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(grafica, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(125, 125, 125))))
-        );
-
-        CONSULTAS.addTab("GANANCIAS", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(barraDeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 1091, Short.MAX_VALUE)
-            .addComponent(barraDeTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 1091, Short.MAX_VALUE)
+            .addComponent(barraDeTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 1091, Short.MAX_VALUE)
+            .addComponent(barraDeTitulo1, javax.swing.GroupLayout.DEFAULT_SIZE, 1091, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(CONSULTAS, javax.swing.GroupLayout.PREFERRED_SIZE, 992, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 99, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1058,8 +1083,14 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                 .addComponent(barraDeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(barraDeTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CONSULTAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addComponent(CONSULTAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(frame_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         pack();
@@ -1281,7 +1312,9 @@ if(cont%2==0 && (Opciones.getSelectedIndex()==0 || Opciones.getSelectedIndex()==
     private com.toedter.calendar.JDateChooser fechaFin;
     private com.toedter.calendar.JDateChooser fechaInicio;
     private javax.swing.JPanel frame_grafica;
+    private javax.swing.JPanel frame_grafica1;
     private javax.swing.JScrollPane frame_scroll;
+    private javax.swing.JScrollPane frame_scroll1;
     private javax.swing.JButton grafica;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
