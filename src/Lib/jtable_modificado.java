@@ -27,6 +27,7 @@ public class jtable_modificado extends JTable {
          //component.setForeground(Color.BLACK); 
       }
       
+      
       return component;
     }
 }
