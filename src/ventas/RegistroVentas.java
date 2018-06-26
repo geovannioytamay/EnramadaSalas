@@ -392,13 +392,13 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
        for(int i=0; i<ganancia.size();i++){
             altura=(ganancia.get(i)*alto)/mayor;
             
-            System.out.println("altura: "+(int)Math.ceil(altura) );
-            int imagen=(i%11);
+            //System.out.println("altura: "+(int)Math.ceil(altura) );
+            int imagen=(i%12);
                 if((int)altura>0){
                     ImageResizer.MAX_HEIGHT=(int)Math.ceil(altura);
                     ImageResizer.MAX_WIDTH=ancho;       
                     Icon icono = ImageResizer.copyImage("src/imagenes/Productos/grafica"+imagen+".png");    
-       
+                    System.out.println("i: "+i+"altura: "+imagen );
        
                     JLabel graf=  new  JLabel();
                     graf.setIcon( icono);
@@ -442,7 +442,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
        for(int i=0;i<=lineas+1;i++){
             JLabel graf=  new  JLabel();
             //graf.setIcon( icono);
-            graf.setLocation(posx, posicionY+posy);
+            graf.setLocation(posx, posicionY+posy-1);
             posicionY=posicionY-decY;
             graf.setSize(anchura,alttura);
             graf.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 255))); 
@@ -1221,8 +1221,8 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(barraDeTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 1091, Short.MAX_VALUE)
-            .addComponent(barraDeTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 1091, Short.MAX_VALUE)
+            .addComponent(barraDeTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(barraDeTitulo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(CONSULTAS, javax.swing.GroupLayout.PREFERRED_SIZE, 992, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1237,7 +1237,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                 .addComponent(barraDeTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(CONSULTAS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(79, 79, 79)
