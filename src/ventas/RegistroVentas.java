@@ -371,54 +371,180 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
    }
    
    
-   void graficar( ArrayList<Double> ganacia,  ArrayList<String> dia_semana){
-      limpiar_grafica();
-       int alto=200;
+   void graficar( ArrayList<Double> ganancia,  ArrayList<String> dia_semana){
+      labels.removeAll();
+      frame_grafica1.removeAll();
+      
+       int alto=250;
        int ancho=30;
-       int posx=25;
-       double mayor = mayor(ganacia);
+       int posx=50;
+       int posy=40;
+       
+       double mayor = mayor(ganancia);
+       
+      fondoGrafica(alto,ancho+10,posx,posy,mayor,ganancia.size()); 
+       
+       
+       
+       
        //System.out.println("mayor: "+mayor);
        double altura;
-       for(int i=0; i<ganacia.size();i++){
-       altura=(ganacia.get(i)*alto)/mayor;
-       //System.out.println("ga: "+ganacia.get(i));
-       int imagen=(i%10);
-       if((int)altura>0){
-       ImageResizer.MAX_HEIGHT=(int)altura;
-       ImageResizer.MAX_WIDTH=ancho;       
-       Icon icono = ImageResizer.copyImage("src/imagenes/Productos/grafica"+imagen+".png");    
+       for(int i=0; i<ganancia.size();i++){
+            altura=(ganancia.get(i)*alto)/mayor;
+            //System.out.println("ga: "+ganacia.get(i));
+            int imagen=(i%11);
+                if((int)altura>0){
+                    ImageResizer.MAX_HEIGHT=(int)altura;
+                    ImageResizer.MAX_WIDTH=ancho;       
+                    Icon icono = ImageResizer.copyImage("src/imagenes/Productos/grafica"+imagen+".png");    
        
        
-       JLabel graf=  new  JLabel();
-       graf.setIcon( icono);
-       graf.setLocation(posx, 40);
-       graf.setSize(40,alto);
-       graf.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))); 
-       graf.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-       frame_grafica1.add(graf);
+                    JLabel graf=  new  JLabel();
+                    graf.setIcon( icono);
+                    graf.setLocation(posx, posy);
+                    graf.setSize(ancho+10,alto);
+                    //graf.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))); 
+                    graf.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+                    frame_grafica1.add(graf);
+                    
+                }
+       
+            JLabel cantidad=  new  JLabel();
+            cantidad.setText(""+ganancia.get(i));
+            cantidad.setLocation(posx, 45+alto);
+            cantidad.setSize(40,10);       
+            //cantidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))); 
+            frame_grafica1.add(cantidad);
+       
+            JLabel datos=  new  JLabel();
+            datos.setText(dia_semana.get(i));
+            labels.add(datos);
+      
+            datos.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/punto"+imagen+".png")));
+            //datos..Color(0, 0, 0))); setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))); 
+            //System.out.println("dia: "+dia_semana.get(i));
+       
+            posx=posx+40;
        }
-       JLabel datos=  new  JLabel();
-       datos.setText(dia_semana.get(i));
-       //datos.setLocation(posx, 280);   
-      
-       labels.add(datos);
-      
-       //datos.setSize(120,40);
-       datos.setIcon(new ImageIcon(getClass().getResource("/imagenes/Productos/punto"+imagen+".png")));
-       //datos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))); 
-       //System.out.println("dia: "+dia_semana.get(i));
-       
-        posx=posx+40;
-       }
-       
-       
-       
-       
-       
-      
-      
+     frame_grafica1.repaint();
    }
-    
+    void fondoGrafica(int alto,int ancho,int posx, int posy,double ganacia,int cantidadElementos){
+       int alttura=2;//altura de la linea a dibuhar
+       int anchura=cantidadElementos*ancho+ancho;
+       //ImageResizer.MAX_HEIGHT=alttura;
+       //ImageResizer.MAX_WIDTH= anchura;     
+       //Icon icono = ImageResizer.copyImage("src/imagenes/Productos/fondoGrafica.png");    
+       int lineas=cantidad_lineas(ganacia)+1;
+       int decY=alto/lineas;//decremento de Y
+       int posicionY=alto;
+       int sumaDato=0;
+       for(int i=0;i<=lineas;i++){
+            JLabel graf=  new  JLabel();
+            //graf.setIcon( icono);
+            graf.setLocation(posx, posicionY+posy);
+            posicionY=posicionY-decY;
+            graf.setSize(anchura,alttura);
+            graf.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 255))); 
+            graf.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+            frame_grafica1.add(graf);
+            
+            
+            JLabel dato=  new  JLabel();
+            //graf.setIcon( icono);
+            dato.setLocation(5, posicionY+posy);            
+            dato.setSize(40,decY);
+            dato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))); 
+            dato.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+            dato.setText(""+sumaDato);
+            sumaDato=sumaDato+proporsion;
+            
+            frame_grafica1.add(dato);
+            
+            
+      
+        }
+        
+    }
+     int proporsion=0;
+    int cantidad_lineas(double ganancia){
+        int cant=0;
+        if(ganancia<10){ 
+            proporsion=1;
+            cant=(int)(ganancia/1);
+            return cant;            
+        }        
+        if(ganancia<30){  
+            proporsion=5;
+            cant=(int)(ganancia/5);
+            return cant;            
+        }        
+        if(ganancia<100){  
+            proporsion=10;
+            cant=(int)(ganancia/10);            
+            return cant;
+        }        
+        if(ganancia<200){            
+            proporsion=20;
+            cant=(int)(ganancia/20);            
+            return cant;
+        }
+        if(ganancia<300){
+            proporsion=30;
+            cant=(int)(ganancia/30);            
+            return cant;
+        }
+        
+        if(ganancia<500){            
+            proporsion=50;
+            cant=(int)(ganancia/50);            
+            return cant;
+        }
+        
+        if(ganancia<1000){
+            proporsion=100;          
+            cant=(int)(ganancia/100);            
+            return cant;
+        }
+        
+        if(ganancia<5000){ 
+            proporsion=500;         
+            cant=(int)(ganancia/500);            
+            return cant;
+        }
+        
+        if(ganancia<10000){ 
+            proporsion=1000;         
+            cant=(int)(ganancia/1000);            
+            return cant;
+        }
+        
+        if(ganancia<30000){ 
+            proporsion=500;           
+            cant=(int)(ganancia/5000);            
+            return cant;
+        }
+        if(ganancia<100000){ 
+            proporsion=10000;           
+            cant=(int)(ganancia/10000);            
+            return cant;
+        }
+        
+        if(ganancia<500000){ 
+            proporsion=50000;          
+            cant=(int)(ganancia/50000);            
+            return cant;
+        }
+        
+        if(ganancia<1000000){ 
+            proporsion=100000;           
+            cant=(int)(ganancia/100000);            
+            return cant;
+        }
+        
+        cant=(int)(ganancia/1000000);  
+        proporsion=1000000;
+        return cant;
+    }
    double mayor(ArrayList<Double> ganacia){
        double mayor =0;
         for(int i=0; i<ganacia.size();i++){
@@ -429,35 +555,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         return mayor;
    }
    
-   void limpiar_grafica(){
-       
-       for(int i=1; i<frame_grafica1.countComponents();i++){
-           frame_grafica1.remove(i);
-           //System.out.println("nombre componente:  "+frame_grafica1.getComponent(i).toString());
-       }
-       labels.removeAll();
-       
-   }
-   
-    JFreeChart ch;
-   ChartPanel cp;
-   void grafica( DefaultCategoryDataset dtsc, String titulo, String etiqueta_y){
-       try{
-           
-            ch = ChartFactory.createBarChart(titulo,etiqueta_y, "Ganancias", dtsc,PlotOrientation.VERTICAL, true, true, false);
-            cp = new ChartPanel(ch);
-            frame_grafica.removeAll();
-            frame_grafica.add(cp);
-            //add(cp);
-         int g= dtsc.getColumnCount();            
-          cp.setBounds(0,0,definir_dimeciones(g),300);
-            
-            
-            
-            
-       }catch(Exception e){ System.out.println(""+e); }
-       
-   }
+    
    
    int definir_dimeciones(int numero){
        int dimencion =0;
@@ -1083,9 +1181,10 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 969, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(frame_scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 842, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(frame_scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 842, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
