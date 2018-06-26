@@ -391,10 +391,11 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
        double altura;
        for(int i=0; i<ganancia.size();i++){
             altura=(ganancia.get(i)*alto)/mayor;
-            //System.out.println("ga: "+ganacia.get(i));
+            
+            System.out.println("altura: "+(int)Math.ceil(altura) );
             int imagen=(i%11);
                 if((int)altura>0){
-                    ImageResizer.MAX_HEIGHT=(int)altura;
+                    ImageResizer.MAX_HEIGHT=(int)Math.ceil(altura);
                     ImageResizer.MAX_WIDTH=ancho;       
                     Icon icono = ImageResizer.copyImage("src/imagenes/Productos/grafica"+imagen+".png");    
        
@@ -429,16 +430,16 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
      frame_grafica1.repaint();
    }
     void fondoGrafica(int alto,int ancho,int posx, int posy,double ganacia,int cantidadElementos){
-       int alttura=2;//altura de la linea a dibuhar
+       int alttura=1;//altura de la linea a dibuhar
        int anchura=cantidadElementos*ancho+ancho;
        //ImageResizer.MAX_HEIGHT=alttura;
        //ImageResizer.MAX_WIDTH= anchura;     
        //Icon icono = ImageResizer.copyImage("src/imagenes/Productos/fondoGrafica.png");    
-       int lineas=cantidad_lineas(ganacia)+1;
-       int decY=alto/lineas;//decremento de Y
+       int lineas=cantidad_lineas(ganacia);
+       int decY=(int)Math.ceil((alto/(lineas+1))+1);//decremento de Y
        int posicionY=alto;
        int sumaDato=0;
-       for(int i=0;i<=lineas;i++){
+       for(int i=0;i<=lineas+1;i++){
             JLabel graf=  new  JLabel();
             //graf.setIcon( icono);
             graf.setLocation(posx, posicionY+posy);
@@ -453,7 +454,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
             //graf.setIcon( icono);
             dato.setLocation(5, posicionY+posy);            
             dato.setSize(40,decY);
-            dato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))); 
+            //dato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))); 
             dato.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
             dato.setText(""+sumaDato);
             sumaDato=sumaDato+proporsion;
@@ -701,7 +702,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
              return false;
          }
           if(inputDate2.before(inputDate)) {
-                 JOptionPane.showMessageDialog(this, "Fecha inicio es menor a fecha final", "Error de fecha", 0,
+                 JOptionPane.showMessageDialog(this, "Fecha inicio es mayor a la fecha final", "Error de fecha", 0,
                         new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
               return false;   
           } 
@@ -1183,8 +1184,8 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(frame_scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 842, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)))
+                        .addComponent(frame_scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
