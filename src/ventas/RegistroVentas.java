@@ -6,6 +6,8 @@
 package ventas;
 
 
+import java.awt.Canvas;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.List;
 import java.text.DateFormat;
@@ -336,10 +338,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
          fecha_inicio=String.format("%1$td/%1$tm/%1$tY",calendar.getTime());
          int numero_anio=calendar.get(Calendar.YEAR);
          double total=0;
-            do { 
-            
-           
-                  
+            do {  
                   fecha_inicio=String.format("%1$tY",calendar.getTime());
                  //System.out.println(fecha_inicio); // Devuelve el objeto Date con los nuevos días añadidos
                  
@@ -378,27 +377,20 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
        int alto=250;
        int ancho=30;
        int posx=50;
-       int posy=40;
-       
-       double mayor = mayor(ganancia);
-       
-      fondoGrafica(alto,ancho+10,posx,posy,mayor,ganancia.size()); 
-       
-       
-       
-       
+       int posy=50;       
+       double mayor = mayor(ganancia);       
+      fondoGrafica(alto,ancho+10,posx,posy,mayor,ganancia.size());  
        //System.out.println("mayor: "+mayor);
        double altura;
        for(int i=0; i<ganancia.size();i++){
-            altura=(ganancia.get(i)*alto)/mayor;
-            
+            altura=(ganancia.get(i)*alto)/mayor;            
             //System.out.println("altura: "+(int)Math.ceil(altura) );
             int imagen=(i%12);
                 if((int)altura>0){
                     ImageResizer.MAX_HEIGHT=(int)Math.ceil(altura);
                     ImageResizer.MAX_WIDTH=ancho;       
                     Icon icono = ImageResizer.copyImage("src/imagenes/Productos/grafica"+imagen+".png");    
-                    System.out.println("i: "+i+"altura: "+imagen );
+                    //System.out.println("i: "+i+"altura: "+imagen );
        
                     JLabel graf=  new  JLabel();
                     graf.setIcon( icono);
@@ -412,7 +404,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
        
             JLabel cantidad=  new  JLabel();
             cantidad.setText(""+ganancia.get(i));
-            cantidad.setLocation(posx, 45+alto);
+            cantidad.setLocation(posx, posy+alto+5);
             cantidad.setSize(40,10);       
             //cantidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))); 
             frame_grafica1.add(cantidad);
@@ -429,36 +421,35 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
        }
      frame_grafica1.repaint();
    }
+      
     void fondoGrafica(int alto,int ancho,int posx, int posy,double ganacia,int cantidadElementos){
        int alttura=1;//altura de la linea a dibuhar
-       int anchura=cantidadElementos*ancho+ancho;
-       //ImageResizer.MAX_HEIGHT=alttura;
-       //ImageResizer.MAX_WIDTH= anchura;     
-       //Icon icono = ImageResizer.copyImage("src/imagenes/Productos/fondoGrafica.png");    
-       int lineas=cantidad_lineas(ganacia);
-       int decY=(int)Math.ceil((alto/(lineas+1))+1);//decremento de Y
-       int posicionY=alto;
+       int anchura=cantidadElementos*ancho+ancho; 
+       cantidad_lineas(ganacia);
+       
+       
+        //System.out.println("lineas: "+lineas);     
        int sumaDato=0;
-       for(int i=0;i<=lineas+1;i++){
-            JLabel graf=  new  JLabel();
-            //graf.setIcon( icono);
-            graf.setLocation(posx, posicionY+posy-1);
-            posicionY=posicionY-decY;
-            graf.setSize(anchura,alttura);
-            graf.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 255))); 
-            graf.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-            frame_grafica1.add(graf);
+       double puntoX=0;
+       int lineas =(int)(ganacia/proporsion);
+       if((ganacia%proporsion)>0)lineas++;
+       for(double i=0;i<lineas+1;i++){           
+            JLabel linea=  new  JLabel();
+            linea.setLocation(posx-30, (int)Math.round(alto-puntoX+posy)); 
+            linea.setSize(anchura,alttura);
+            linea.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 255)));
+            frame_grafica1.add(linea);
             
+            puntoX =puntoX + (proporsion*alto*1.0)/ganacia;
+            System.out.println("puntoX: "+puntoX); 
             
-            JLabel dato=  new  JLabel();
-            //graf.setIcon( icono);
-            dato.setLocation(5, posicionY+posy);            
-            dato.setSize(40,decY);
+            JLabel dato=  new  JLabel();            
+            dato.setLocation(5, (int)Math.round(alto-puntoX+posy));            
+            dato.setSize(40,(int)Math.ceil((proporsion*alto*1.0)/ganacia));
             //dato.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))); 
             dato.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
             dato.setText(""+sumaDato);
-            sumaDato=sumaDato+proporsion;
-            
+            sumaDato=sumaDato+proporsion;            
             frame_grafica1.add(dato);
             
             
@@ -466,6 +457,8 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
         }
         
     }
+    
+    
      int proporsion=0;
     int cantidad_lineas(double ganancia){
         int cant=0;
@@ -1437,7 +1430,7 @@ if(cont%2==0 && (Opciones.getSelectedIndex()==0 || Opciones.getSelectedIndex()==
     }//GEN-LAST:event_miminizar1ActionPerformed
 
     private void miminizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizar2ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_miminizar2ActionPerformed
 
     private void miminizar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizar3ActionPerformed
