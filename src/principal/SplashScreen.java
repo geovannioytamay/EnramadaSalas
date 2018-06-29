@@ -7,9 +7,17 @@ package principal;
 
 import com.sun.awt.AWTUtilities;
 import java.awt.Cursor;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
+import productos.OpcionesAl;
 
 /**
  *
@@ -35,15 +43,68 @@ public class SplashScreen extends javax.swing.JFrame {
         Thread hi = new Thread(new Runnable() {
             @Override
             public void run() {
-                AccesoLogin ven = new AccesoLogin(spl);
+                 AccesoLogin ven = new AccesoLogin(spl);
                 ven.setLocationRelativeTo(null);
-                ven.setVisible(true);
-                dispose();
+                if(isCompletado())
+                if(iniciarSesion()){               
+                ven.setVisible(true);               
+                }
+                else{
+                   MenuPrincipalAd menu = new MenuPrincipalAd(); 
+                   menu.setVisible(true);
+                   ven.dispose();
+                }
+                 dispose();
             }
         });
         hi.start();
     }
-
+   public static boolean isCompletado(){
+     conectar cc = new conectar();
+     Connection cn = cc.conexion();
+     PreparedStatement ps;
+       String consulta="select* from licencias";
+      
+      try {
+            
+            Statement st = cn.createStatement();
+            ResultSet rs;
+            
+            rs = st.executeQuery(consulta);            
+            if(rs.next())return false;
+                //System.out.println(""+rs.getString("sesion"));
+               // num =num + Integer.parseInt(rs.getString("count(*)"));  
+            
+            } catch (SQLException ex) {
+           System.out.println(""+ex.getMessage());
+        }
+       
+       return true;
+   }
+   boolean iniciarSesion(){
+       
+      conectar cc = new conectar();
+      Connection cn = cc.conexion();
+      PreparedStatement ps;
+      
+      String consulta="select sesion from configuraciones";
+      
+      try {
+            
+            Statement st = cn.createStatement();
+            ResultSet rs;
+            
+            rs = st.executeQuery(consulta);            
+            if(rs.next()&& rs.getString("sesion").equals("1")) return true;
+                //System.out.println(""+rs.getString("sesion"));
+               // num =num + Integer.parseInt(rs.getString("count(*)"));  
+            
+            } catch (SQLException ex) {
+           System.out.println(""+ex.getMessage());
+        }
+       
+       return false;
+   }
     public JProgressBar getJProgressBar() {
         return progreso;
     }

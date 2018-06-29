@@ -70,8 +70,13 @@ public class conectar {
                                             "  `venta` decimal(10,2) DEFAULT NULL,\n" +
                                             "  PRIMARY KEY (`id_venta`,`id_producto`)\n" +
                                             ") ";
+            String tabla_configuraciones=" CREATE TABLE `configuraciones` (\n" +
+                                            "  `sesion` INT(1) NULL,\n" +
+                                            "  `recibo` INT(1) NULL);";
+            String configuraciones_default="INSERT INTO configuraciones"
+                                            + " VALUES (1,0)";// 1 = true y 0= false
             
-            
+
             
             st.execute("create database basededatos; ");
             st.execute("use basededatos;");

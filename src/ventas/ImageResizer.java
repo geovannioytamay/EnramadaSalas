@@ -22,8 +22,8 @@ public class ImageResizer {
     /*Este método es el de la magia recibe la ruta al archivo original y la ruta donde vamos a guardar la copia
     copyImage("C:\\Users\\IngenioDS\\Desktop\\test.png","C:\\Users\\IngenioDS\\Desktop\\Copia\\test2.png");*/
  
-    public static ImageIcon copyImage(String filePath) {
-        BufferedImage bimage = loadImage(filePath);
+    public static ImageIcon copyImage(BufferedImage bimage) {
+        //BufferedImage bimage = loadImage(filePath);
         bimage = resize(bimage, MAX_WIDTH, MAX_HEIGHT);
         return new ImageIcon(bimage);
         //saveImage(bimage, copyPath);
@@ -32,6 +32,7 @@ public class ImageResizer {
      /*
     Este método se utiliza para cargar la imagen de disco
     */
+    
     public static BufferedImage loadImage(String pathName) {
         BufferedImage bimage = null;
         try {

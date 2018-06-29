@@ -5,6 +5,7 @@
  */
 package principal;
 
+import principal.configuracion.config;
 import java.awt.Dimension;
 import productos.Productos;
 import java.awt.event.ActionEvent;
@@ -267,36 +268,37 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
                 .addComponent(caja, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76)
                 .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
                         .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(maximizar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(miminizar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cerrar_sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(cerrar_sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cerrar, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                            .addComponent(maximizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(miminizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cerrar_sesion, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(usuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(almacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ventas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(caja, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(18, 18, 18))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(info, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(usuarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(almacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ventas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(caja, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cerrar, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addComponent(maximizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(miminizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cerrar_sesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         userConect.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -342,7 +344,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -371,30 +373,62 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         Timer tiempo = new Timer(100, new MenuPrincipalAd.horas());
         tiempo.start();
     }//GEN-LAST:event_formWindowOpened
-    usuarios.Usuarios us;
-    private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosActionPerformed
-       
+    usuarios.Usuarios us;    productos.Productos al;    CajaAd ca;
+    RegistroVentas rv;
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        
+    }//GEN-LAST:event_formWindowClosing
+
+    private void cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar_sesionActionPerformed
+        if (JOptionPane.showConfirmDialog(this, "Esta a punto de\ncerrar la sesión\n¿Desea continuar?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, 0,
+            new ImageIcon(getClass().getResource("/imagenes/principal/preg2.png"))) == JOptionPane.YES_OPTION) {
+        this.dispose();
+        new AccesoLogin().setVisible(true);
+        }
+    }//GEN-LAST:event_cerrar_sesionActionPerformed
+
+    private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_cerrarActionPerformed
+
+    private void maximizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maximizarActionPerformed
+        this.setExtendedState(MAXIMIZED_BOTH);
+
+    }//GEN-LAST:event_maximizarActionPerformed
+
+    private void miminizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizarActionPerformed
+        if (JOptionPane.showConfirmDialog(this, "Esta a punto de salir\nde la aplicación.\n¿Desea continuar?", "Cerrar", JOptionPane.YES_NO_OPTION, 0,
+            new ImageIcon(getClass().getResource("/imagenes/principal/adver1.png"))) == JOptionPane.YES_OPTION) {
+        System.exit(0);
+        }else{
+            this.setDefaultCloseOperation(0);
+        }
+    }//GEN-LAST:event_miminizarActionPerformed
+
+    private void ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasActionPerformed
         if(tipo_usuario.equals("NORMAL")){
             JOptionPane.showMessageDialog(this, "Acceso denegado.", "Error", 0,
                 new ImageIcon(getClass().getResource("/imagenes/usuarios/impo.png")));
-       }
-       else
-        if (estacerrado(us)) {
-            us = new Usuarios();
-            escritorio.add(us).setLocation(250, 3);
-            us.show();
-             } else {
-                    us.toFront();
-            }
-    }//GEN-LAST:event_usuariosActionPerformed
-    productos.Productos al;
+        }
+        else
+        if (estacerrado(rv)) {
+            rv = new RegistroVentas();
+            escritorio.add(rv).setLocation(250, 3);
+            rv.setSize(800,550);
+            rv.show();
+            cerra1 = true;
+        } else {
+            rv.toFront();
+        }
+    }//GEN-LAST:event_ventasActionPerformed
+
     private void almacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_almacenActionPerformed
-       if(tipo_usuario.equals("NORMAL")){
+        if(tipo_usuario.equals("NORMAL")){
             JOptionPane.showMessageDialog(this, "Acceso denegado.", "Error", 0,
                 new ImageIcon(getClass().getResource("/imagenes/usuarios/impo.png")));
-       }
-       else
-           if (estacerrado(al)) {
+        }
+        else
+        if (estacerrado(al)) {
             al = new Productos();
             escritorio.add(al).setLocation(250, 3);
             al.show();
@@ -402,24 +436,22 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
             al.toFront();
         }
     }//GEN-LAST:event_almacenActionPerformed
-    CajaAd ca;
-    RegistroVentas rv;
-    private void ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasActionPerformed
+
+    private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosActionPerformed
+
         if(tipo_usuario.equals("NORMAL")){
             JOptionPane.showMessageDialog(this, "Acceso denegado.", "Error", 0,
                 new ImageIcon(getClass().getResource("/imagenes/usuarios/impo.png")));
-       }
-       else
-            if (estacerrado(rv)) {
-            rv = new RegistroVentas();
-            escritorio.add(rv).setLocation(250, 3);
-            rv.setSize(800,550);
-            rv.show();
-            cerra1 = true;
-        } else {
-          rv.toFront();
         }
-    }//GEN-LAST:event_ventasActionPerformed
+        else
+        if (estacerrado(us)) {
+            us = new Usuarios();
+            escritorio.add(us).setLocation(250, 3);
+            us.show();
+        } else {
+            us.toFront();
+        }
+    }//GEN-LAST:event_usuariosActionPerformed
 
     private void cajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cajaActionPerformed
         if (estacerrado(ca)) {
@@ -432,55 +464,23 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cajaActionPerformed
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        
-    }//GEN-LAST:event_formWindowClosing
- config con;
     private void infoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoActionPerformed
-      
+
         if(tipo_usuario.equals("NORMAL")){
             JOptionPane.showMessageDialog(this, "Acceso denegado.", "Error", 0,
                 new ImageIcon(getClass().getResource("/imagenes/usuarios/impo.png")));
-       }
-       else
-           if (estacerrado(con)) {
+        }
+        else
+        if (estacerrado(con)) {
             con = new config();
             escritorio.add(con).setLocation(250, 3);
             con.show();
         } else {
             con.toFront();
         }
-        
-      
-                  
+
     }//GEN-LAST:event_infoActionPerformed
-
-    private void miminizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizarActionPerformed
-       if (JOptionPane.showConfirmDialog(this, "Esta a punto de salir\nde la aplicación.\n¿Desea continuar?", "Cerrar", JOptionPane.YES_NO_OPTION, 0,
-                new ImageIcon(getClass().getResource("/imagenes/principal/adver1.png"))) == JOptionPane.YES_OPTION) {
-            System.exit(0);
-        }else{
-            this.setDefaultCloseOperation(0);
-        } 
-    }//GEN-LAST:event_miminizarActionPerformed
-
-    private void maximizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maximizarActionPerformed
-        this.setExtendedState(MAXIMIZED_BOTH);
-         
-    }//GEN-LAST:event_maximizarActionPerformed
-
-    private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
-        this.setExtendedState(ICONIFIED);
-    }//GEN-LAST:event_cerrarActionPerformed
-
-    private void cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar_sesionActionPerformed
-         if (JOptionPane.showConfirmDialog(this, "Esta a punto de\ncerrar la sesión\n¿Desea continuar?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION, 0,
-                new ImageIcon(getClass().getResource("/imagenes/principal/preg2.png"))) == JOptionPane.YES_OPTION) {
-            this.dispose();
-            new AccesoLogin().setVisible(true);
-        }
-    }//GEN-LAST:event_cerrar_sesionActionPerformed
-    class horas implements ActionListener {
+ config con;    class horas implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             Date sistemaHora = new Date();
@@ -531,7 +531,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
     private javax.swing.JButton almacen;
     private javax.swing.JButton caja;
     private javax.swing.JButton cerrar;
-    private javax.swing.JButton cerrar_sesion;
+    public static javax.swing.JButton cerrar_sesion;
     public static principal.Escritorio escritorio;
     private javax.swing.JLabel fecha;
     private javax.swing.JLabel hora;

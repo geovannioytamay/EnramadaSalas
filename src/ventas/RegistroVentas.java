@@ -10,6 +10,7 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.List;
+import java.awt.image.BufferedImage;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -388,8 +389,16 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
             int imagen=(i%12);
                 if((int)altura>0){
                     ImageResizer.MAX_HEIGHT=(int)Math.ceil(altura);
-                    ImageResizer.MAX_WIDTH=ancho;       
-                    Icon icono = ImageResizer.copyImage("src/imagenes/Productos/grafica"+imagen+".png");    
+                    ImageResizer.MAX_WIDTH=ancho;
+                    // cargamos la imagen en un icono
+                    ImageIcon ico=new ImageIcon(getClass().getResource("/imagenes/Productos/grafica"+imagen+".png"));
+                    Image im = ico.getImage();//convertimos la imagen icono a imagen
+                     BufferedImage bi = new BufferedImage//traformamomos la imge para la edicon
+                    (im.getWidth(null),im.getHeight(null),BufferedImage.TYPE_INT_RGB);
+                    Graphics bg = bi.getGraphics();
+                    bg.drawImage(im, 0, 0, null);
+                     bg.dispose();
+                    Icon icono = ImageResizer.copyImage(bi);    
                     //System.out.println("i: "+i+"altura: "+imagen );
        
                     JLabel graf=  new  JLabel();
@@ -441,7 +450,7 @@ public class RegistroVentas extends javax.swing.JInternalFrame {
             frame_grafica1.add(linea);
             
             puntoX =puntoX + (proporsion*alto*1.0)/ganacia;
-            System.out.println("puntoX: "+puntoX); 
+            //System.out.println("puntoX: "+puntoX); 
             
             JLabel dato=  new  JLabel();            
             dato.setLocation(5, (int)Math.round(alto-puntoX+posy));            

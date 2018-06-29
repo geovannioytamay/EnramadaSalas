@@ -1,0 +1,157 @@
+-- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: basededatos
+-- ------------------------------------------------------
+-- Server version	8.0.11
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+ SET NAMES utf8 ;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `producto`
+--
+
+DROP TABLE IF EXISTS `producto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `producto` (
+  `id_producto` char(50) NOT NULL,
+  `nombre` char(100) DEFAULT NULL,
+  `costo_compra` decimal(10,2) DEFAULT NULL,
+  `costo_venta` decimal(10,2) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `tipo` char(100) DEFAULT NULL,
+  PRIMARY KEY (`id_producto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `producto`
+--
+
+LOCK TABLES `producto` WRITE;
+/*!40000 ALTER TABLE `producto` DISABLE KEYS */;
+INSERT INTO `producto` VALUES ('AL0001','COCACOLA',7.00,9.00,3,'REFRESCO'),('AL0002','PAPEL',0.50,1.50,150,'FILETE'),('AL0003','ARROZ',7.00,9.00,10,'BOTANAS'),('AL0004','JABON',3.00,5.00,10,'BOTANAS'),('AL0005','BARRA',1.00,2.00,40,'PESCADO'),('AL0006','FIRJOL NEGRO',7.00,8.00,10,'BOTANAS'),('AL0007','CEPILLO DE DIENTES',7.00,11.50,20,'OTROS'),('AL0008','SABRITA PAPA SALADAS',5.60,10.50,40,'BEBIDAS'),('AL0009','MANZANA',15.00,20.00,50,'FRUTAS'),('AL0010','LAPIZ',3.00,5.00,7,'PAPELERIA'),('AL0011','BUBALO',1.00,1.50,40,'CHICLES'),('AL0012','TRAILERS',2.00,3.00,33,'CHICLES'),('AL0013','CARTULINA',1.50,2.50,20,'PAPELERIA'),('AL0014','PAPAS FRITAS SABIRTAS',6.00,10.00,20,'SABRITAS'),('AL0015','RUNNERS',5.00,8.00,15,'SABRITAS'),('AL0016','RANCHERITOS',4.50,8.00,13,'SABRITAS'),('AL0017','JABON DE LAVAO SIMPRED',2.00,2.50,13,'DETERGENTE'),('AL0018','FAB FOCA',3.00,5.50,13,'DETERGENTE'),('AL0019','FAB HACE',4.00,6.00,5,'DETERGENTE'),('AL0020','CLORO',6.00,6.50,14,'DETERGENTE'),('AL0021','PASTA COLGATE',8.00,10.50,33,'DETERGENTE'),('AL0022','BORRADOR',3.00,4.00,10,'PAPELERIA');
+/*!40000 ALTER TABLE `producto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipo_producto`
+--
+
+DROP TABLE IF EXISTS `tipo_producto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `tipo_producto` (
+  `tipo` char(150) NOT NULL,
+  PRIMARY KEY (`tipo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo_producto`
+--
+
+LOCK TABLES `tipo_producto` WRITE;
+/*!40000 ALTER TABLE `tipo_producto` DISABLE KEYS */;
+INSERT INTO `tipo_producto` VALUES ('1'),('2'),('CHICLES'),('COMIDAS'),('DESECHABLES'),('DETERGENTE'),('FRUTAS'),('PAN'),('PAPELERIA'),('REFRESCO'),('SABRITAS'),('VERDURAS');
+/*!40000 ALTER TABLE `tipo_producto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `usuarios` (
+  `id_usuario` varchar(20) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `sexo` varchar(10) DEFAULT NULL,
+  `tipo` varchar(50) DEFAULT NULL,
+  `contraseña` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES ('US0001','ADMIN','MASCULINO','ADMINISTRADOR','admin'),('US0002','NORMAL','MASCULINO','NORMAL','normal');
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `venta`
+--
+
+DROP TABLE IF EXISTS `venta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `venta` (
+  `id_venta` int(11) NOT NULL,
+  `total` decimal(10,2) DEFAULT NULL,
+  `fecha` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_venta`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `venta`
+--
+
+LOCK TABLES `venta` WRITE;
+/*!40000 ALTER TABLE `venta` DISABLE KEYS */;
+INSERT INTO `venta` VALUES (1,62.00,'01/01/2016'),(2,78.00,'05/01/2016'),(3,48.00,'15/01/2016'),(4,180.00,'22/01/2017'),(5,42.00,'26/01/2017'),(6,44.00,'26/01/2017'),(7,58.00,'02/02/2017'),(8,110.00,'03/02/2017'),(9,63.50,'07/02/2017'),(10,72.00,'17/02/2018'),(11,11.00,'23/03/2018'),(12,91.50,'28/03/2018'),(13,24.00,'28/03/2018'),(14,44.00,'28/03/2018'),(15,11.00,'27/04/2018'),(16,6.00,'28/04/2018'),(17,118.50,'01/04/2018'),(18,39.00,'08/04/2018'),(19,9.00,'14/04/2018'),(20,5.00,'22/04/2018'),(21,30.00,'28/04/2018'),(22,21.00,'25/05/2018'),(23,17.00,'26/05/2018'),(24,252.00,'27/05/2018'),(25,300.00,'31/05/2018'),(26,30.00,'31/05/2018'),(27,30.00,'31/05/2018'),(28,36.50,'05/06/2018'),(29,52.50,'07/06/2018'),(30,24.00,'07/06/2018'),(31,344.00,'07/06/2018'),(32,124.00,'07/06/2018'),(33,27.00,'07/06/2018'),(34,13.00,'07/06/2018'),(35,429.50,'07/06/2018'),(36,51.00,'07/06/2018'),(37,32.00,'07/06/2018'),(38,10.50,'07/06/2018'),(39,3895.00,'08/06/2018'),(40,147.50,'08/06/2018'),(41,66.00,'08/06/2018'),(42,327.50,'08/06/2018'),(43,22.00,'09/06/2018'),(44,23.00,'09/06/2018'),(45,9.00,'11/06/2018');
+/*!40000 ALTER TABLE `venta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `venta_producto`
+--
+
+DROP TABLE IF EXISTS `venta_producto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `venta_producto` (
+  `id_venta` int(10) NOT NULL,
+  `id_producto` varchar(50) NOT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `compra` decimal(10,2) DEFAULT NULL,
+  `venta` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`id_venta`,`id_producto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `venta_producto`
+--
+
+LOCK TABLES `venta_producto` WRITE;
+/*!40000 ALTER TABLE `venta_producto` DISABLE KEYS */;
+INSERT INTO `venta_producto` VALUES (1,'AL0001',6,2.00,2.00),(1,'AL0002',4,1.00,2.00),(1,'AL0003',8,1.00,2.00),(1,'AL0008',1,1.00,2.00),(2,'AL0005',5,1.00,2.00),(2,'AL0007',1,1.00,2.00),(2,'AL0008',2,1.00,2.00),(3,'AL0002',2,1.00,2.00),(3,'AL0007',5,1.00,2.00),(3,'AL0008',3,1.00,2.00),(4,'AL0005',4,1.00,2.00),(4,'AL0006',3,1.00,2.00),(4,'AL0008',2,1.00,2.00),(5,'AL0005',5,1.00,2.00),(5,'AL0006',2,1.00,2.00),(5,'AL0008',3,2.00,2.00),(6,'AL0006',3,1.00,2.00),(6,'AL0008',6,1.00,2.00),(7,'AL0002',2,7.00,8.00),(7,'AL0005',3,1.00,2.00),(7,'AL0006',1,7.00,8.00),(7,'AL0007',2,7.00,11.00),(7,'AL0008',7,1.00,2.00),(8,'AL0002',2,0.50,1.50),(8,'AL0007',36,7.00,11.00),(8,'AL0008',55,7.00,11.00),(9,'AL0005',1,1.00,2.00),(9,'AL0008',5,5.60,10.50),(10,'AL0005',6,1.00,2.00),(10,'AL0008',3,1.00,2.00),(11,'AL0005',7,1.00,2.00),(11,'AL0006',2,1.00,2.00),(12,'AL0001',2,5.60,10.50),(12,'AL0002',2,5.60,10.50),(12,'AL0003',2,5.60,10.50),(12,'AL0004',2,5.60,10.50),(12,'AL0005',2,5.60,10.50),(12,'AL0006',2,5.60,10.50),(12,'AL0007',2,5.60,10.50),(12,'AL0008',3,2.00,2.00),(13,'AL0001',2,5.60,10.50),(13,'AL0002',2,5.60,10.50),(13,'AL0003',2,5.60,10.50),(13,'AL0004',2,5.60,10.50),(13,'AL0007',2,5.60,10.50),(13,'AL0008',2,5.60,10.50),(14,'AL0001',2,5.60,10.50),(14,'AL0002',2,5.60,10.50),(14,'AL0004',2,5.60,10.50),(14,'AL0005',2,5.60,10.50),(14,'AL0006',3,1.00,2.00),(14,'AL0007',2,5.60,10.50),(14,'AL0008',2,5.60,10.50),(15,'AL0003',2,5.60,10.50),(15,'AL0004',2,5.60,10.50),(15,'AL0005',2,5.60,10.50),(15,'AL0006',2,5.60,10.50),(17,'AL0001',3,7.00,10.00),(17,'AL0002',2,5.60,10.50),(17,'AL0004',2,5.60,10.50),(17,'AL0005',27,1.00,2.00),(17,'AL0006',3,7.00,8.00),(17,'AL0007',2,5.60,10.50),(17,'AL0008',1,6.00,11.00),(18,'AL0002',5,0.50,1.50),(18,'AL0008',3,5.60,10.50),(19,'AL0003',1,7.00,9.00),(20,'AL0002',2,0.50,1.50),(20,'AL0005',1,1.00,2.00),(21,'AL0005',3,1.00,2.00),(21,'AL0006',3,7.00,8.00),(22,'AL0006',1,7.00,8.00),(22,'AL0007',2,7.00,11.00),(23,'AL0005',3,1.00,2.00),(23,'AL0006',2,7.00,8.00),(24,'AL0007',36,7.00,11.00),(25,'AL0007',55,7.00,11.00),(26,'AL0002',2,0.50,1.50),(26,'AL0005',1,1.00,2.00),(26,'AL0008',5,5.60,10.50),(28,'AL0001',1,7.00,9.00),(28,'AL0003',1,7.00,9.00),(28,'AL0006',1,7.00,8.00),(28,'AL0008',1,5.60,10.50),(29,'AL0002',1,0.50,1.50),(29,'AL0003',4,7.00,9.00),(29,'AL0004',3,3.00,5.00),(30,'AL0005',4,1.00,2.00),(30,'AL0006',2,7.00,8.00),(31,'AL0001',3,7.00,9.00),(31,'AL0002',35,0.50,1.50),(31,'AL0007',23,7.00,11.50),(32,'AL0001',4,7.00,9.00),(32,'AL0002',44,0.50,1.50),(32,'AL0005',1,1.00,2.00),(32,'AL0009',1,15.00,20.00),(33,'AL0001',3,7.00,9.00),(34,'AL0004',1,3.00,5.00),(34,'AL0006',1,7.00,8.00),(35,'AL0003',3,7.00,9.00),(35,'AL0007',35,7.00,11.50),(36,'AL0002',1,0.50,1.50),(36,'AL0006',1,7.00,8.00),(36,'AL0007',1,7.00,11.50),(36,'AL0009',1,15.00,20.00),(36,'AL0010',2,3.00,5.00),(37,'AL0006',4,7.00,8.00),(38,'AL0021',1,8.00,10.50),(39,'AL0008',32,5.60,10.50),(39,'AL0012',1,2.00,3.00),(39,'AL0014',355,6.00,10.00),(39,'AL0019',1,4.00,6.00),(40,'AL0001',1,7.00,9.00),(40,'AL0003',2,7.00,9.00),(40,'AL0006',1,7.00,8.00),(40,'AL0007',7,7.00,11.50),(40,'AL0009',1,15.00,20.00),(40,'AL0018',1,3.00,5.50),(40,'AL0020',1,6.00,6.50),(41,'AL0005',5,1.00,2.00),(41,'AL0016',7,4.50,8.00),(42,'AL0001',10,7.00,9.00),(42,'AL0010',30,3.00,5.00),(42,'AL0018',5,3.00,5.50),(42,'AL0022',15,3.00,4.00),(43,'AL0004',1,3.00,5.00),(43,'AL0010',1,3.00,5.00),(43,'AL0018',1,3.00,5.50),(43,'AL0020',1,6.00,6.50),(44,'AL0004',1,3.00,5.00),(44,'AL0006',1,7.00,8.00),(44,'AL0010',1,3.00,5.00),(44,'AL0013',1,1.50,2.50),(44,'AL0017',1,2.00,2.50),(45,'AL0003',1,7.00,9.00);
+/*!40000 ALTER TABLE `venta_producto` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-06-14 15:20:30
