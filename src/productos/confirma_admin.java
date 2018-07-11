@@ -5,6 +5,7 @@
  */
 package productos;
 
+import clientes.OpcionesCli;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Cursor;
 import java.awt.event.ItemEvent;
@@ -176,6 +177,10 @@ public class confirma_admin extends javax.swing.JInternalFrame {
                      case 2:eliminaT = OpcionesVen.eliminaTodos();
                             objeto="Ventas";
                          break;
+                     case 3:eliminaT = OpcionesCli.eliminaTodos();
+                            objeto="Clientes";
+                         break;                         
+                     
                  }
                
                     if (eliminaT != 0) {

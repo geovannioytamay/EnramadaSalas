@@ -5,39 +5,9 @@
  */
 package principal.configuracion;
 
-import ventas.*;
-import java.awt.Cursor;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import javax.swing.ImageIcon;
-import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DefaultPieDataset;
-import static principal.MenuPrincipalAd.escritorio;
-import productos.OpcionesAl;
-import productos.confirma_admin;
+import java.awt.MouseInfo;
+import java.awt.Point;
 
-/**
- *
- * @author Rojeru San CL
- */
 public class config extends javax.swing.JInternalFrame {
 
     /**
@@ -197,6 +167,11 @@ public class config extends javax.swing.JInternalFrame {
         titulo.setForeground(new java.awt.Color(255, 255, 255));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("CONFIGURACIONES");
+        titulo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                tituloMouseDragged(evt);
+            }
+        });
 
         javax.swing.GroupLayout barraDeTituloLayout = new javax.swing.GroupLayout(barraDeTitulo);
         barraDeTitulo.setLayout(barraDeTituloLayout);
@@ -317,6 +292,35 @@ public class config extends javax.swing.JInternalFrame {
         con.setVisible(true);
         contenido.setVisible(true);
     }//GEN-LAST:event_configuracionActionPerformed
+
+    private void tituloMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tituloMouseDragged
+       Point punto=MouseInfo.getPointerInfo().getLocation();
+    
+    int x=punto.x-200;
+    int y=punto.y-150;
+    
+    int max_punto_X=798; 
+    int max_punto_Y=247; 
+    
+    int max_pos_X=max_punto_X-200; 
+    int max_pos_Y=max_punto_Y-150;
+    
+    
+if((punto.x>=200 && punto.x<max_punto_X)  )
+      this.setLocation(x,this.getY()); 
+
+    if( (punto.y>=150 && punto.y<max_punto_Y) )
+        this.setLocation(this.getX(),y);
+
+    if(punto.x<200 )this.setLocation(3,this.getY());
+    if(punto.x>max_punto_X)this.setLocation(max_pos_X,this.getY());
+    if(punto.y<150 )this.setLocation(this.getX(),0);
+    if(punto.y>max_punto_Y )this.setLocation(this.getX(),max_pos_Y);
+
+ //this.setLocation(x,y);
+ //System.out.println("x:"+this.getHeight()+" y:"+this.getWidth());
+//System.out.println("x2:"+punto.x+" y2:"+punto.y);
+    }//GEN-LAST:event_tituloMouseDragged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

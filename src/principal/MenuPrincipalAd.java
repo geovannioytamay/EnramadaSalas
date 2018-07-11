@@ -24,15 +24,14 @@ import ventas.CajaAd;
 import static ventas.CajaAd.tablaCaja;
 import ventas.RegistroVentas;
 
-/**
- *
- * @author Rojeru San CL
- */
 public class MenuPrincipalAd extends javax.swing.JFrame {
 
     public static boolean cerra = false;
     public static boolean cerra1 = false;
     public static String tipo_usuario="AdMINISTRADOR";
+     public static int ancho;
+     public static int alto;
+     
 
     public boolean estacerrado(Object obj) {
         JInternalFrame[] activos = escritorio.getAllFrames();
@@ -58,12 +57,16 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);       
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/principal/logo.png")).getImage());
         //this.setTitle("MENÚ PRINCIPAL "+tipo_usuario+" - SISTEMA PUNTO DE VENTA");
+        ancho=this.getWidth();
+        alto= this.getHeight();
         tipo.setText(tipo_usuario);
         usuarios.setMnemonic(KeyEvent.VK_A);
         almacen.setMnemonic(KeyEvent.VK_U);
         ventas.setMnemonic(KeyEvent.VK_R);
         caja.setMnemonic(KeyEvent.VK_C);
         info.setMnemonic(KeyEvent.VK_C);
+        
+        
        // this.setUndecorated(true); 
         //this.setResizable(true);
        
@@ -373,7 +376,9 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         Timer tiempo = new Timer(100, new MenuPrincipalAd.horas());
         tiempo.start();
     }//GEN-LAST:event_formWindowOpened
-    usuarios.Usuarios us;    productos.Productos al;    CajaAd ca;
+    usuarios.Usuarios us;
+    productos.Productos al;
+    CajaAd ca;
     RegistroVentas rv;
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         
@@ -480,7 +485,9 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_infoActionPerformed
- config con;    class horas implements ActionListener {
+ config con; 
+ 
+ class horas implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             Date sistemaHora = new Date();
@@ -534,7 +541,7 @@ public class MenuPrincipalAd extends javax.swing.JFrame {
     public static javax.swing.JButton cerrar_sesion;
     public static principal.Escritorio escritorio;
     private javax.swing.JLabel fecha;
-    private javax.swing.JLabel hora;
+    public static javax.swing.JLabel hora;
     private javax.swing.JButton info;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

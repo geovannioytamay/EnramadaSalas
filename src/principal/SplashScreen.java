@@ -7,17 +7,22 @@ package principal;
 
 import com.sun.awt.AWTUtilities;
 import java.awt.Cursor;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
-import productos.OpcionesAl;
+
+import ventas.ImageResizer;
 
 /**
  *
@@ -43,68 +48,137 @@ public class SplashScreen extends javax.swing.JFrame {
         Thread hi = new Thread(new Runnable() {
             @Override
             public void run() {
-                 AccesoLogin ven = new AccesoLogin(spl);
+                AccesoLogin ven = new AccesoLogin(spl);
                 ven.setLocationRelativeTo(null);
-                if(isCompletado())
-                if(iniciarSesion()){               
-                ven.setVisible(true);               
+                if (isCompletado()) {
+                    if (iniciarSesion()) {
+                        ven.setVisible(true);
+                    } else {
+                        MenuPrincipalAd menu = new MenuPrincipalAd();
+                        menu.setVisible(true);
+                        ven.dispose();
+                    }
+                    dispose();
+                } else {
+                    System.exit(0);
                 }
-                else{
-                   MenuPrincipalAd menu = new MenuPrincipalAd(); 
-                   menu.setVisible(true);
-                   ven.dispose();
-                }
-                 dispose();
             }
         });
         hi.start();
     }
-   public static boolean isCompletado(){
-     conectar cc = new conectar();
-     Connection cn = cc.conexion();
-     PreparedStatement ps;
-       String consulta="select* from licencias";
-      
-      try {
-            
+
+    public  boolean isCompletado() {
+        conectar cc = new conectar();
+        Connection cn = cc.conexion();
+        PreparedStatement ps;
+        String consulta = "select* from licencias";
+
+        try {
+
             Statement st = cn.createStatement();
             ResultSet rs;
-            
-            rs = st.executeQuery(consulta);            
-            if(rs.next())return false;
+
+            rs = st.executeQuery(consulta);
+            if (rs.next()) {
+                //System.out.println("" + rs.getString("numero"));
+                if(esFechaValida(rs.getString("fecha_inicio")))return true;
+                String titulo;
+                if(rs.getString("clave").equals("34ER45VD3-45DF45FDD-34GS46VB6-DF34GF45GDC"))
+                    titulo="Version de prueba a vencido";
+                else titulo="Clave vencida";
+                String clave = JOptionPane.showInputDialog(null, "Ingrese la clave :"+ rs.getString("numero"), titulo , JOptionPane.INFORMATION_MESSAGE);
+                //System.out.println("" + clave);
+                if((""+clave).equals("null"))return false;
+                if (clave.equals(rs.getString("clave"))) {
+                     if(rs.getString("clave").equals("34ER45VD3-45DF45FDD-34GS46VB6-DF34GF45GDC")) return true;
+                     consulta = "DELETE FROM licencias WHERE (numero = '"+rs.getString("numero")+"');";
+                     ps = cn.prepareStatement(consulta);
+                     ps.executeUpdate();
+                     JOptionPane.showMessageDialog(this, "La clave fue correcta.", "Registro", 0,
+                    new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
+                    return true;
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Clave de registro icorrecto.\n Contactece con el administrador\n\n"+
+                            "DESARROLADOR: Edwin Geovanni Oy Tamay.\n" +
+                            "TELEFONO: 986 119 3106.\n" +
+                            "FACEBOOK: www.facebook.com/GeovanniOyTamay.7",
+                            "Error", 0,  icono());
+                   
+                    return false;
+                }
+            }
                 //System.out.println(""+rs.getString("sesion"));
-               // num =num + Integer.parseInt(rs.getString("count(*)"));  
-            
-            } catch (SQLException ex) {
-           System.out.println(""+ex.getMessage());
+            // num =num + Integer.parseInt(rs.getString("count(*)"));  
+
+        } catch (SQLException ex) {
+            System.out.println("" + ex.getMessage());
         }
+
+        return true;
+    }
+   boolean esFechaValida(String fecha_maxima){
        
-       return true;
+        try{
+           
+        //fecha de hoy
+        Date sistemaFech = new Date();
+        SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha_fin=form.format(sistemaFech);        
+         Date fehca_hoy = new SimpleDateFormat("dd/MM/yyyy").parse(fecha_fin);
+        // fecha de maxima
+         Date fin = new SimpleDateFormat("dd/MM/yyyy").parse(fecha_maxima);
+         
+          if( fehca_hoy.after(fin))  {
+              System.out.println("fech venciada"); 
+              return false;
+           }
+        }catch(Exception e){  
+           System.out.println(""+e.getMessage()); 
+        }
+        System.out.println("fech valida"); 
+        return true;
    }
-   boolean iniciarSesion(){
-       
-      conectar cc = new conectar();
-      Connection cn = cc.conexion();
-      PreparedStatement ps;
-      
-      String consulta="select sesion from configuraciones";
-      
-      try {
-            
+    boolean iniciarSesion() {
+
+        conectar cc = new conectar();
+        Connection cn = cc.conexion();
+        PreparedStatement ps;
+
+        String consulta = "select sesion from configuraciones";
+
+        try {
+
             Statement st = cn.createStatement();
             ResultSet rs;
-            
-            rs = st.executeQuery(consulta);            
-            if(rs.next()&& rs.getString("sesion").equals("1")) return true;
+
+            rs = st.executeQuery(consulta);
+            if (rs.next() && rs.getString("sesion").equals("1")) {
+                return true;
+            }
                 //System.out.println(""+rs.getString("sesion"));
-               // num =num + Integer.parseInt(rs.getString("count(*)"));  
-            
-            } catch (SQLException ex) {
-           System.out.println(""+ex.getMessage());
+            // num =num + Integer.parseInt(rs.getString("count(*)"));  
+
+        } catch (SQLException ex) {
+            System.out.println("" + ex.getMessage());
         }
-       
-       return false;
-   }
+
+        return false;
+    }
+
+        ImageIcon icono() {
+        ImageResizer.MAX_HEIGHT=60;
+        ImageResizer.MAX_WIDTH=60;
+        ImageIcon ico = new ImageIcon(getClass().getResource("/imagenes/principal/cerradura.png"));
+        Image im = ico.getImage();//convertimos la imagen icono a imagen
+        BufferedImage bi = new BufferedImage//traformamomos la imge para la edicon
+                (im.getWidth(null), im.getHeight(null), BufferedImage.TYPE_INT_RGB);
+        Graphics bg = bi.getGraphics();
+        bg.drawImage(im, 0, 0, null);
+        bg.dispose();
+        return ImageResizer.copyImage(bi);
+    }
+
     public JProgressBar getJProgressBar() {
         return progreso;
     }

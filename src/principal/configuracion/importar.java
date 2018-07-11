@@ -166,7 +166,7 @@ public class importar extends javax.swing.JInternalFrame {
          
       }
       catch(Exception e){
-         e.printStackTrace();
+         System.out.println("23 Error: "+e.getMessage());
            
       }finally{
          // En el finally cerramos el fichero, para asegurarnos
@@ -177,7 +177,7 @@ public class importar extends javax.swing.JInternalFrame {
                fr.close();     
             }                  
          }catch (Exception e2){ 
-            e2.printStackTrace();
+            System.out.println("1324 Error: "+e2.getMessage());
            
          }
       }
@@ -196,7 +196,7 @@ public class importar extends javax.swing.JInternalFrame {
             ps.executeUpdate();
             txt_info.setText(sql+"\n"+txt_info.getText());
          }catch(Exception e){
-             //System.out.println("error354:"+ e.getMessage());
+             System.out.println("error354:"+ e.getMessage());
              cont_error++;
              errores=errores+"\n"+e.getMessage();
          }

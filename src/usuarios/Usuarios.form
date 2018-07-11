@@ -704,6 +704,9 @@
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="USUARIOS"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="jLabel1MouseDragged"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

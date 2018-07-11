@@ -56,6 +56,11 @@ public class respaldo extends javax.swing.JInternalFrame {
         String count_ven="select count(*) from venta";
         String count_ven_pro="select count(*) from venta_producto";
         String count_us="select count(*) from usuarios";
+        
+        String count_cli="select count(*) from cliente";
+        String count_cli_ven="select count(*) from cliente_venta";
+
+        
         double num=0;
         try {
             
@@ -80,7 +85,15 @@ public class respaldo extends javax.swing.JInternalFrame {
            
             rs = st.executeQuery(count_us);           
             if(rs.next())               
-                num =num + Integer.parseInt(rs.getString("count(*)"));                     
+                num =num + Integer.parseInt(rs.getString("count(*)"));
+            
+             rs = st.executeQuery(count_cli);           
+            if(rs.next())               
+                num =num + Integer.parseInt(rs.getString("count(*)"));
+            
+             rs = st.executeQuery(count_cli_ven);           
+            if(rs.next())               
+                num =num + Integer.parseInt(rs.getString("count(*)"));
             
             
         } catch (SQLException ex) {
@@ -140,6 +153,10 @@ public class respaldo extends javax.swing.JInternalFrame {
         String sql_venta = "SELECT * FROM venta";
         String sql_venta_producto = "SELECT * FROM venta_producto";
         String sql_usuarios= "SELECT * FROM usuarios";
+        
+        String sql_cliente= "SELECT * FROM cliente";
+        String sql_cliente_venta= "SELECT * FROM cliente_venta";
+        String sql_configuraciones= "SELECT * FROM configuraciones";
         String datos;
         
         try {
@@ -228,6 +245,57 @@ public class respaldo extends javax.swing.JInternalFrame {
                 datos="INSERT INTO usuarios VALUES (";
                cargar(porsen=porsen+num);
             }
+             escritura("",3);
+     //__________________________________________________________________________         
+            rs = st.executeQuery(sql_cliente);
+            datos="INSERT INTO cliente VALUES (";
+            while (rs.next()) {
+                datos = datos + "'"+rs.getString("id_cliente")+"', ";
+                datos = datos + "'"+rs.getString("nombre")+"', ";
+                datos = datos + "'"+rs.getString("sexo")+"', ";
+                datos = datos + "'"+rs.getString("telefono")+"', ";
+                datos = datos + "'"+rs.getString("direccion")+"', ";
+                datos = datos + "'"+rs.getString("saldo")+"') ";
+                
+               
+                escritura(datos,1);
+                datos="INSERT INTO cliente VALUES (";
+               cargar(porsen=porsen+num);
+            }
+             escritura("",3);
+    
+    //__________________________________________________________________________         
+            rs = st.executeQuery(sql_cliente_venta);
+            datos="INSERT INTO cliente_venta VALUES (";
+            while (rs.next()) {
+                datos = datos + "'"+rs.getString("id_cliente")+"', ";               
+                datos = datos + "'"+rs.getString("id_venta")+"') ";                
+               
+                escritura(datos,1);
+                datos="INSERT INTO cliente_venta VALUES (";
+               cargar(porsen=porsen+num);
+            }
+             escritura("",3);
+    
+              
+    //__________________________________________________________________________          
+            rs = st.executeQuery(sql_configuraciones);
+            escritura("TRUNCATE TABLE configuraciones",1);
+            datos="INSERT INTO configuraciones VALUES (";
+            while (rs.next()) {
+                datos = datos + "'"+rs.getString("sesion")+"', ";
+                datos = datos + "'"+rs.getString("recibo")+"', ";
+                datos = datos + "'"+rs.getString("credito")+"') ";
+                escritura(datos,1);
+                datos="INSERT INTO configuraciones VALUES (";
+               cargar(porsen=porsen+num);
+            }
+            
+             
+           // datos=datos.substring(0, datos.length()-3);
+            //System.out.print(datos);
+            
+             escritura("",3);
            // datos=datos.substring(0, datos.length()-3);
             //System.out.print(datos);
             

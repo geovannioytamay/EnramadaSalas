@@ -8,6 +8,8 @@ package productos;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Cursor;
 import java.awt.Image;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.Icon;
@@ -104,7 +106,7 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
    seleccion=true;
     }
     
-    boolean existes_punto(String numero){
+    public static boolean existes_punto(String numero){
    
      for(int i=0; i<numero.length();i++) {
                   if(numero.charAt(i)=='.'){
@@ -596,6 +598,11 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("PRODUCTOS");
+        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel1MouseDragged(evt);
+            }
+        });
 
         javax.swing.GroupLayout barraDeTituloLayout = new javax.swing.GroupLayout(barraDeTitulo);
         barraDeTitulo.setLayout(barraDeTituloLayout);
@@ -923,6 +930,36 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
     private void miminizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miminizar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_miminizar1ActionPerformed
+
+    private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
+         Point punto=MouseInfo.getPointerInfo().getLocation();
+    
+    int x=punto.x-200;
+    int y=punto.y-150;
+    
+    int max_punto_X=712; 
+    int max_punto_Y=180; 
+    
+    int max_pos_X=max_punto_X-200; 
+    int max_pos_Y=max_punto_Y-150;
+    
+    
+
+ if((punto.x>=200 && punto.x<max_punto_X)  )
+      this.setLocation(x,this.getY()); 
+
+    if( (punto.y>=150 && punto.y<max_punto_Y) )
+        this.setLocation(this.getX(),y);
+
+    if(punto.x<200 )this.setLocation(3,this.getY());
+    if(punto.x>max_punto_X)this.setLocation(max_pos_X,this.getY());
+    if(punto.y<150 )this.setLocation(this.getX(),0);
+    if(punto.y>max_punto_Y )this.setLocation(this.getX(),max_pos_Y);
+
+ //this.setLocation(x,y);
+ //System.out.println("x:"+this.getHeight()+" y:"+this.getWidth());
+//System.out.println("x2:"+punto.x+" y2:"+punto.y);
+    }//GEN-LAST:event_jLabel1MouseDragged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

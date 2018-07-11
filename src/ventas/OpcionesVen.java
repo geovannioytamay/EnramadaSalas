@@ -80,30 +80,44 @@ public class OpcionesVen {
  }
     public static int eliminar(String id) {
         int rsu = 0;
-        String sql = VentasCod.ELIMINAR;
+        String sql_venta = VentasCod.ELIMINAR;
+        String sql_cliente_venta = "DELETE FROM cliente_venta WHERE id_venta ="+id+"";
+        String sql_venta_producto = "DELETE FROM venta_producto WHERE id_venta ="+id+"";
 
         try {
-            ps = cn.prepareStatement(sql);
+             ps = cn.prepareStatement(sql_venta_producto);           
+            rsu = ps.executeUpdate();
+            
+            ps = cn.prepareStatement(sql_cliente_venta);           
+            rsu = ps.executeUpdate();
+            
+            ps = cn.prepareStatement(sql_venta);
             ps.setString(1, id);
             rsu = ps.executeUpdate();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+             System.out.println("Error: "+ex.getMessage());
         }
-        System.out.println(sql);
+       
         return rsu;
     }
 
     public static int eliminaTodos() {
         int rsu = 0;
-        String sql = VentasCod.ELIMINAR_TODO;
+        String sql_ventas = VentasCod.ELIMINAR_TODO;
+        String sql_venta_cliente = "DELETE FROM cliente_venta";
+        String sql_venta_producto = "DELETE FROM venta_producto";
         try {
-            ps = cn.prepareStatement(sql);
+            ps = cn.prepareStatement(sql_venta_producto);
+            rsu = ps.executeUpdate();
+            ps = cn.prepareStatement(sql_venta_cliente);
+            rsu = ps.executeUpdate();
+             ps = cn.prepareStatement(sql_ventas);
             rsu = ps.executeUpdate();
              OpcionesVen.listar("");
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            System.out.println("Error: "+ex.getMessage());
         }
-        System.out.println(sql);
+        //System.out.println(sql);
         return rsu;
     }
 
@@ -218,5 +232,132 @@ public class OpcionesVen {
         
         return "$"+total;
     }
+     
+     
+ //______________________________________credito________________
+ 
+     public static void optener_creditos(String nombre) {
+       DefaultTableModel modelo = (DefaultTableModel) ventas.RegistroVentas.tablaCredito.getModel();
+       String sql="";
+       String sql2="";
+      while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+
+         if(nombre.equals("")){
+               sql = "SELECT cliente.id_cliente, cliente.nombre, venta.id_venta, venta.fecha, venta.total "
+                       + "FROM (cliente INNER JOIN cliente_venta INNER JOIN venta) "
+                       + "WHERE cliente.id_cliente=cliente_venta.id_cliente and venta.id_venta= cliente_venta.id_venta ";
+               
+              
+         }
+         else {
+                 sql = "SELECT cliente.id_cliente, cliente.nombre, venta.id_venta, venta.fecha, venta.total "
+                       + "FROM (cliente INNER JOIN cliente_venta INNER JOIN venta) "
+                       + "WHERE cliente.id_cliente=cliente_venta.id_cliente and venta.id_venta= cliente_venta.id_venta and nombre like'"+nombre+"%'";
+                 
+         }
+        
+        
+       
+              
+            
+        try {
+           Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            String datos[] = new String[5];
+            while (rs.next()) {
+                datos[0] = rs.getString("id_cliente");
+                datos[1] = rs.getString("nombre");
+                datos[2] = rs.getString("id_venta");
+                datos[3] = rs.getString("fecha");
+                datos[4] = rs.getString("total");
+                modelo.addRow(datos);
+            }
+            
+           
+           
+        }catch (Exception ex) {
+           System.out.println("111 Error: " +ex.getMessage());
+        }        
+     }      
+     public static void optener_adeudo(String id) {
+       
+       String sql="";
+         if(id.equals("")){              
+               sql="SELECT SUM(saldo) AS total from cliente";              
+         }
+         else {
+                 sql ="SELECT saldo as total from cliente where id_cliente='"+id+"'";      
+         }
+        try {
+           Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+             RegistroVentas.txt_adeudo.setText("loco"); 
+           while (rs.next()) {
+                RegistroVentas.txt_adeudo.setText(rs.getString("total"));              
+             
+            }
+           
+        }catch (Exception ex) {
+           System.out.println(ex.getMessage());
+        }       
+   
+        
+     }   
+     
+     public static void eliminar_deudas(String id) {
+        int rsu = 0;
+        String sql = "DELETE FROM cliente_venta WHERE id_cliente = '"+id+"'";
+
+        try {
+            ps = cn.prepareStatement(sql);            
+            rsu = ps.executeUpdate();
+        } catch (Exception ex) {
+           System.out.println("error: "+ex.getMessage());
+        }
+        
+        
+    }
+     
+     
+       public static void optener_productos_vendidos(String id) {
+       DefaultTableModel modelo = (DefaultTableModel) ventas.mostrarProducto.tablaProductos_venta.getModel();
+       String sql="";
+     
+      while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+
+        
+               sql = "SELECT producto.id_producto, producto.tipo, producto.nombre,venta_producto.cantidad,venta_producto.venta "
+                       + "FROM (producto INNER JOIN venta_producto) "
+                       + "WHERE  venta_producto.id_venta ="+id+" AND producto.id_producto= venta_producto.id_producto ";
+              
+            
+        try {
+           Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            String datos[] = new String[6];
+            while (rs.next()) {
+                datos[0] = rs.getString("id_producto");
+                datos[1] = rs.getString("tipo");
+                datos[2] = rs.getString("nombre");
+                datos[3] = rs.getString("cantidad");
+                datos[4] = rs.getString("venta");
+                datos[5]=""+(Integer.parseInt(datos[3]))*(Double.parseDouble(datos[4]));
+                
+                
+                modelo.addRow(datos);
+            }
+            
+           
+           
+        }catch (Exception ex) {
+           System.out.println("Error: " +ex.getMessage());
+        }        
+     }    
+     
+ //___________________________________________________________________
 
 }

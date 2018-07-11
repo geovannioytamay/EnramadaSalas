@@ -186,10 +186,7 @@ public class OpcionesAl {
             modelo.removeRow(0);
         }
         String sql = "";
-        switch(opcion){
-            case 1: 
-                break;
-        }
+        
         
         if (busca.equals("")) {
             sql = ProductosCod.LISTAR;
@@ -265,6 +262,65 @@ public class OpcionesAl {
             }
         } catch (NumberFormatException nfe) {
             return false;
+        }
+    }
+    
+    
+    
+    //___CREDITO//________________________________________
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public static void CREDITOS(String busca, int opcion) {//opcion= 0 id/nombre, opcion=1 menor a..,  opcion=3 tipo
+        DefaultTableModel modelo = (DefaultTableModel) productos.Productos.tablaProductos.getModel();
+
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+        String sql = "";
+        switch(opcion){
+            case 1: sql = "SELECT * FROM producto WHERE (id_producto like'" + busca + "%' or nombre like'" + busca + "%') "
+                    + " ORDER BY nombre";
+                break;
+        }
+        
+        if (busca.equals("")) {
+            sql = ProductosCod.LISTAR;
+        } else {
+            if(opcion==0)
+            sql = "SELECT * FROM producto WHERE (id_producto like'" + busca + "%' or nombre like'" + busca + "%') "
+                    + " ORDER BY nombre";
+            else
+                if(opcion==1)
+                    sql = "SELECT * FROM producto WHERE (cantidad <=" + Integer.parseInt(busca) + ") "
+                    + " ORDER BY nombre";
+                else sql = "SELECT * FROM producto WHERE (tipo like'" + busca + "%') "
+                    + " ORDER BY nombre";
+        }
+        String datos[] = new String[6];
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos[0] = rs.getString("id_producto");
+                datos[1] = rs.getString("nombre");
+                datos[2] = rs.getString("costo_compra");
+                datos[3] = rs.getString("costo_venta");
+                datos[4] = rs.getString("cantidad");
+                datos[5] = rs.getString("tipo");
+                modelo.addRow(datos);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OpcionesAl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

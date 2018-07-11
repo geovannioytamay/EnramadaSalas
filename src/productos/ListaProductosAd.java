@@ -8,10 +8,12 @@ package productos;
 import java.awt.Cursor;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import ventas.CajaAd;
 
 /**
@@ -204,7 +206,7 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
         OpcionesAl.listar2(buscar.getText());
         esUnico();// para saber si es el unico registro y enviar a caja
     }//GEN-LAST:event_buscarKeyReleased
-    void  esUnico(){
+    void  esUnico(){// verificar si en la tabla es unico
         int  registros  = tablaProductos.getRowCount();
         // System.out.println("unico"+registros);
         if( registros ==1){
@@ -241,6 +243,12 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                     String tipo = tablaProductos.getValueAt(fila, 1).toString();
                     String nom = tablaProductos.getValueAt(fila, 2).toString();
                     String precio = tablaProductos.getValueAt(fila, 3).toString();
+                    
+                    dato[0] = cod;
+                    dato[1] = tipo;
+                    dato[2] = nom;
+                    dato[3] = precio;
+                    
                     int c = 0;
                     int j = 0;
                     cant = JOptionPane.showInputDialog(this, "Cantidad:", ""+ nom+": "+precio, JOptionPane.INFORMATION_MESSAGE);
@@ -275,7 +283,10 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                                     return;
                                 }
                                
-                                ventas.CajaAd.tablaCaja.setValueAt(String.valueOf(cantT), i, 4);
+                                //ventas.CajaAd.tablaCaja.setValueAt(String.valueOf(cantT), i, 4);
+                                dato[4]=String.valueOf(cantT);
+                                tabla(dato, i);
+                                ventas.CajaAd.tablaCaja.setRowSelectionInterval(0,0);
                                 c++;
                                 
                                 ventas.CajaAd.total();
@@ -293,19 +304,22 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                                      
                                     return;
                             }
-                            dato[0] = cod;
-                            dato[1] = tipo;
-                            dato[2] = nom;
-                            dato[3] = precio;
+                            
                             dato[4] = cant;
-                                   
-                            tabladet.addRow(dato);
+                             
+                            
+                           
+                          
+                           //tabladet.addRow(dato);
+                           tabla(dato, -1);
+                            
 
-                            ventas.CajaAd.tablaCaja.setModel(tabladet);
+                            //ventas.CajaAd.tablaCaja.setModel(tabladet);
                             ventas.CajaAd.total();
 
                             CajaAd.recibi.setText("");
                             CajaAd.cambio.setText("");
+                            ventas.CajaAd.tablaCaja.setRowSelectionInterval(0,0);
                         }
                     }
                 }
@@ -317,6 +331,37 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
         }
         
     }
+    
+  void tabla(String nuevoDatos[], int index){
+      DefaultTableModel modelo = (DefaultTableModel) ventas.CajaAd.tablaCaja.getModel();
+      int nuevo=0;
+      if(index<0)nuevo=1;
+      int filas= modelo.getRowCount();
+      String datos[][] = new String[filas+nuevo][6];
+      datos[0]=nuevoDatos;
+        System.out.println("dato: "+index);
+       for(int fil=0;fil<filas;fil++){
+           for(int col=0;col<6;col++){
+             if(fil!=index)   
+             datos[fil+nuevo][col]=ventas.CajaAd.tablaCaja.getValueAt(fil,col).toString();
+            
+            }
+            
+       }
+      
+       while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+            //System.out.println("dato: "+datos[0][0]);
+        }
+      
+       for(int i=0;i<=filas;i++) 
+        modelo.addRow(datos[i]);
+      
+       
+       
+  }
+   
+    
     boolean disponible(int fila){
         if(Integer.parseInt(tablaProductos.getValueAt(fila, 4).toString())==0){
             
