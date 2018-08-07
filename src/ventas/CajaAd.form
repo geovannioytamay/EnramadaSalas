@@ -430,13 +430,14 @@
                 <Component class="javax.swing.JTable" name="tablaCaja">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="0">
+                      <Table columnCount="7" rowCount="0">
                         <Column editable="false" title="C&#xd3;DIGO" type="java.lang.Object"/>
                         <Column editable="false" title="TIPO" type="java.lang.Object"/>
                         <Column editable="false" title="DESCRIPCI&#xd3;N" type="java.lang.Object"/>
                         <Column editable="false" title="PRECIO $" type="java.lang.Object"/>
                         <Column editable="false" title="CANTIDAD" type="java.lang.Object"/>
                         <Column editable="false" title="IMPORTE $" type="java.lang.Object"/>
+                        <Column editable="false" title="cantridad" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -480,6 +481,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaCajaMouseClicked"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                   </AuxValues>

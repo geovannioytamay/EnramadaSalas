@@ -16,11 +16,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.util.HashMap;
 import javax.swing.ImageIcon;
 
 import javax.swing.JInternalFrame;
@@ -28,8 +31,16 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
 import static principal.MenuPrincipalAd.escritorio;
 import principal.conectar;
+import static productos.ListaProductosAd.tablaProductos;
 import static ventas.OpcionesVen.cn;
 
 
@@ -67,6 +78,10 @@ public class CajaAd extends javax.swing.JInternalFrame {
         nombre.setText(principal.MenuPrincipalAd.userConect.getText());
         Credito();// cargar configuraciones
         ((javax.swing.plaf.basic.BasicInternalFrameUI) ListaProductos.getUI()).setNorthPane(null);
+        
+        tablaCaja.getColumnModel().getColumn(6).setMaxWidth(0);
+        tablaCaja.getColumnModel().getColumn(6).setMinWidth(0);
+        tablaCaja.getColumnModel().getColumn(6).setPreferredWidth(0);
                 
         borrar.setMnemonic(KeyEvent.VK_E);
         cancelar.setMnemonic(KeyEvent.VK_T);
@@ -133,25 +148,63 @@ public class CajaAd extends javax.swing.JInternalFrame {
         String can;
         double total = 0;
         double precio;
-        int cantidad;
+        double cantidad;
         double imp = 0.0;
-
+        //System.out.println("_____________________");
         for (int i = 0; i < ventas.CajaAd.tablaCaja.getRowCount(); i++) {
             pre = ventas.CajaAd.tablaCaja.getValueAt(i, 3).toString();
-            can = ventas.CajaAd.tablaCaja.getValueAt(i, 4).toString();
+            can = ventas.CajaAd.tablaCaja.getValueAt(i, 6).toString();
             precio = Double.parseDouble(pre);
-            cantidad = Integer.parseInt(can);
+            cantidad = Double.parseDouble(can);
             imp = precio * cantidad;
             total = total + imp;
+            
             ventas.CajaAd.tablaCaja.setValueAt(Math.rint(imp * 100) / 100, i, 5);
+             
+            // System.out.println("imp:  "+imp);
 
         }
+        
         ventas.CajaAd.total.setText("" + Math.rint(total * 100) / 100);
 
     }
     
    void imprimirTicket(){
 
+        try {
+            List lista = new ArrayList();
+            String Codigo;
+            String Producto;
+            String Precio;
+            String Cantidad;
+            String Importe;
+            for(int i=0; i<tablaCaja.getRowCount(); i++ ){
+                Codigo  = tablaCaja.getValueAt(i, 0).toString();
+                Producto= tablaCaja.getValueAt(i, 2).toString();
+                Precio  = tablaCaja.getValueAt(i, 3).toString();
+                Cantidad= tablaCaja.getValueAt(i, 4).toString();
+                Importe = tablaCaja.getValueAt(i, 5).toString();
+                reporte.lista_ticket ticket= new  reporte.lista_ticket(Codigo,Producto,Precio,Cantidad,Importe);
+                lista.add(ticket);
+            }
+            JasperReport  tick = (JasperReport) JRLoader.loadObject("ticket.jasper");
+            Map parametro = new HashMap();
+            parametro.put("numVen", numFac.getText());
+            parametro.put("fecha", fecha.getText());
+            parametro.put("hora", principal.MenuPrincipalAd.hora.getText());
+            parametro.put("total", total.getText());
+            parametro.put("efectivo", recibi.getText());
+            parametro.put("cambio", cambio.getText());
+            parametro.put("caja", nombre.getText());
+            
+            JasperPrint print= JasperFillManager.fillReport(tick,parametro, new JRBeanCollectionDataSource(lista) );
+            JasperViewer.viewReport(print);
+            
+            
+        } catch (Exception ex) {
+            //Logger.getLogger(CajaAd.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("43 Error: " + ex.getMessage());
+        }
 
     }
     @SuppressWarnings("unchecked")
@@ -334,11 +387,11 @@ public class CajaAd extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "CÓDIGO", "TIPO", "DESCRIPCIÓN", "PRECIO $", "CANTIDAD", "IMPORTE $"
+                "CÓDIGO", "TIPO", "DESCRIPCIÓN", "PRECIO $", "CANTIDAD", "IMPORTE $", "cantridad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -346,6 +399,11 @@ public class CajaAd extends javax.swing.JInternalFrame {
             }
         });
         tablaCaja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tablaCaja.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaCajaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaCaja);
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 750, 270));
@@ -401,7 +459,7 @@ public class CajaAd extends javax.swing.JInternalFrame {
         );
         ListaProductosLayout.setVerticalGroup(
             ListaProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 539, Short.MAX_VALUE)
+            .addGap(0, 541, Short.MAX_VALUE)
         );
 
         barraDeTitulo.setBackground(new java.awt.Color(7, 37, 77));
@@ -457,7 +515,7 @@ public class CajaAd extends javax.swing.JInternalFrame {
         );
         barraDeTituloLayout.setVerticalGroup(
             barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(miminizar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(miminizar, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
             .addComponent(miminizar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(barraDeTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraDeTituloLayout.createSequentialGroup()
@@ -596,7 +654,7 @@ public class CajaAd extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_recibiKeyReleased
 
     private void recibiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_recibiKeyPressed
-        System.out.println(" tecl: "+evt.getKeyCode());
+        //System.out.println(" tecl: "+evt.getKeyCode());
         if (evt.getKeyCode() == evt.VK_ENTER) {
             if (JOptionPane.showConfirmDialog(tablaCaja, "¿Hacer venta?", "Caja", JOptionPane.YES_NO_OPTION, 0,
                 new ImageIcon(getClass().getResource("/imagenes/usuarios/seguro.png"))) == JOptionPane.YES_OPTION) {
@@ -620,6 +678,10 @@ public class CajaAd extends javax.swing.JInternalFrame {
             cli.toFront();
         }
     }//GEN-LAST:event_creditoActionPerformed
+
+    private void tablaCajaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCajaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaCajaMouseClicked
     productos.ListaProductosAd la;
 
     void calcular() {
@@ -675,12 +737,12 @@ public void registrar_venta(){
 
     public static String[][] optener_id_costo_venta_cantidad() {
         int cant = tablaCaja.getRowCount();
-        String id_cantidad[][] = new String[cant][5];//[id][precio][costo][venta][cuantos productos a cender]
+        String id_cantidad[][] = new String[cant][4];//[id][precio][costo][venta][cuantos productos a cender]
 
         for (int i = 0; i < cant; i++) {
             id_cantidad[i][0] = (String) tablaCaja.getValueAt(i, 0);//id
-            id_cantidad[i][1] = (String) tablaCaja.getValueAt(i, 4);//precio
-            id_cantidad[i][4] = (String) ""+tablaCaja.getValueAt(i, 4);//cantidad
+            id_cantidad[i][1] = (String) tablaCaja.getValueAt(i, 6);//cantidad
+            //id_cantidad[i][4] = (String) tablaCaja.getValueAt(i, 6);//cantidad
 
             String SQL = "SELECT costo_compra, costo_venta FROM producto WHERE id_producto='" + id_cantidad[i][0] + "'";
 

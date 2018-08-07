@@ -5,10 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.*;
 
-/**
- *
- * @author Sony
- */
+
 
 public class conectar {
 
@@ -37,8 +34,9 @@ public class conectar {
                                     "  `nombre` char(100) DEFAULT NULL,\n" +
                                     "  `costo_compra` decimal(10,2) DEFAULT NULL,\n" +
                                     "  `costo_venta` decimal(10,2) DEFAULT NULL,\n" +
-                                    "  `cantidad` int(11) DEFAULT NULL,\n" +
+                                    "  `cantidad` char(4) DEFAULT NULL,\n" +
                                     "  `tipo` char(100) DEFAULT NULL,\n" +
+                                    "  `medida` char(6) DEFAULT NULL,\n" +
                                     "  PRIMARY KEY (`id_producto`)\n" +
                                     ") ";
             
@@ -68,9 +66,9 @@ public class conectar {
              String tabla_venta_producto="CREATE TABLE `venta_producto` (\n" +
                                             "  `id_venta` int(10) NOT NULL,\n" +
                                             "  `id_producto` varchar(50) NOT NULL,\n" +
-                                            "  `cantidad` int(11) DEFAULT NULL,\n" +
+                                            "  `cantidad` CHAR(7) DEFAULT NULL,\n" +
                                             "  `compra` decimal(10,2) DEFAULT NULL,\n" +
-                                            "  `venta` decimal(10,2) DEFAULT NULL,\n" +
+                                            "  `venta` decimal(10,2) DEFAULT NULL,\n" +                                           
                                             "  PRIMARY KEY (`id_venta`,`id_producto`)\n" +
                                             ") ";
              

@@ -17,7 +17,7 @@ public class jtable_modificado2 extends JTable {
       //System.out.println(""+getValueAt(rowIndex, 4));
      
      
-      if(getValueAt(rowIndex, 4).equals("0")){
+      if(Double.parseDouble(""+getValueAt(rowIndex, 4))<=0.1){
          component.setBackground(Color.GRAY);
          //component.setForeground(Color.BLACK); 
       }

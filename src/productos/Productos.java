@@ -75,6 +75,14 @@ public class Productos extends javax.swing.JInternalFrame {
         costo_venta.setText(tablaProductos.getValueAt(fila, 3).toString());
         cantidad.setText(tablaProductos.getValueAt(fila, 4).toString());
         tipoAl1.setSelectedItem(tablaProductos.getValueAt(fila, 5).toString());
+        if(tablaProductos.getValueAt(fila, 6).toString().equals("PZA")){
+            pieza.setSelected(true);
+            peso.setSelected(false);
+        }else{
+            peso.setSelected(true);
+            pieza.setSelected(false);
+        }
+            
     }
     boolean selecionRegistro = false;
 
@@ -118,9 +126,19 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
  }
      return false;
  }
-    
+ public static boolean digitDecimal(String numero){
+     
+      for(int i=0; i<numero.length();i++) {
+                  if(numero.charAt(i)=='.'){
+                      if(numero.length()-2<=i)return false;
+                      else  return true;
+                 
+                  }
+      }
+     return false;
+ }
     void Registrar(){
-        if (selecionRegistro) {
+        if ( OpcionesAl.existe_id(codigo.getText())) {
             JOptionPane.showMessageDialog(this, "El CODIGO: " + this.codigo.getText() + "\nya existe en un registro.", "Almacen", 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/impo.png")));
         } else if (codigo.getText().equals("") || nombre.getText().equals("")
@@ -135,6 +153,8 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
             us.setCosto_venta(costo_venta.getText());
             us.setCantidad(cantidad.getText());
             us.setTipo(tipoAl1.getSelectedItem().toString());
+            if(pieza.isSelected()) us.setMedida("PZA");
+            else us.setMedida("KG");
             int opcion = OpcionesAl.registrar(us);
             if (opcion != 0) {
                 String id = codigo.getText();
@@ -187,6 +207,8 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
         tipoL = new javax.swing.JLabel();
         agregar_tipo = new javax.swing.JButton();
         actualizar_tipo = new javax.swing.JButton();
+        pieza = new javax.swing.JRadioButton();
+        peso = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductos = new Lib.jtable_modificado();
         jPanel3 = new javax.swing.JPanel();
@@ -346,6 +368,11 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
         jPanel2.add(cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 180, -1));
 
         nombreL4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/nombreL.png"))); // NOI18N
+        nombreL4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombreL4KeyTyped(evt);
+            }
+        });
         jPanel2.add(nombreL4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, -1, 52));
 
         tipoAl1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TIPO DE PRODUCTO" }));
@@ -392,16 +419,33 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
         });
         jPanel2.add(actualizar_tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 10, 60, -1));
 
+        pieza.setSelected(true);
+        pieza.setText("Pieza");
+        pieza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                piezaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(pieza, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, 70, -1));
+
+        peso.setText("KG");
+        peso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 100, 70, -1));
+
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "CÓDIGO", "NOMBRE", "COSTO", "VENTA", "CANTIDAD", "TIPO"
+                "CÓDIGO", "NOMBRE", "COSTO", "VENTA", "CANTIDAD", "TIPO", "MEDIDA"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -409,6 +453,16 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
             }
         });
         tablaProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tablaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaProductosMouseClicked(evt);
+            }
+        });
+        tablaProductos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tablaProductosKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaProductos);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -689,7 +743,9 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
                     us.setCosto_compra(costo_compra.getText());
                     us.setCosto_venta(costo_venta.getText());
                     us.setCantidad(cantidad.getText());
-                     us.setTipo(tipoAl1.getSelectedItem().toString());
+                    us.setTipo(tipoAl1.getSelectedItem().toString());
+                    if(pieza.isSelected()) us.setMedida("PZA");
+                    else us.setMedida("KG");
                     int opcion = OpcionesAl.actualizar(us);
                     if (opcion != 0) {
                         String id = codigo.getText();
@@ -871,11 +927,23 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
     }//GEN-LAST:event_cantidadKeyReleased
 
     private void cantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidadKeyTyped
-       char num = evt.getKeyChar();
+     char num = evt.getKeyChar();
                 
-        if ((num < '0' || num > '9')) {
+        if (num!='.' && (num < '0' || num > '9')) {
             evt.consume();
         }
+       
+        if(!peso.isSelected() &&  num=='.')evt.consume();
+        else{
+        if( num=='.' && existes_punto(cantidad.getText())){
+            evt.consume();
+        }  
+        if(digitDecimal(cantidad.getText()))evt.consume();
+        }
+        if(!cantidad.getText().equals("") && Double.parseDouble(cantidad.getText())>9999  ) evt.consume();
+       
+        
+        
     }//GEN-LAST:event_cantidadKeyTyped
 
     private void codigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codigoKeyPressed
@@ -961,6 +1029,29 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
 //System.out.println("x2:"+punto.x+" y2:"+punto.y);
     }//GEN-LAST:event_jLabel1MouseDragged
 
+    private void piezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_piezaActionPerformed
+       peso.setSelected(false); 
+       pieza.setSelected(true); 
+      
+    }//GEN-LAST:event_piezaActionPerformed
+
+    private void pesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesoActionPerformed
+        pieza.setSelected(false); 
+        peso.setSelected(true);
+    }//GEN-LAST:event_pesoActionPerformed
+
+    private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaProductosMouseClicked
+
+    private void tablaProductosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaProductosKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaProductosKeyPressed
+
+    private void nombreL4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreL4KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreL4KeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizar;
@@ -991,6 +1082,8 @@ boolean seleccion=true;// si es verdadero pone en los campos los valore de la ta
     private javax.swing.JLabel nombreL3;
     private javax.swing.JLabel nombreL4;
     private org.bolivia.combo.SComboBoxBlue opcion_busqueda;
+    private javax.swing.JRadioButton peso;
+    private javax.swing.JRadioButton pieza;
     private javax.swing.JButton registrar;
     public static javax.swing.JTable tablaProductos;
     public static org.bolivia.combo.SComboBoxBlue tipoAl1;

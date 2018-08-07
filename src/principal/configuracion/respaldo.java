@@ -171,7 +171,8 @@ public class respaldo extends javax.swing.JInternalFrame {
                 datos =datos + rs.getString("costo_compra")+",";
                 datos =datos + rs.getString("costo_venta")+",";
                 datos =datos + rs.getString("cantidad")+",";
-                datos =datos + "'"+rs.getString("tipo")+"')";
+                datos =datos + rs.getString("tipo")+",";
+                datos =datos + "'"+rs.getString("medida")+"')";
                 escritura(datos,1);
                 datos="INSERT INTO producto VALUES (";
                 

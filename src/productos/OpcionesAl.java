@@ -39,11 +39,13 @@ public class OpcionesAl {
             ps.setString(4, uc.getCosto_venta());
             ps.setString(5, uc.getCantidad());             
             ps.setString(6, uc.getTipo());
+            ps.setString(7, uc.getMedida());
             rsu = ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
+            System.out.println("13 Error"+ex.getMessage());
         }
-        System.out.println(sql);
+        
         return rsu;
     }
     
@@ -105,7 +107,8 @@ public class OpcionesAl {
             ps.setString(3, uc.getCosto_venta());
             ps.setString(4, uc.getCantidad());
             ps.setString(5, uc.getTipo());
-            ps.setString(6, uc.getPrimaryKey());
+            ps.setString(6, uc.getMedida());
+            ps.setString(7, uc.getPrimaryKey());
             rsu = ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("002 error"+ex);
@@ -201,7 +204,7 @@ public class OpcionesAl {
                 else sql = "SELECT * FROM producto WHERE (tipo like'" + busca + "%') "
                     + " ORDER BY nombre";
         }
-        String datos[] = new String[6];
+        String datos[] = new String[7];
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -212,6 +215,7 @@ public class OpcionesAl {
                 datos[3] = rs.getString("costo_venta");
                 datos[4] = rs.getString("cantidad");
                 datos[5] = rs.getString("tipo");
+                datos[6] = rs.getString("medida");
                 modelo.addRow(datos);
             }
         } catch (SQLException ex) {
@@ -233,7 +237,7 @@ public class OpcionesAl {
             sql = "SELECT * FROM producto WHERE (id_producto like'" + busca + "%' or nombre like'" + busca + "%') "
                     + "or tipo='" + busca + "' ORDER BY nombre";
         }
-        String datos[] = new String[5];
+        String datos[] = new String[6];
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -243,6 +247,7 @@ public class OpcionesAl {
                 datos[2] = rs.getString("nombre");               
                 datos[3] = rs.getString("costo_venta");
                 datos[4] = rs.getString("cantidad");
+                datos[5] = rs.getString("medida");
                // System.out.println(datos[0]);
                 modelo.addRow(datos);
             }
@@ -251,6 +256,26 @@ public class OpcionesAl {
             System.out.println(""+ex);
         }
        // System.out.println("____________________________________________________");
+    }
+    
+    
+    public static boolean existe_id(String id) {
+        String sql = "SELECT id_producto FROM producto WHERE id_producto ='" + id + "' ";
+                   
+        
+       
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OpcionesAl.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(""+ex);
+        }
+      
+        return false;// System.out.println("____________________________________________________");
     }
 
     public static boolean isNumber(String n) {

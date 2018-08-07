@@ -16,13 +16,14 @@ public class jtable_modificado extends JTable {
       //component.setForeground(Color.BLACK);
       //System.out.println(""+getValueAt(rowIndex, 4));
      
-     if(Integer.parseInt(""+getValueAt(rowIndex, 4))<=3){
+     if(Double.parseDouble(""+getValueAt(rowIndex, 4))<=3){
          component.setBackground(Color.ORANGE);
          component.setVisible(false);
          
          //component.setForeground(Color.BLACK); 
       }
-      if(getValueAt(rowIndex, 4).equals("0")){
+     
+      if(Double.parseDouble(""+getValueAt(rowIndex, 4))<=0.1){
          component.setBackground(Color.GRAY);
          //component.setForeground(Color.BLACK); 
       }

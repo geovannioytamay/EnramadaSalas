@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import static productos.Productos.digitDecimal;
+import static productos.Productos.existes_punto;
 import ventas.CajaAd;
 
 /**
@@ -38,6 +40,11 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
         tablaProductos.getColumnModel().getColumn(4).setMaxWidth(0);
         tablaProductos.getColumnModel().getColumn(4).setMinWidth(0);
         tablaProductos.getColumnModel().getColumn(4).setPreferredWidth(0);
+        
+        tablaProductos.getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaProductos.getColumnModel().getColumn(5).setMinWidth(0);
+        tablaProductos.getColumnModel().getColumn(5).setPreferredWidth(0);
+        
         tipoAl.addItemListener(new ItemListener() {
 
             @Override
@@ -75,7 +82,10 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
         codigoL1 = new javax.swing.JLabel();
         tipoAl = new org.bolivia.combo.SComboBoxBlue();
         tipoL = new javax.swing.JLabel();
-        enviar = new javax.swing.JButton();
+        cantidad = new app.bolivia.swing.JCTextField();
+        codigoL2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        medida = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -90,11 +100,11 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "CÓDIGO", "TIPO", "NOMBRE", "PRECIO", ""
+                "CÓDIGO", "TIPO", "NOMBRE", "PRECIO", "", ""
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -125,6 +135,11 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
         buscar.setOpaque(false);
         buscar.setPhColor(new java.awt.Color(255, 255, 255));
         buscar.setPlaceholder("CÓDIGO/NOMBRE");
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
         buscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 buscarKeyReleased(evt);
@@ -147,22 +162,36 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
         tipoL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/tipoAlLmin.png"))); // NOI18N
         jPanel4.add(tipoL, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 40, 30));
 
-        enviar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        enviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/regis1.png"))); // NOI18N
-        enviar.setText("Enviar a Caja");
-        enviar.setBorder(null);
-        enviar.setBorderPainted(false);
-        enviar.setContentAreaFilled(false);
-        enviar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        enviar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        enviar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Productos/regis2.png"))); // NOI18N
-        enviar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        enviar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enviarActionPerformed(evt);
+        cantidad.setBackground(new java.awt.Color(34, 102, 145));
+        cantidad.setBorder(null);
+        cantidad.setForeground(new java.awt.Color(255, 255, 255));
+        cantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cantidad.setText("1");
+        cantidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        cantidad.setOpaque(false);
+        cantidad.setPhColor(new java.awt.Color(255, 255, 255));
+        cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cantidadKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cantidadKeyTyped(evt);
             }
         });
-        jPanel4.add(enviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 90, 100));
+        jPanel4.add(cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 60, -1));
+
+        codigoL2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        codigoL2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caja/cantidad.png"))); // NOI18N
+        jPanel4.add(codigoL2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 80, 52));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("CANTIDAD");
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 60, -1));
+
+        medida.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        medida.setText("PZA");
+        jPanel4.add(medida, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -172,8 +201,8 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
-                .addContainerGap(95, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,6 +242,8 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
              tablaProductos.setRowSelectionInterval(0,0);
              enviar_caja();
              buscar.setText("");
+             OpcionesAl.listar2("");
+                     
              
               
            //  System.out.println("unico");
@@ -221,6 +252,7 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
         
     }
     void enviar_caja(){
+         defaul();
         if(disponible(tablaProductos.getSelectedRow()))return ;// si el producto es cero no envia  a caja
         linea_seleccionado=-1;
         if (tablaProductos.getRowCount() > 0) {
@@ -228,7 +260,7 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                 String cant = "-1";
                 DefaultTableModel tabladet = (DefaultTableModel) ventas.CajaAd.tablaCaja.getModel();
 
-                String[] dato = new String[6];
+                String[] dato = new String[7];
 
                 int fila = tablaProductos.getSelectedRow();
                
@@ -251,31 +283,22 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                     
                     int c = 0;
                     int j = 0;
-                    cant = JOptionPane.showInputDialog(this, "Cantidad:", ""+ nom+": "+precio, JOptionPane.INFORMATION_MESSAGE);
-                   // JOptionPane.showInputDialog(rootPane, closable, title, fila, frameIcon, dato, linea_seleccionado)
-                            
-                    if( cant.equals(""))cant="1";
-                    //System.out.println("`rint"+JOptionPane.OPTION_TYPE_PROPERTY;
-                    while (!OpcionesAl.isNumber(cant)) {
-                        cant = JOptionPane.showInputDialog(this, "Debe ingresar valores numéricos\ny que sean mayor a 0:",
-                                "Error", JOptionPane.ERROR_MESSAGE);
-                        
-                         if(cant.equals(""))cant="1";
-                        
-                    }
+                    if(cantidad.getText().equals("0.") ||  cantidad.getText().equals("0"))cantidad.setText("1");
+                    cant = cantidad.getText();                            
+                                       
                     if (cant.equals("0")) {
 //                        JOptionPane.showMessageDialog(this, "Debe ingresar algun valor mayor que 0");
                     } else {
                         for (int i = 0; i < ventas.CajaAd.tablaCaja.getRowCount(); i++) {
-                            Object id = ventas.CajaAd.tablaCaja.getValueAt(i, 0);
-                            Object cant1 = ventas.CajaAd.tablaCaja.getValueAt(i, 4);
+                            String id = ventas.CajaAd.tablaCaja.getValueAt(i, 0).toString();
+                            String cant1 = ventas.CajaAd.tablaCaja.getValueAt(i, 6).toString();
                             if (cod.equals(id)) {
                                 j = i;
                                 
-                                int cantT = Integer.parseInt(cant) + Integer.parseInt((String) cant1);
-                                int consulta_cant=ventas.OpcionesVen.resta_cantidad(""+id, ""+cantT);
+                                double cantT = Double.parseDouble(cant) + Double.parseDouble(cant1);
+                                double consulta_cant=ventas.OpcionesVen.resta_cantidad(""+id, cantT);
                                 if(consulta_cant<0){
-                                    int disponible = cantT + consulta_cant- Integer.parseInt((String) cant1);
+                                    double disponible = cantT + consulta_cant- Double.parseDouble(cant1);
                                     JOptionPane.showMessageDialog(this, "No hay suficientes productos para agregar."
                                             + " solo puede agregar a lo màs "+disponible+" de este  producto", "Productos", 0,
                                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
@@ -284,20 +307,25 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                                 }
                                
                                 //ventas.CajaAd.tablaCaja.setValueAt(String.valueOf(cantT), i, 4);
-                                dato[4]=String.valueOf(cantT);
+                                dato[4]=""+cantT+" "+tablaProductos.getValueAt(fila, 5).toString();
+                                dato[6]=""+cantT;
+                                //System.out.println("cant:  "+cantT);
+        
                                 tabla(dato, i);
+                                
+                                ventas.CajaAd.total();
                                 ventas.CajaAd.tablaCaja.setRowSelectionInterval(0,0);
                                 c++;
                                 
-                                ventas.CajaAd.total();
+                                
                                 CajaAd.recibi.setText("");
                                 CajaAd.cambio.setText("");
                             }
                         }
                         if (c == 0) {
-                            int consulta_cant=ventas.OpcionesVen.resta_cantidad(""+cod, ""+cant);
+                            double consulta_cant=ventas.OpcionesVen.resta_cantidad(""+cod,1);
                             if(consulta_cant<0){
-                                int disponible = Integer.parseInt(cant) + consulta_cant;
+                                double  disponible = Double.parseDouble(cant) + consulta_cant;
                                     JOptionPane.showMessageDialog(this, "No hay suficientes productos para agregar."
                                             + " solo puede agregar a lo màs "+disponible+" de este  producto", "Productos", 0,
                                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
@@ -305,7 +333,8 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                                     return;
                             }
                             
-                            dato[4] = cant;
+                            dato[4] = cant+" "+tablaProductos.getValueAt(fila, 5).toString();
+                            dato[6] = cant;
                              
                             
                            
@@ -324,6 +353,7 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
                     }
                 }
             } catch (Exception e) {
+                System.out.println("013 error: "+e);
             }
         } else {
             JOptionPane.showMessageDialog(this, "No hay registros.", "Productos", 0,
@@ -335,26 +365,33 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
   void tabla(String nuevoDatos[], int index){
       DefaultTableModel modelo = (DefaultTableModel) ventas.CajaAd.tablaCaja.getModel();
       int nuevo=0;
+     
       if(index<0)nuevo=1;
+     
       int filas= modelo.getRowCount();
-      String datos[][] = new String[filas+nuevo][6];
+      String datos[][] = new String[filas+nuevo][nuevoDatos.length];
       datos[0]=nuevoDatos;
-        System.out.println("dato: "+index);
+      int row=1;
+      
+        //System.out.println("dato: "+index);
        for(int fil=0;fil<filas;fil++){
-           for(int col=0;col<6;col++){
-             if(fil!=index)   
-             datos[fil+nuevo][col]=ventas.CajaAd.tablaCaja.getValueAt(fil,col).toString();
-            
+           //System.out.println("fila: "+filas+" fi: "+fil);
+           //fila=1;
+           if(fil!=index){
+           for(int col=0;col<nuevoDatos.length;col++)             
+            datos[row][col]=ventas.CajaAd.tablaCaja.getValueAt(fil,col).toString();             
+            row++;
             }
-            
+           
        }
+      
       
        while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
             //System.out.println("dato: "+datos[0][0]);
         }
-      
-       for(int i=0;i<=filas;i++) 
+     
+       for(int i=0;i<filas+nuevo;i++) 
         modelo.addRow(datos[i]);
       
        
@@ -363,7 +400,7 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
    
     
     boolean disponible(int fila){
-        if(Integer.parseInt(tablaProductos.getValueAt(fila, 4).toString())==0){
+        if(Double.parseDouble(tablaProductos.getValueAt(fila, 4).toString())==0){
             
             JOptionPane.showMessageDialog(this, "imposible enviar a caja. No hay màs productos.", "Productos", 0,
                     new ImageIcon(getClass().getResource("/imagenes/usuarios/info.png")));
@@ -372,18 +409,24 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
         }
         return false;
     }
-    private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
-        enviar_caja();
-    }//GEN-LAST:event_enviarActionPerformed
-
+    
+    void defaul (){
+        if(cantidad.getText().equals(""))cantidad.setText("1");
+         if(tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 5).toString().equals("PZA"))cantidad.setText(""+Math.floor(Double.parseDouble(cantidad.getText())));
+    }
     private void tablaProductosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaProductosKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_tablaProductosKeyPressed
 
     private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
-  
+   
+        
+    
                cliks_tabla++;
-               System.out.println(""+tablaProductos.getSelectedRow());
+               //System.out.println(""+tablaProductos.getSelectedRow());
+               String me = tablaProductos.getValueAt(tablaProductos.getSelectedRow(), 5).toString();
+               medida.setText(me);
+               
                if(tablaProductos.getSelectedRow()==linea_seleccionado){
                    
                     if (cliks_tabla==2  ) {
@@ -401,14 +444,46 @@ public class ListaProductosAd extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tipoAlActionPerformed
 
+    private void cantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidadKeyReleased
+       
+       if(cantidad.getText().equals("."))cantidad.setText("0.");
+    }//GEN-LAST:event_cantidadKeyReleased
+
+    private void cantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidadKeyTyped
+        char num = evt.getKeyChar();
+                
+        if (num!='.' && (num < '0' || num > '9')) {
+            evt.consume();
+        }
+       
+        if(medida.getText().equals("PZA") &&  num=='.')evt.consume();
+        else{
+        if( num=='.' && existes_punto(cantidad.getText())){
+            evt.consume();
+        }  
+        if(digitDecimal(cantidad.getText()))evt.consume();
+        }
+        if(!cantidad.getText().equals("") && Double.parseDouble(cantidad.getText())>9999  ) evt.consume();
+       
+        
+        
+    }//GEN-LAST:event_cantidadKeyTyped
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private app.bolivia.swing.JCTextField buscar;
+    private app.bolivia.swing.JCTextField cantidad;
     private javax.swing.JLabel codigoL1;
-    private javax.swing.JButton enviar;
+    private javax.swing.JLabel codigoL2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel medida;
     public static javax.swing.JTable tablaProductos;
     public static org.bolivia.combo.SComboBoxBlue tipoAl;
     private javax.swing.JLabel tipoL;

@@ -19,15 +19,16 @@ public class ProductosCod {
     
     public static String LISTAR_CAJA = "SELECT id_producto, nombre, tipo, costo_venta FROM producto ORDER BY nombre";
     
-    public static String REGISTRAR = "INSERT INTO producto(id_producto,nombre, costo_compra, costo_venta, cantidad, tipo) "
-            + "VALUES(?,?,?,?,?,?)";
+    public static String REGISTRAR = "INSERT INTO producto(id_producto,nombre, costo_compra, costo_venta, cantidad, tipo,medida) "
+            + "VALUES(?,?,?,?,?,?,?)";
     
     public static String ACTUALIZAR = "UPDATE producto SET "
                 + "nombre=?, "
                 + "costo_compra=?, "
                 + "costo_venta=?, "
                 + "cantidad=?, "
-                + "tipo=? "
+                + "tipo=?, "
+                + "medida=? "
                 + "WHERE id_producto=?";
     
     public static String ELIMINAR = "DELETE FROM producto WHERE id_producto = ?";
@@ -40,6 +41,9 @@ public class ProductosCod {
     private String costo_venta;
     private String cantidad;
     private String tipo;
+    private String medida;
+
+   
 
     public ProductosCod(){
         
@@ -91,6 +95,14 @@ public class ProductosCod {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+    
+     public void setMedida(String medida) {
+        this.medida = medida;
+    }
+
+    public String getMedida() {
+        return medida;
     }
 
     

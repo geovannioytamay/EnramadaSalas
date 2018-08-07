@@ -53,7 +53,7 @@ public class OpcionesVen {
                ps2.executeUpdate();
                 
               // actulizar la cantidad de los productos catidad de productos menos cantidad vendida
-                int cantidad = resta_cantidad(uc.getIds_producto()[i][0],uc.getIds_producto()[i][4]);
+                double cantidad = resta_cantidad(uc.getIds_producto()[i][0],Double.parseDouble(uc.getIds_producto()[i][1]));
                 ps = cn.prepareStatement("UPDATE producto SET cantidad = '"+cantidad+"' WHERE id_producto = '"+uc.getIds_producto()[i][0]+"'");
                 ps.executeUpdate();
             }
@@ -65,17 +65,22 @@ public class OpcionesVen {
         //System.out.println(sql);
         return rsu;
     }
- public static int resta_cantidad(String id, String venta) throws SQLException{
-       Statement cs = cn.createStatement();
+ public static double resta_cantidad(String id, double venta){
+      double can=0;
+     try {
+          Statement cs = cn.createStatement();
+      
         ResultSet rs = cs.executeQuery("SELECT cantidad FROM producto where id_producto='"+id+"'");
-              int can=0;
+             
               //System.out.println(id);
               if(rs.next()){
-               can = Integer.parseInt(rs.getString("cantidad"))-Integer.parseInt(venta); 
+               can = Double.parseDouble(rs.getString("cantidad"))-venta; 
                }
-              
-              return can;
-       
+             
+              } catch (SQLException ex) {
+             System.out.println("813 Error: "+ex.getMessage());
+        }
+        return can;
      
  }
     public static int eliminar(String id) {
@@ -180,10 +185,10 @@ public class OpcionesVen {
     }
   
     /// consultas para graficar 
-    public static double optener_ventas(String fecha,int opcion) throws SQLException {
+    public static double optener_ventas(String fecha,int opcion) {
        String sql="";
        String sql2="";
-
+  
          if(opcion==0){
                sql = "SELECT id_venta FROM venta WHERE fecha='"+fecha+"'";
                sql2= "SELECT cantidad,compra,venta FROM venta_producto WHERE id_venta= ANY ("+sql+")";
@@ -195,16 +200,16 @@ public class OpcionesVen {
         
         
        
-         int cantidad=0;
+         double cantidad=0;
          double compra=0;
          double venta=0;
          double total=0;
-       
+       try{
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql2);
            while (rs.next()) {
                
-              cantidad=Integer.parseInt(rs.getString("cantidad"));
+              cantidad=Double.parseDouble(rs.getString("cantidad"));
               compra=Double.parseDouble(rs.getString("compra"));
               venta=Double.parseDouble(rs.getString("venta"));
               total=total+((venta-compra)*cantidad);
@@ -213,7 +218,9 @@ public class OpcionesVen {
                 
             }            
           
-        
+         }catch (Exception ex) {
+           System.out.println("1414 Error: " +ex.getMessage());
+        }    
         return total;
     }
     
@@ -345,7 +352,7 @@ public class OpcionesVen {
                 datos[2] = rs.getString("nombre");
                 datos[3] = rs.getString("cantidad");
                 datos[4] = rs.getString("venta");
-                datos[5]=""+(Integer.parseInt(datos[3]))*(Double.parseDouble(datos[4]));
+                datos[5]=""+(Double.parseDouble(datos[3]))*(Double.parseDouble(datos[4]));
                 
                 
                 modelo.addRow(datos);
